@@ -3,7 +3,6 @@ import ModeButton from './ModeButton';
 import Theme from './Theme';
 
 const HeaderBar = styled.header``;
-const Button = styled.button``;
 
 const Header = () => {
   return (
