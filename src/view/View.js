@@ -1,12 +1,12 @@
 import styled from 'styled-components';
+import Vertex from './Vertex';
 
 const Canvas = styled.div``;
-const Node = styled.div``;
 
 const View = () => {
   return (
     <Canvas>
-      <Node>루트</Node>
+      <Vertex name='root' />
     </Canvas>
   );
 };
