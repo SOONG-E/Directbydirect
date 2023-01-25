@@ -5,8 +5,8 @@ import { useState, useEffect } from 'react';
 
 const Box = styled.div``;
 
-const Command = () => {
-  const [record, setRecord] = useState([]);
+const Command = ({record, setRecord}) => {
+  
   const [lastCommand, setLastCommand] = useState('');
 
   useEffect(() => {

@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
 
-const Box = styled.div``;
-const InputBox = styled.input``;
-
 const Prompt = ({ addCommand }) => {
   const [input, setInput] = useState('');
 
@@ -31,3 +28,6 @@ const Prompt = ({ addCommand }) => {
 };
 
 export default Prompt;
+
+const Box = styled.div``;
+const InputBox = styled.input``;
