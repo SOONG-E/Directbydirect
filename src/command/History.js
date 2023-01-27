@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 
 const History = ({ record }) => {
+  console.log(record);
   return (
     <Box>
-      {record.map((x) => (
-        <div>{x.join(' ')}</div>
+      {record.map((x, idx) => (
+        <div key={idx}>{x.join(' ')}</div>
       ))}
     </Box>
   );
