@@ -1,9 +1,5 @@
-import Permission from "./Permission";
-
-const TYPE = Object.freeze({
-  DIR: 0,
-  FILE: 1,
-});
+import Permission from './Permission';
+import { TYPE } from '../constants/Type';
 
 class Tree {
   #name;
@@ -16,7 +12,7 @@ class Tree {
     this.#type = type;
     this.#permission = permission;
     if (type === TYPE.DIR) {
-      this.#child = {};
+      this.#child = new Map();
     }
   }
 
@@ -28,14 +24,35 @@ class Tree {
     return this.#type;
   }
 
+  getPermission() {
+    return this.#permission;
+  }
+
+  getChild() {
+    return this.#child;
+  }
+
+  setName(name) {
+    this.#name = name;
+  }
+
+  setType(type) {
+    this.#type = type;
+  }
+
+  setPermission(permission) {
+    this.#permission = permission;
+	}
+ 
   addChild(tree) {
-    if (tree.getType() === TYPE.FILE) {
+    if (this.#type === TYPE.FILE) {
       // 에러 핸들링
     }
-    if (this.child.has(tree.getName()) {
+    const key = tree.getName();
+    if (this.#child.has(key)) {
       return;
     }
-    this.child.add(tree);
+    this.#child.set(key, tree);
   }
 }
 
