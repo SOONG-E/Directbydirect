@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import { useState } from 'react';
 import Message from '../constants/Message';
 
-const Directory = (setDirec) => {
-  const [directorty, setDirectorty] = useState('');
+const Directory = ({ onDirec }) => {
+  const [directory, setDirectorty] = useState('');
 
   const handleOnKeyPress = (e) => {
     if (e.key === 'Enter') {
-      setDirec(directorty);
+      onDirec(directory);
       setDirectorty('');
     }
   };
@@ -23,7 +23,7 @@ const Directory = (setDirec) => {
         placeholder='시작할 디렉토리 입력란'
         onKeyDown={handleOnKeyPress}
         onChange={onChangeInput}
-        value={directorty}
+        value={directory}
       />
     </Box>
   );

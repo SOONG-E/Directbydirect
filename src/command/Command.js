@@ -34,6 +34,7 @@ const Command = (props) => {
     const splittedCommand = lastCommand.split(' ');
     props.setRecord([...props.record, splittedCommand]);
     execute(splittedCommand, props);
+    console.log(props.root);
     setLastCommand('');
   }, [lastCommand]);
 

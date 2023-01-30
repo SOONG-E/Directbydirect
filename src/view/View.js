@@ -3,7 +3,7 @@ import Vertex from './Vertex';
 
 const Canvas = styled.div``;
 
-const View = () => {
+const View = (name) => {
   return (
     <Canvas>
       <Vertex name='root' />

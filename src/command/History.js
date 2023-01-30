@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const History = ({ record }) => {
-  console.log(record);
   return (
     <Box>
       {record.map((x, idx) => (
