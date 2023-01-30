@@ -6,6 +6,7 @@ class Tree {
   #type;
   #permission;
   #child = null;
+  #parent = null;
 
   constructor(name, type, permission = new Permission('rw-', 'r--', 'r--')) {
     this.#name = name;
@@ -32,6 +33,10 @@ class Tree {
     return this.#child;
   }
 
+  getParent() {
+    return this.#parent;
+  }
+
   setName(name) {
     this.#name = name;
   }
@@ -43,13 +48,17 @@ class Tree {
   setPermission(permission) {
     this.#permission = permission;
 	}
+
+  setParent(parent) {
+    this.#parent = parent;
+  }
  
-  addChild(tree) {
+  addChild(tree, force = false) {
     if (this.#type === TYPE.FILE) {
       // 에러 핸들링
     }
     const key = tree.getName();
-    if (this.#child.has(key)) {
+    if (!force && this.#child.has(key)) {
       return;
     }
     this.#child.set(key, tree);
