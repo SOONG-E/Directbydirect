@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import Header from './header/Header';
-import Command from './command/Command';
-import View from './view/View';
-import Footer from './infoBar/Footer';
-import Directory from './init/Directory';
+import Header from './component/header/Header';
+import Command from './component/command/Command';
+import View from './component/view/View';
+import Footer from './component/infoBar/Footer';
+import Directory from './component/init/Directory';
 import Tree from './model/Tree';
 import { TYPE } from './constants/Type';
 

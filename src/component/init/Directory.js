@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import Message from '../constants/Message';
+import Message from '../../constants/Message';
 
 const Directory = ({ onDirec }) => {
   const [directory, setDirectorty] = useState('');

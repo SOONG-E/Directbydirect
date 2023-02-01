@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import History from './History';
 import Prompt from './Prompt';
 import { useState, useEffect } from 'react';
-import Builtin from '../model/Builitin';
+import Builtin from '../../model/Builitin';
 
 const table = new Map();
 table.set('cd', Builtin.cd);
