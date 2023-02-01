@@ -1,8 +1,13 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 const Prompt = ({ addCommand }) => {
+  const focusInput = useRef(null);
   const [input, setInput] = useState('');
+
+  useEffect(() => {
+    focusInput.current.focus();
+  }, []);
 
   const handleOnKeyPress = (e) => {
     if (e.key === 'Enter') {
@@ -18,6 +23,7 @@ const Prompt = ({ addCommand }) => {
   return (
     <Box>
       <InputBox
+        ref={focusInput}
         placeholder='여기에 적으세요.'
         onKeyDown={handleOnKeyPress}
         onChange={onChangeInput}
