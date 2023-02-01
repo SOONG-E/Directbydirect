@@ -40,9 +40,4 @@ function App() {
   );
 }
 
-/* 명령어
-cp mv mkdir rm touch chmod cd cwd
-directed graph, vertex: 
-*/
-
 export default App;
