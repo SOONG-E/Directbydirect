@@ -1,17 +1,14 @@
-import Permission from './Permission';
 import { TYPE } from '../constants/Type';
 
 class Tree {
   #name;
   #type;
-  #permission;
   #child = null;
   #parent = null;
 
-  constructor(name, type, permission = new Permission('rw-', 'r--', 'r--')) {
+  constructor(name, type) {
     this.#name = name;
     this.#type = type;
-    this.#permission = permission;
     if (type === TYPE.DIR) {
       this.#child = new Map();
     }
@@ -23,10 +20,6 @@ class Tree {
 
   getType() {
     return this.#type;
-  }
-
-  getPermission() {
-    return this.#permission;
   }
 
   getChild() {
@@ -45,14 +38,10 @@ class Tree {
     this.#type = type;
   }
 
-  setPermission(permission) {
-    this.#permission = permission;
-	}
-
   setParent(parent) {
     this.#parent = parent;
   }
- 
+
   addChild(tree, force = false) {
     if (this.#type === TYPE.FILE) {
       // 에러 핸들링
