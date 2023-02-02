@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import Message from '../../constants/Message';
+import { MESSAGE } from '../../constants/Message';
 
 const Directory = ({ onDirec }) => {
   const [directory, setDirectorty] = useState('');
@@ -18,7 +18,7 @@ const Directory = ({ onDirec }) => {
 
   return (
     <Box>
-      <Help>{Message.INFORMATION}</Help>
+      <Help>{MESSAGE.INFORMATION}</Help>
       <StartDirectory
         placeholder='시작할 디렉토리 입력란'
         onKeyDown={handleOnKeyPress}
