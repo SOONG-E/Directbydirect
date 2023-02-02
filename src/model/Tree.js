@@ -48,9 +48,10 @@ class Tree {
     }
     const key = tree.getName();
     if (!force && this.#child.has(key)) {
-      return;
+      return false;
     }
     this.#child.set(key, tree);
+    return true;
   }
 }
 
