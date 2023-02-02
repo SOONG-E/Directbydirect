@@ -19,11 +19,9 @@ const execute = (splittedCommand, props) => {
   const func = table.get(cmd);
 
   if (func === undefined) {
-    // props.setRecord([...props.record, '잘못 입력 하셨습니다.']);
-    console.log('잘못 입력 하셨습니다.');
-    return;
+    return [`${cmd}: command not found`];
   }
-  func(arg, props);
+  return func(arg, props);
 };
 
 const Command = (props) => {
@@ -31,10 +29,14 @@ const Command = (props) => {
 
   useEffect(() => {
     if (lastCommand.length === 0) return;
-    const splittedCommand = lastCommand.split(' ');
-    props.setRecord([...props.record, splittedCommand]);
-    execute(splittedCommand, props);
-    console.log(props.root);
+    const splittedCommand = lastCommand.trim().split(' ');
+    const error = execute(splittedCommand, props);
+    props.setRecord((prev) => {
+      return {
+        cmd: [...prev.cmd, splittedCommand],
+        error: [...prev.error, error],
+      };
+    });
     setLastCommand('');
   }, [lastCommand]);
 
@@ -43,7 +45,7 @@ const Command = (props) => {
       Command
       <div>{lastCommand}</div>
       <History record={props.record} />
-      <Prompt addCommand={setLastCommand} />
+      <Prompt cmd={props.record.cmd} addCommand={setLastCommand} />
     </Box>
   );
 };

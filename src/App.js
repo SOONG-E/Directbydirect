@@ -8,7 +8,7 @@ import Tree from './model/Tree';
 import { TYPE } from './constants/Type';
 
 function App() {
-  const [record, setRecord] = useState([]); //command 기록
+  const [record, setRecord] = useState({cmd: [], error:[]}); //command 기록 
   const [cwd, setCwd] = useState([]); // 현재 경로(스택)
   const [root, setRoot] = useState(); // Root
 
