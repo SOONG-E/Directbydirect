@@ -1,4 +1,4 @@
-// import { useMemo } from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 const CommandLine = ({ cmd }) => {
@@ -16,6 +16,15 @@ const ErrorLine = ({ error }) => {
 };
 
 const History = ({ record }) => {
+  const messagesEndRef = useRef(null);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [record]);
+
   return (
     <Box>
       {record.cmd.map((x, idx) => (
@@ -24,6 +33,7 @@ const History = ({ record }) => {
           <ErrorLine error={record.error[idx]} />
         </Container>
       ))}
+      <div ref={messagesEndRef} />
     </Box>
   );
 };
@@ -31,7 +41,14 @@ const History = ({ record }) => {
 export default History;
 
 const Box = styled.div`
-  height: 400px;
+    width: 400px;
+    height: 800px;
+    background: transparent;
+    border-radius: 3px;
+    border: 2px solid palevioletred;
+    color: palevioletred;
+    padding: 0.25em 1em;
+    overflow-y: auto;
 `;
 
 const Container = styled.div``;
