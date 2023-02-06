@@ -152,10 +152,12 @@ const Builtin = {
       if (arg[i] === '-rf') continue;
       const splittedArg = arg[i].split('/');
       const node = Builtin.getNode(cwd, splittedArg);
-      if (node === undefined || node.leafNode === undefined) return;
+      if (node === undefined || node.leafNode === undefined) {
+        return [`rm: ${arg[i]}: ${ERROR.ENOENT}`];
+      }
       const type = node.leafNode.getType();
       if (i === 0 && type === TYPE.DIR) {
-        return [`rm: ${arg[i]}: ${ERROR.ENOTDIR}}`];
+        return [`rm: ${arg[i]}: ${ERROR.ENOTDIR}`];
       }
       node.lastDir.getChild().delete(splittedArg.at(-1));
     }
