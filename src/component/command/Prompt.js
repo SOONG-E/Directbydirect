@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import CMD from '../../constants/Cmd';
 
+const MAX_LENGTH = 50;
+const FONT_WIDTH = 30;
+
 const Prompt = ({ cmd, addCommand }) => {
   const focusInput = useRef(null);
   const historyIndex = useRef(cmd.length + 1);
@@ -36,7 +39,13 @@ const Prompt = ({ cmd, addCommand }) => {
   const handleOnKeyPress = (e) => {
     if (e.key === 'ArrowUp') {
       changeIndex(-1);
+      focusInput.current.focus();
       setInput(cmd[historyIndex.current].join(' '));
+      const el = e.target;
+      setTimeout(() => {
+        el.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
+        el.scrollLeft = MAX_LENGTH * FONT_WIDTH;
+      }, 0);
     }
     if (e.key === 'ArrowDown') {
       changeIndex(1);
