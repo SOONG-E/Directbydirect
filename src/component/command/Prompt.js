@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
+import CMD from '../../constants/Cmd';
 
 const Prompt = ({ cmd, addCommand }) => {
   const focusInput = useRef(null);
@@ -12,7 +13,13 @@ const Prompt = ({ cmd, addCommand }) => {
   }, []);
 
   useEffect(() => {
-    setRecoInput('');
+    if (input.length === 0) {
+      setRecoInput('');
+      return;
+    }
+    setRecoInput(
+      CMD.filter((suggestion) => suggestion.startsWith(input.toLowerCase()))[0]
+    );
   }, [input]);
 
   const onClickReco = () => {
@@ -41,6 +48,12 @@ const Prompt = ({ cmd, addCommand }) => {
       addCommand(input);
       setInput('');
     }
+    if (e.key === 'Tab') {
+      e.preventDefault(); // 탭에서 다음 항목으로 넘어가는 거 방지!
+      if (recoInput !== undefined) {
+        setInput(recoInput);
+      }
+    }
   };
 
   const onChangeInput = (e) => {
@@ -56,7 +69,7 @@ const Prompt = ({ cmd, addCommand }) => {
         value={input}
         onChange={onChangeInput}
       />
-      <Recommend onClick={onClickReco}>{recoInput}</Recommend>
+      <Recommend>{recoInput}</Recommend>
       <CurrentTyping onClick={onClickReco}>{input}</CurrentTyping>
     </Box>
   );
