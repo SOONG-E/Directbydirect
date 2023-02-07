@@ -3,12 +3,14 @@ import { TYPE } from '../constants/Type';
 class Tree {
   #name;
   #type;
+  #depth;
   #child = null;
   #parent = null;
 
-  constructor(name, type) {
+  constructor(name, type, depth = 0) {
     this.#name = name;
     this.#type = type;
+    this.#depth = depth;
     if (type === TYPE.DIR) {
       this.#child = new Map();
     }
@@ -20,6 +22,10 @@ class Tree {
 
   getType() {
     return this.#type;
+  }
+
+  getDepth() {
+    return this.#depth;
   }
 
   getChild() {
@@ -38,6 +44,10 @@ class Tree {
     this.#type = type;
   }
 
+  setDepth(depth) {
+    this.#depth = depth;
+  }
+
   setParent(parent) {
     this.#parent = parent;
   }
@@ -50,6 +60,7 @@ class Tree {
     if (!force && this.#child.has(key)) {
       return false;
     }
+    tree.setDepth(this.#depth + 1);
     this.#child.set(key, tree);
     return true;
   }
