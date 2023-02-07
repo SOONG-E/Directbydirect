@@ -1,7 +1,8 @@
+import { useContext, useEffect, useState } from 'react';
+import { Interation } from '../../App';
 import styled from 'styled-components';
 import History from './History';
 import Prompt from './Prompt';
-import { useState, useEffect } from 'react';
 import Builtin from '../../model/Builitin';
 
 const table = new Map();
@@ -24,7 +25,8 @@ const execute = (splittedCommand, props) => {
   return func(arg, props);
 };
 
-const Command = (props) => {
+const Command = () => {
+  const props = useContext(Interation);
   const [lastCommand, setLastCommand] = useState('');
 
   useEffect(() => {
@@ -44,7 +46,7 @@ const Command = (props) => {
     <Box>
       Command
       <div>{lastCommand}</div>
-      <History record={props.record} />
+      <History/>
       <Prompt cmd={props.record.cmd} addCommand={setLastCommand} />
     </Box>
   );

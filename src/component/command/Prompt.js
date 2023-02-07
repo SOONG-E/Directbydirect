@@ -39,12 +39,10 @@ const Prompt = ({ cmd, addCommand }) => {
   const handleOnKeyPress = (e) => {
     if (e.key === 'ArrowUp') {
       changeIndex(-1);
-      focusInput.current.focus();
       setInput(cmd[historyIndex.current].join(' '));
-      const el = e.target;
       setTimeout(() => {
-        el.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
-        el.scrollLeft = MAX_LENGTH * FONT_WIDTH;
+        e.target.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
+        e.target.scrollLeft = MAX_LENGTH * FONT_WIDTH;
       }, 0);
     }
     if (e.key === 'ArrowDown') {
