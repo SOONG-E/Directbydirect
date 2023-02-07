@@ -36,20 +36,22 @@ const Builtin = {
       return [];
     }
     const path = arg[0].split('/');
-    path.forEach((element) => {
+    for (let element in path) {
       if (element === '..' && cwd.length != 1) {
         cwd.pop();
-      } else if (element !== '.') {
+        continue;
+      }
+      if (element !== '.') {
         const subTree = cwd.at(-1).getChild().get(element);
         if (subTree === undefined) {
           return [`cd: ${arg[0]}: ${ERROR.ENOENT}`];
-        } else if (subTree.getType() === TYPE.DIR) {
-          setCwd([...cwd, subTree]);
-        } else {
+        }
+        if (subTree.getType() !== TYPE.DIR) {
           return [`cd: ${arg[0]}: ${ERROR.ENOTDIR}`];
         }
+        setCwd([...cwd, subTree]);
       }
-    });
+    }
     return [];
   },
 
@@ -98,9 +100,11 @@ const Builtin = {
   },
 
   mv(arg, { cwd }) {
+    if (arg.length === 0) {
+      return [];
+    }
     if (arg.length === 1) {
-      console.log(`mv: ${ERROR.EINVAL}`);
-      return;
+      return [`mv: ${ERROR.EINVAL}`];
     }
     const splittedLastArg = arg.at(-1).split('/');
     const lastArg = Builtin.getNode(cwd, splittedLastArg);
