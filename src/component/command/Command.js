@@ -46,7 +46,7 @@ const Command = () => {
     <Box>
       Command
       <div>{lastCommand}</div>
-      <History/>
+      <History />
       <Prompt cmd={props.record.cmd} addCommand={setLastCommand} />
     </Box>
   );

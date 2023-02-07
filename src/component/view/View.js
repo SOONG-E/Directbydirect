@@ -1,29 +1,26 @@
 import { useContext } from 'react';
 import { Interation } from '../../App';
 import styled from 'styled-components';
-import { TYPE } from '../../constants/Type';
 import Vertex from './Vertex';
 
-const reqSearchMap = (depth, tree) => {
-  <Vertex tree={tree} />
-  
-  // if (tree.getChild() === null || tree.getChild().size === 0) return;
-  // // <Vertex name={tree.getName()}></Vertex>; // 이친구 왜 안나와여??
-  // tree.getChild();
-  // tree.getChild().forEach((element) => {
-  //   reqSearchMap(depth + 1, element);
-  // });
+const Root = ({ root }) => {
+  return <RootWrapper>{root.getName()}</RootWrapper>;
 };
 
 const View = () => {
-  const { root } = useContext(Interation);
+  const { root, cwd } = useContext(Interation);
   return (
     <Canvas>
-      <Vertex tree={root} />
+      <Root root={root} />
+      <Vertex tree={root} cwd={cwd} />
     </Canvas>
   );
 };
 
+export default View;
+
 const Canvas = styled.div``;
 
-export default View;
+const RootWrapper = styled.div`
+  border: 1px solid black;
+`;
