@@ -36,21 +36,23 @@ const Builtin = {
       return [];
     }
     const path = arg[0].split('/');
-    for (let element in path) {
-      if (element === '..' && cwd.length != 1) {
-        cwd.pop();
+    for (const element of path) {
+      if (element === '..') {
+        if (cwd.length != 1) {
+          cwd.pop();
+        }
         continue;
       }
-      if (element !== '.') {
-        const subTree = cwd.at(-1).getChild().get(element);
-        if (subTree === undefined) {
-          return [`cd: ${arg[0]}: ${ERROR.ENOENT}`];
-        }
-        if (subTree.getType() !== TYPE.DIR) {
-          return [`cd: ${arg[0]}: ${ERROR.ENOTDIR}`];
-        }
-        setCwd([...cwd, subTree]);
+      if (element === '.') continue;
+
+      const subTree = cwd.at(-1).getChild().get(element);
+      if (subTree === undefined) {
+        return [`cd: ${arg[0]}: ${ERROR.ENOENT}`];
       }
+      if (subTree.getType() !== TYPE.DIR) {
+        return [`cd: ${arg[0]}: ${ERROR.ENOTDIR}`];
+      }
+      setCwd([...cwd, subTree]);
     }
     return [];
   },
