@@ -1,11 +1,10 @@
 import { TYPE } from '../constants/Type';
-import Tree from './Tree';
 import { ERROR } from '../constants/Message';
+import Tree from './Tree';
 
 const Builtin = {
   getNode(cwd, splittedPath) {
     const tempWd = [...cwd];
-
     for (let i = 0; i < splittedPath.length; ++i) {
       if (splittedPath[i] === '..' && cwd.length != 1) {
         tempWd.pop();
@@ -33,8 +32,10 @@ const Builtin = {
   },
 
   cd(arg, { cwd, setCwd }) {
+    if (arg.length === 0) {
+      return [];
+    }
     const path = arg[0].split('/');
-
     path.forEach((element) => {
       if (element === '..' && cwd.length != 1) {
         cwd.pop();
