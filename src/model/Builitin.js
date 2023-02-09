@@ -92,12 +92,18 @@ const Builtin = {
 
   mkdir(arg, { cwd }) {
     const error = [];
-    arg.forEach((element) => {
-      const dir = new Tree(element, TYPE.DIR);
-      if (!cwd.at(-1).addChild(dir)) {
+    for (const element of arg) {
+      const splittedPath = element.split('/');
+      const path = Builtin.getNode(cwd, splittedPath);
+      if (path === undefined) {
+        error.push(`mkdir: ${element}: ${ERROR.ENOENT}`);
+        continue;
+      }
+      const dir = new Tree(splittedPath.at(-1), TYPE.DIR);
+      if (!path.lastDir.addChild(dir)) {
         error.push(`mkdir: ${element}: ${ERROR.EEXIST}`);
       }
-    });
+    }
     return error;
   },
 
@@ -172,13 +178,15 @@ const Builtin = {
   },
 
   touch(arg, { cwd }) {
-    arg.forEach((element) => {
+    for (const element of arg) {
       const splittedPath = element.split('/');
       const path = Builtin.getNode(cwd, splittedPath);
-      if (path === undefined || path.leafNode !== undefined) return;
+      if (path === undefined || path.leafNode !== undefined) {
+        return [];
+      }
       const file = new Tree(splittedPath.at(-1), TYPE.FILE);
       path.lastDir.addChild(file);
-    });
+    }
     return [];
   },
 };
