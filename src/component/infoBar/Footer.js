@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import GitButton from './GitButton';
 
-const FooterBar = styled.header``;
-
 const Footer = () => {
   return (
     <FooterBar>
@@ -12,3 +10,9 @@ const Footer = () => {
 };
 
 export default Footer;
+
+const FooterBar = styled.footer`
+  position: absolute;
+  width: 99%;
+  bottom: 0;
+`;

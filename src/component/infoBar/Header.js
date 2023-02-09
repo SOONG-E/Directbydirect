@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import ModeButton from './ModeButton';
 import Theme from './Theme';
 
-const HeaderBar = styled.header``;
-
 const Header = () => {
   return (
     <HeaderBar>
@@ -14,3 +12,8 @@ const Header = () => {
 };
 
 export default Header;
+
+const HeaderBar = styled.header`
+  height: 5%;
+  width: 100%;
+`;

@@ -3,16 +3,23 @@ import { Interation } from '../../App';
 import styled from 'styled-components';
 
 const CommandLine = ({ cmd }) => {
-  return <CommandBox>{cmd.join(' ')}</CommandBox>;
+  return (
+    <CommandBox>
+      <Right src='img/right.png' alt='' />
+      {cmd.join(' ')}
+    </CommandBox>
+  );
 };
 
 const ErrorLine = ({ error }) => {
   return (
-    <div>
+    <>
       {error.map((x, idx) => (
-        <ErrorBox key={idx}>{x}</ErrorBox>
+        <>
+          <ErrorBox key={idx}>{x}</ErrorBox>
+        </>
       ))}
-    </div>
+    </>
   );
 };
 
@@ -42,17 +49,29 @@ const History = () => {
 
 export default History;
 
+const Right = styled.img`
+  margin-top: 5.5px;
+  filter: grayscale(50%);
+  height: 10px;
+  padding-right: 10px;
+`;
+
 const Box = styled.div`
   width: 400px;
-  height: 800px;
+  height: 100%;
+  font-size: large;
   background: transparent;
   border-radius: 3px;
   border: 2px solid palevioletred;
   color: palevioletred;
+  font-family: monospace;
+  line-height: 20px;
   padding: 0.25em 1em;
   overflow-y: auto;
 `;
 
 const Container = styled.div``;
-const CommandBox = styled.div``;
+const CommandBox = styled.div`
+  display: flex;
+`;
 const ErrorBox = styled.div``;

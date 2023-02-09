@@ -1,5 +1,5 @@
-import { createContext, useEffect, useState } from 'react';
-import Header from './component/header/Header';
+import { createContext, useState } from 'react';
+import Header from './component/infoBar/Header';
 import Command from './component/command/Command';
 import View from './component/view/View';
 import Footer from './component/infoBar/Footer';
@@ -16,35 +16,43 @@ function App() {
   const [root, setRoot] = useState(); // Root
 
   const onDirec = (direc) => {
-    let root = new Tree(direc, TYPE.DIR);
+    const root = new Tree(direc, TYPE.DIR);
     setCwd([root]);
     setRoot(root);
   };
 
-  useEffect(() => {
-    console.log('root state changed');
-  }, [root]);
-
   return (
-    <div>
-      <Header />
-      {cwd.length > 0 ? (
-        <Wrapper>
-          <Interation.Provider value={{ record, setRecord, cwd, setCwd, root }}>
-            <Command />
-            <View />
-          </Interation.Provider>
-        </Wrapper>
-      ) : (
-        <Directory onDirec={onDirec} />
-      )}
-      <Footer />
-    </div>
+    <>
+      <Wrapper>
+        <Header />
+        <MidleWrapper>
+          {cwd.length > 0 ? (
+            <Interation.Provider
+              value={{ record, setRecord, cwd, setCwd, root }}
+            >
+              <Command />
+              <View />
+            </Interation.Provider>
+          ) : (
+            <Directory onDirec={onDirec} />
+          )}
+        </MidleWrapper>
+        <Footer />
+      </Wrapper>
+    </>
   );
 }
 
 export default App;
 
 const Wrapper = styled.div`
+  font-family: system-ui;
+  color: white;
+  background-color: #213c4b;
+  height: 100%;
+`;
+
+const MidleWrapper = styled.div`
   display: flex;
+  height: 85%;
 `;

@@ -19,8 +19,11 @@ const View = () => {
 
 export default View;
 
-const Canvas = styled.div``;
+const Canvas = styled.div`
+  margin-left: 20px;
+`;
 
 const RootWrapper = styled.div`
   border: 1px solid black;
+  font-size: 25px;
 `;
