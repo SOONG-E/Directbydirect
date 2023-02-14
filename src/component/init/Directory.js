@@ -1,12 +1,19 @@
-import styled from 'styled-components';
-import { useState } from 'react';
+import { styled } from '@mui/material/styles';
+import { useState, useRef } from 'react';
 import { MESSAGE } from '../../constants/Message';
+import { TextField } from '@mui/material';
+import { Box } from '@mui/material';
 
 const Directory = ({ onDirec }) => {
   const [directory, setDirectorty] = useState('');
 
+  const focusInput = useRef();
   const handleOnKeyPress = (e) => {
     if (e.key === 'Enter') {
+      if (e.target.value.length < 1) {
+        focusInput.current.focus();
+        return;
+      }
       onDirec(directory);
       setDirectorty('');
     }
@@ -17,44 +24,46 @@ const Directory = ({ onDirec }) => {
   };
 
   return (
-    <Box>
+    <Container>
       <Help>{MESSAGE.INFORMATION}</Help>
       <Wrapper>
         <StartDirectory
+          ref={focusInput}
+          autoFocus={true}
           placeholder='시작할 디렉토리 입력란'
           onKeyDown={handleOnKeyPress}
           onChange={onChangeInput}
           value={directory}
         />
       </Wrapper>
-    </Box>
+    </Container>
   );
 };
 
 export default Directory;
 
-const Box = styled.div`
+const Container = styled(Box)`
   margin: 10%;
-  border: 2px solid yellow;
+  border: 1px solid white;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 30px;
 `;
-const Help = styled.div`
+const Help = styled(Box)`
   padding: 0% 20%;
 `;
-const StartDirectory = styled.input`
+const StartDirectory = styled(TextField)`
   type: text;
-  font-size: 20px;
+  font-size: 15px;
   text-align: center;
   border-radius: 10px;
   margin-top: 30px;
   width: 50%;
   height: 100%;
 `;
-const Wrapper = styled.div`
+const Wrapper = styled(Box)`
   display: flex;
   align-items: center;
   justify-content: center;

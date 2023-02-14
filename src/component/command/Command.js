@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { Interation } from '../../App';
-import styled from 'styled-components';
 import History from './History';
 import Prompt from './Prompt';
 import Builtin from '../../model/Builitin';
+import { styled } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 const table = new Map();
 table.set('cd', Builtin.cd);
@@ -43,14 +44,14 @@ const Command = () => {
   }, [lastCommand]);
 
   return (
-    <Box>
+    <CommandBox>
       <div>{lastCommand}</div>
       <History />
       <Prompt cmd={props.record.cmd} addCommand={setLastCommand} />
-    </Box>
+    </CommandBox>
   );
 };
 
 export default Command;
 
-const Box = styled.div``;
+const CommandBox = styled(Box)``;

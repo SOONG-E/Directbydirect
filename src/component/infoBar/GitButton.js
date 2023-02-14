@@ -1,17 +1,19 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
+import { Avatar } from '@mui/material';
 
 const GitButton = () => {
   return (
     <a href='https://github.com/SOONG-E/Directbydirect'>
-      <Icon alt='enter our github!' src='img/github.png' />
+      <Img alt='enter our github!' src='img/github.png' />
     </a>
   );
 };
 
 export default GitButton;
 
-const Icon = styled.img`
+const Img = styled(Avatar)`
   float: right;
   display: inline-block;
   height: 80px;
+  width: 80px;
 `;

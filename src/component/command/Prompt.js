@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
 import CMD from '../../constants/Cmd';
+import { Box, Paper, TextField } from '@mui/material';
 
 const MAX_LENGTH = 50;
 const FONT_WIDTH = 30;
@@ -11,9 +12,9 @@ const Prompt = ({ cmd, addCommand }) => {
   const [input, setInput] = useState('');
   const [recoInput, setRecoInput] = useState('');
 
-  useEffect(() => {
-    focusInput.current.focus();
-  }, []);
+  // useEffect(() => {
+  //   focusInput.current.focus();
+  // }, []);
 
   useEffect(() => {
     if (input.length === 0) {
@@ -68,13 +69,15 @@ const Prompt = ({ cmd, addCommand }) => {
   };
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: '#0a1929', boxShadow: '5px 5px 3px gray' }}>
       <InputBox
+        autoFocus={true}
         type='text'
         ref={focusInput}
         onKeyDown={handleOnKeyPress}
         value={input}
         onChange={onChangeInput}
+        color='warning'
       />
       <Recommend>{recoInput}</Recommend>
       <CurrentTyping onClick={onClickReco}>{input}</CurrentTyping>
@@ -83,17 +86,14 @@ const Prompt = ({ cmd, addCommand }) => {
 };
 export default Prompt;
 
-const Box = styled.div``;
-const InputBox = styled.input`
-  background: transparent;
-  border: 3px solid yellow;
-  display: inline-block;
-  position: relative;
+const InputBox = styled(TextField)`
+  width: 100%;
+  heigth: 100%;
   font-size: 18px;
   color: white;
   font-family: Arial;
 `;
-const Recommend = styled.span`
+const Recommend = styled(Paper)`
   display: inline-block;
   position: absolute;
   top: 862px;
@@ -104,8 +104,9 @@ const Recommend = styled.span`
   color: gray;
   font-family: Arial;
 `;
-const CurrentTyping = styled.span`
+const CurrentTyping = styled(Paper)`
   display: inline-block;
+  background: transparent;
   position: absolute;
   top: 862px;
   left: 11px;

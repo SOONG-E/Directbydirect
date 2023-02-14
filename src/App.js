@@ -6,7 +6,8 @@ import Footer from './component/infoBar/Footer';
 import Directory from './component/init/Directory';
 import Tree from './model/Tree';
 import { TYPE } from './constants/Type';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
+import { Box } from '@mui/material';
 
 export const Interation = createContext();
 
@@ -25,7 +26,7 @@ function App() {
     <>
       <Wrapper>
         <Header />
-        <MidleWrapper>
+        <MiddleWrapper>
           {cwd.length > 0 ? (
             <Interation.Provider
               value={{ record, setRecord, cwd, setCwd, root }}
@@ -36,7 +37,7 @@ function App() {
           ) : (
             <Directory onDirec={onDirec} />
           )}
-        </MidleWrapper>
+        </MiddleWrapper>
         <Footer />
       </Wrapper>
     </>
@@ -45,14 +46,14 @@ function App() {
 
 export default App;
 
-const Wrapper = styled.div`
+const Wrapper = styled(Box)`
   font-family: system-ui;
   color: white;
   background-color: #213c4b;
   height: 100%;
 `;
 
-const MidleWrapper = styled.div`
+const MiddleWrapper = styled(Box)`
   display: flex;
   height: 85%;
 `;

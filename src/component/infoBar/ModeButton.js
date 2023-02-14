@@ -1,11 +1,16 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
+import { Button } from '@mui/material';
 
 const ModeButton = () => {
-  return <Button>모드</Button>;
+  return (
+    <SelectButton variant='contained' disableElevation>
+      모드
+    </SelectButton>
+  );
 };
 
 export default ModeButton;
 
-const Button = styled.button`
+const SelectButton = styled(Button)`
   float: right;
 `;

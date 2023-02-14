@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useRef } from 'react';
 import { Interation } from '../../App';
-import styled from 'styled-components';
+import { styled } from '@mui/material/styles';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
+import Alert from '@mui/material/Alert';
+import { Box } from '@mui/material';
 
 const CommandLine = ({ cmd }) => {
   return (
     <CommandBox>
-      <Right src='img/right.png' alt='' />
+      <PromptIcon>
+        <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
+      </PromptIcon>
       {cmd.join(' ')}
     </CommandBox>
   );
@@ -16,12 +22,18 @@ const ErrorLine = ({ error }) => {
     <>
       {error.map((x, idx) => (
         <>
-          <ErrorBox key={idx}>{x}</ErrorBox>
+          <Alert key={idx} severity='error'>
+            {x}
+          </Alert>
         </>
       ))}
     </>
   );
 };
+// <ErrorIcon>
+//   <ErrorOutlineOutlinedIcon sx={{ fontSize: 20, color: 'red' }} />
+//   <ErrorBox key={idx}>{x}</ErrorBox>
+// </ErrorIcon>
 
 const History = () => {
   const { record } = useContext(Interation);
@@ -35,34 +47,30 @@ const History = () => {
   }, [record]);
 
   return (
-    <Box>
+    <HistoryBox>
       {record.cmd.map((x, idx) => (
-        <Container key={idx}>
+        <Box key={idx}>
           <CommandLine cmd={x} />
           <ErrorLine error={record.error[idx]} />
-        </Container>
+        </Box>
       ))}
       <div ref={messagesEndRef} />
-    </Box>
+    </HistoryBox>
   );
 };
 
 export default History;
 
-const Right = styled.img`
-  margin-top: 5.5px;
-  filter: grayscale(50%);
-  height: 10px;
-  padding-right: 10px;
+const PromptIcon = styled(Box)`
+  padding-top: 3px;
 `;
 
-const Box = styled.div`
+const HistoryBox = styled(Box)`
   width: 400px;
   height: 100%;
   font-size: large;
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid palevioletred;
+  background: #0a1929;
+  box-shadow: 5px 5px 3px gray;
   color: palevioletred;
   font-family: monospace;
   line-height: 20px;
@@ -70,8 +78,6 @@ const Box = styled.div`
   overflow-y: auto;
 `;
 
-const Container = styled.div``;
-const CommandBox = styled.div`
+const CommandBox = styled(Box)`
   display: flex;
 `;
-const ErrorBox = styled.div``;
