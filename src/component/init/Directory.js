@@ -3,8 +3,10 @@ import { useState, useRef } from 'react';
 import { MESSAGE } from '../../constants/Message';
 import { TextField } from '@mui/material';
 import { Box } from '@mui/material';
+import { useTheme } from 'styled-components';
 
 const Directory = ({ onDirec }) => {
+  const theme = useTheme();
   const [directory, setDirectorty] = useState('');
 
   const focusInput = useRef();
@@ -34,7 +36,8 @@ const Directory = ({ onDirec }) => {
           onKeyDown={handleOnKeyPress}
           onChange={onChangeInput}
           value={directory}
-        />
+          color='StartDirectory'
+      />
       </Wrapper>
     </Container>
   );

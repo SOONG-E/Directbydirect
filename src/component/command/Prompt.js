@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import CMD from '../../constants/Cmd';
 import { Box, Paper, TextField } from '@mui/material';
+import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
 
 const MAX_LENGTH = 50;
 const FONT_WIDTH = 30;
@@ -69,50 +70,57 @@ const Prompt = ({ cmd, addCommand }) => {
   };
 
   return (
-    <Box sx={{ backgroundColor: '#0a1929', boxShadow: '5px 5px 3px gray' }}>
-      <InputBox
+    <Wrapper>
+      <KeyboardDoubleArrowRightRoundedIcon color='white' />
+      <InputField
+        color='primary'
         autoFocus={true}
         type='text'
         ref={focusInput}
         onKeyDown={handleOnKeyPress}
         value={input}
         onChange={onChangeInput}
-        color='warning'
+        InputProps={{
+          style: { color: '#0a1929' },
+        }}
       />
-      <Recommend>{recoInput}</Recommend>
-      <CurrentTyping onClick={onClickReco}>{input}</CurrentTyping>
-    </Box>
+      <Recommend elevation={0}>{recoInput}</Recommend>
+      <CurrentTyping elevation={0} onClick={onClickReco}>
+        {input}
+      </CurrentTyping>
+    </Wrapper>
   );
 };
 export default Prompt;
 
-const InputBox = styled(TextField)`
+const Wrapper = styled(Box)`
+  position: relative;
+  display: flex;
+  background-color: #0a1929;
+  align-items: center;
+`;
+const InputField = styled(TextField)`
+  height: 10%;
   width: 100%;
-  heigth: 100%;
-  font-size: 18px;
-  color: white;
-  font-family: Arial;
+  z-index: 2;
 `;
 const Recommend = styled(Paper)`
-  display: inline-block;
   position: absolute;
-  top: 862px;
-  left: 11px;
-  width: 100px;
-  height: 100px;
-  font-size: 18px;
-  color: gray;
-  font-family: Arial;
-`;
-const CurrentTyping = styled(Paper)`
+  left: 37px;
   display: inline-block;
   background: transparent;
-  position: absolute;
-  top: 862px;
-  left: 11px;
-  width: 100px;
-  height: 100px;
+  color: gray;
   font-size: 18px;
-  color: black;
   font-family: Arial;
+  z-index: 3;
+`;
+const CurrentTyping = styled(Paper)`
+  position: absolute;
+  left: 37px;
+  display: inline-block;
+  background: transparent;
+  color: white;
+  font-size: 18px;
+  font-family: Arial;
+  z-index: 3;
 `;

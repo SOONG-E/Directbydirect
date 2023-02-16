@@ -1,10 +1,32 @@
 import { styled } from '@mui/material/styles';
-// import { TYPE } from '../../constants/Type';
-import { Box, Chip } from '@mui/material';
+import { Box, Chip, Stack } from '@mui/material';
+import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined';
+import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
+import { TYPE } from '../../constants/Type';
+import { useTheme } from '@mui/material/styles';
 
+const ChipChild = ({ child, cwd }) => {
+  return (
+    <Chip
+      icon={
+        child.getType() == TYPE.DIR ? (
+          <FolderOpenOutlinedIcon fontSize='small' />
+        ) : (
+          <InsertDriveFileOutlinedIcon fontSize='small' />
+        )
+      }
+      label={child.getName()}
+      color={child === cwd.at(-1) ? 'object' : 'selectedObject'}
+    />
+  );
+};
 
-const bgColor = (tree, cwd) => {
-  return tree === cwd.at(-1) ? '#848484' : '#213c4b';
+const Directory = () => {
+  return <FolderOpenOutlinedIcon fontSize='small' />;
+};
+
+const File = () => {
+  return <InsertDriveFileOutlinedIcon fontSize='small' />;
 };
 
 const Prefix = (depth) => {
@@ -18,27 +40,27 @@ const Prefix = (depth) => {
 };
 
 const Vertex = ({ tree, cwd }) => {
+  const theme = useTheme();
+
   return (
-    <>
+    <Stack spacing={2}>
       {[...tree.getChild().values()].map((child, idx) => (
-        <VertexWrapper key={idx} bgColor={bgColor(child, cwd)}>
+        <VertexWrapper key={idx}>
           <CircleWrapper>
             {Prefix(child.getDepth())}
-            <Chip label={child.getName()} />
+            <ChipChild child={child} cwd={cwd} />
           </CircleWrapper>
           {child.getChild()?.size ? <Vertex tree={child} cwd={cwd} /> : null}
         </VertexWrapper>
       ))}
-    </>
+    </Stack>
   );
 };
 
 export default Vertex;
-// {/* <Circle>{child.getName()}</Circle> */}
 
 const VertexWrapper = styled(Box)`
   font-size: 25px;
-  background-color: ${(props) => props.bgColor};
 `;
 
 const CircleWrapper = styled(Box)`

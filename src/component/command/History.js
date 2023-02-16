@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Interation } from '../../App';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import Alert from '@mui/material/Alert';
 import { Box } from '@mui/material';
 
@@ -21,11 +20,9 @@ const ErrorLine = ({ error }) => {
   return (
     <>
       {error.map((x, idx) => (
-        <>
-          <Alert key={idx} severity='error'>
-            {x}
-          </Alert>
-        </>
+        <Alert variant='standard' key={idx} severity='error'>
+          {x}
+        </Alert>
       ))}
     </>
   );
@@ -66,11 +63,9 @@ const PromptIcon = styled(Box)`
 `;
 
 const HistoryBox = styled(Box)`
-  width: 400px;
-  height: 100%;
+  height: 90%;
   font-size: large;
-  background: #0a1929;
-  box-shadow: 5px 5px 3px gray;
+  background-color: #0a1929;
   color: palevioletred;
   font-family: monospace;
   line-height: 20px;

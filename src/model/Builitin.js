@@ -170,7 +170,7 @@ const Builtin = {
       }
       const type = node.leafNode.getType();
       if (i === 0 && type === TYPE.DIR) {
-        return [`rm: ${arg[i]}: ${ERROR.ENOTDIR}`];
+        return [`rm: ${arg[i]}: ${ERROR.EISDIR}`];
       }
       node.lastDir.getChild().delete(splittedArg.at(-1));
     }

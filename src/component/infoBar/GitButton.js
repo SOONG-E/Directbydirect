@@ -14,6 +14,7 @@ export default GitButton;
 const Img = styled(Avatar)`
   float: right;
   display: inline-block;
-  height: 80px;
-  width: 80px;
+  height: 50px;
+  width: 50px;
+  padding-right: 15px;
 `;

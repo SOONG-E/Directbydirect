@@ -7,7 +7,9 @@ import Directory from './component/init/Directory';
 import Tree from './model/Tree';
 import { TYPE } from './constants/Type';
 import { styled } from '@mui/material/styles';
-import { Box } from '@mui/material';
+import { ThemeProvider } from '@mui/material/styles';
+import Colors from './constants/Colors';
+import { Box, Stack } from '@mui/material';
 
 export const Interation = createContext();
 
@@ -23,7 +25,7 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider theme={Colors}>
       <Wrapper>
         <Header />
         <MiddleWrapper>
@@ -31,8 +33,10 @@ function App() {
             <Interation.Provider
               value={{ record, setRecord, cwd, setCwd, root }}
             >
-              <Command />
-              <View />
+              <Stack direction='row' justifyContent='space-between'>
+                <Command />
+                <View />
+              </Stack>
             </Interation.Provider>
           ) : (
             <Directory onDirec={onDirec} />
@@ -40,13 +44,14 @@ function App() {
         </MiddleWrapper>
         <Footer />
       </Wrapper>
-    </>
+    </ThemeProvider>
   );
 }
 
 export default App;
 
 const Wrapper = styled(Box)`
+  position: relative;
   font-family: system-ui;
   color: white;
   background-color: #213c4b;
@@ -55,5 +60,5 @@ const Wrapper = styled(Box)`
 
 const MiddleWrapper = styled(Box)`
   display: flex;
-  height: 85%;
+  height: 80%;
 `;

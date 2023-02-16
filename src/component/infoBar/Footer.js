@@ -13,7 +13,9 @@ const Footer = () => {
 export default Footer;
 
 const FooterBar = styled(Box)`
+  height: 10vh;
+  width: 100%;
   position: absolute;
-  width: 99%;
   bottom: 0;
+  z-index: 1;
 `;

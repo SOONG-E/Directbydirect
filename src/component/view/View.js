@@ -2,33 +2,34 @@ import { useContext } from 'react';
 import { Interation } from '../../App';
 import { styled } from '@mui/material/styles';
 import Vertex from './Vertex';
-import { Box, Chip } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import Colors from '../../constants/Colors';
+import { Box, Chip, Stack } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import FolderSpecialOutlinedIcon from '@mui/icons-material/FolderSpecialOutlined';
 
-const Root = ({ root }) => {
-  return <RootWrapper>{root.getName()}</RootWrapper>;
+const Root = ({ root, cwd }) => {
+  const theme = useTheme();
+
+  return (
+    <Chip
+      icon={<FolderSpecialOutlinedIcon />}
+      label={root.getName()}
+      color={root === cwd.at(-1) ? 'object' : 'selectedObject'}
+    />
+  );
 };
 
 const View = () => {
   const { root, cwd } = useContext(Interation);
   return (
-    <ThemeProvider theme={Colors}>
-      <Canvas>
-        <Root root={root} />
-        <Vertex tree={root} cwd={cwd} />
-      </Canvas>
-    </ThemeProvider>
+    <Stack
+      direction='column'
+      alignItems='center'
+      width='70vw'
+    >
+      <Root root={root} cwd={cwd} />
+      <Vertex tree={root} cwd={cwd} />
+    </Stack>
   );
 };
 
 export default View;
-
-const Canvas = styled(Box)`
-  margin-left: 20px;
-`;
-
-const RootWrapper = styled(Box)`
-  border: 1px solid black;
-  font-size: 25px;
-`;

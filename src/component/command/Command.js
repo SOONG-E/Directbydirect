@@ -54,4 +54,7 @@ const Command = () => {
 
 export default Command;
 
-const CommandBox = styled(Box)``;
+const CommandBox = styled(Box)`
+  width: 30vw;
+  height: 100vh;
+`;
