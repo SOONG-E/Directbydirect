@@ -2,17 +2,27 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { Interation } from '../../App';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Alert from '@mui/material/Alert';
-import { Box } from '@mui/material';
+import { Box, Stack } from '@mui/material';
+import { useTheme } from 'styled-components';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 
-const CommandLine = ({ cmd }) => {
+const CommandLine = ({ cmd, error }) => {
+  const theme = useTheme();
   return (
-    <CommandBox>
-      <PromptIcon>
-        <ArrowForwardIosIcon sx={{ fontSize: 14 }} />
-      </PromptIcon>
-      {cmd.join(' ')}
-    </CommandBox>
+    <Stack direction='row' justifyContent='space-between' margin={1}>
+      <CommandBox>
+        <PromptIcon>
+          <ArrowForwardIosIcon sx={{ fontSize: 11 }} />
+        </PromptIcon>
+        {cmd.join(' ')}
+      </CommandBox>
+      {error.length === 0 ? (
+        <CheckCircleOutlineOutlinedIcon />
+      ) : (
+        <ErrorOutlineOutlinedIcon color='ErrorLine' />
+      )}
+    </Stack>
   );
 };
 
@@ -20,17 +30,20 @@ const ErrorLine = ({ error }) => {
   return (
     <>
       {error.map((x, idx) => (
-        <Alert variant='standard' key={idx} severity='error'>
+        <ErrorAlert
+          key={idx}
+          sx={{
+            borderRadius: 1,
+            minWidth: '90%',
+            padding: 1,
+          }}
+        >
           {x}
-        </Alert>
+        </ErrorAlert>
       ))}
     </>
   );
 };
-// <ErrorIcon>
-//   <ErrorOutlineOutlinedIcon sx={{ fontSize: 20, color: 'red' }} />
-//   <ErrorBox key={idx}>{x}</ErrorBox>
-// </ErrorIcon>
 
 const History = () => {
   const { record } = useContext(Interation);
@@ -44,29 +57,39 @@ const History = () => {
   }, [record]);
 
   return (
-    <HistoryBox>
-      {record.cmd.map((x, idx) => (
-        <Box key={idx}>
-          <CommandLine cmd={x} />
-          <ErrorLine error={record.error[idx]} />
-        </Box>
-      ))}
-      <div ref={messagesEndRef} />
-    </HistoryBox>
+    <>
+      <HistoryBox
+        sx={{
+          borderRadius: 10,
+        }}
+      >
+        {record.cmd.map((x, idx) => (
+          <Box key={idx}>
+            <CommandLine cmd={x} error={record.error[idx]} />
+            <ErrorLine error={record.error[idx]} />
+          </Box>
+        ))}
+        <div ref={messagesEndRef} />
+      </HistoryBox>
+    </>
   );
 };
 
 export default History;
 
+const ErrorAlert = styled(Box)`
+  border: 2px dotted white;
+`;
+
 const PromptIcon = styled(Box)`
-  padding-top: 3px;
+  padding-top: 1px;
+  margin-right: 2px;
 `;
 
 const HistoryBox = styled(Box)`
   height: 90%;
   font-size: large;
-  background-color: #0a1929;
-  color: palevioletred;
+  color: white;
   font-family: monospace;
   line-height: 20px;
   padding: 0.25em 1em;

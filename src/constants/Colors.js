@@ -22,6 +22,9 @@ const Colors = createTheme({
     StartDirectory: {
       main: '#5E8790',
     },
+    ErrorLine: {
+      main: '#d32f2f',
+    },
   },
 });
 

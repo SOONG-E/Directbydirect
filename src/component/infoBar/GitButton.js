@@ -12,9 +12,11 @@ const GitButton = () => {
 export default GitButton;
 
 const Img = styled(Avatar)`
-  float: right;
   display: inline-block;
-  height: 50px;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
   width: 50px;
-  padding-right: 15px;
+  height: 50px;
+  z-index: 2;
 `;

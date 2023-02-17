@@ -2,30 +2,28 @@ import { styled } from '@mui/material/styles';
 import ModeButton from './ModeButton';
 import Theme from './Theme';
 import { Box, AppBar, Stack } from '@mui/material';
-import { ThemeProvider } from '@mui/material/styles';
-import Colors from '../../constants/Colors';
+import { useTheme } from '@mui/material/styles';
 
 const Header = () => {
+  const theme = useTheme();
   return (
-    <ThemeProvider theme={Colors}>
-      <Wrapper>
-        <AppBar
-          position='static'
-          style={{ backgroundColor: Colors.palette.primary.border }}
-          elevation={0}
+    <Wrapper>
+      <AppBar
+        position='static'
+        style={{ backgroundColor: 'primary.border' }}
+        elevation={0}
+      >
+        <Stack
+          direction='row'
+          justifyContent='flex-end'
+          spacing={2}
+          sx={{ m: '0.1em' }}
         >
-          <Stack
-            direction='row'
-            justifyContent='flex-end'
-            spacing={2}
-            sx={{ m: '10px' }}
-          >
-            <ModeButton />
-            <Theme />
-          </Stack>
-        </AppBar>
-      </Wrapper>
-    </ThemeProvider>
+          <ModeButton />
+          <Theme />
+        </Stack>
+      </AppBar>
+    </Wrapper>
   );
 };
 
@@ -34,5 +32,6 @@ export default Header;
 const Wrapper = styled(Box)`
   position: relative;
   flexgrow: 1;
-  heigth: 10%;
+  height: 5%;
+  width: 100%;
 `;

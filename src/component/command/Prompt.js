@@ -73,7 +73,8 @@ const Prompt = ({ cmd, addCommand }) => {
     <Wrapper>
       <KeyboardDoubleArrowRightRoundedIcon color='white' />
       <InputField
-        color='primary'
+        size='small'
+        autoComplete='off'
         autoFocus={true}
         type='text'
         ref={focusInput}
@@ -91,6 +92,7 @@ const Prompt = ({ cmd, addCommand }) => {
     </Wrapper>
   );
 };
+
 export default Prompt;
 
 const Wrapper = styled(Box)`
@@ -99,26 +101,38 @@ const Wrapper = styled(Box)`
   background-color: #0a1929;
   align-items: center;
 `;
-const InputField = styled(TextField)`
-  height: 10%;
-  width: 100%;
-  z-index: 2;
-`;
+
+const InputField = styled(TextField)({
+  width: '100%',
+  '& .MuiOutlinedInput-root': {
+    '& fieldset': {
+      borderColor: '#ffffff',
+    },
+    '&:hover fieldset': {
+      borderColor: '#ffffff',
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: '#ffffff',
+    },
+  },
+});
+
 const Recommend = styled(Paper)`
   position: absolute;
   left: 37px;
   display: inline-block;
-  background: transparent;
+  background: #0a1929;
   color: gray;
   font-size: 18px;
   font-family: Arial;
   z-index: 3;
 `;
+
 const CurrentTyping = styled(Paper)`
   position: absolute;
   left: 37px;
   display: inline-block;
-  background: transparent;
+  background: #0a1929;
   color: white;
   font-size: 18px;
   font-family: Arial;

@@ -37,7 +37,9 @@ const Directory = ({ onDirec }) => {
           onChange={onChangeInput}
           value={directory}
           color='StartDirectory'
-      />
+          variant='standard'
+          autoComplete='off'
+        />
       </Wrapper>
     </Container>
   );
@@ -46,7 +48,9 @@ const Directory = ({ onDirec }) => {
 export default Directory;
 
 const Container = styled(Box)`
-  margin: 10%;
+  margin: auto;
+  width: 80%;
+  height: 70%;
   border: 1px solid white;
   display: flex;
   flex-direction: column;
@@ -55,6 +59,7 @@ const Container = styled(Box)`
   border-radius: 30px;
 `;
 const Help = styled(Box)`
+  text-align: center;
   padding: 0% 20%;
 `;
 const StartDirectory = styled(TextField)`
@@ -65,6 +70,7 @@ const StartDirectory = styled(TextField)`
   margin-top: 30px;
   width: 50%;
   height: 100%;
+  z-index: 3;
 `;
 const Wrapper = styled(Box)`
   display: flex;

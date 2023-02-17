@@ -40,14 +40,20 @@ const Command = () => {
         error: [...prev.error, error],
       };
     });
+    props.setCmd((prev) => {
+      return [...prev, splittedCommand];
+    });
     setLastCommand('');
   }, [lastCommand]);
 
   return (
     <CommandBox>
-      <div>{lastCommand}</div>
       <History />
-      <Prompt cmd={props.record.cmd} addCommand={setLastCommand} />
+      <Prompt
+        cmd={props.record.cmd}
+        history={props.cmd}
+        addCommand={setLastCommand}
+      />
     </CommandBox>
   );
 };
@@ -55,6 +61,10 @@ const Command = () => {
 export default Command;
 
 const CommandBox = styled(Box)`
-  width: 30vw;
-  height: 100vh;
+  margin-top: 18px;
+  margin-left: 18px;
+  margin-bottom: 18px;
+  width: 33vw;
+  border-radius: 5px;
+  background-color: #0a1929;
 `;
