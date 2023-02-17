@@ -1,22 +1,7 @@
 import { useContext } from 'react';
 import { Interation } from '../../App';
-import { styled } from '@mui/material/styles';
 import Vertex from './Vertex';
-import { Box, Chip, Stack } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import FolderSpecialOutlinedIcon from '@mui/icons-material/FolderSpecialOutlined';
-
-const Root = ({ root, cwd }) => {
-  const theme = useTheme();
-
-  return (
-    <Chip
-      icon={<FolderSpecialOutlinedIcon />}
-      label={root.getName()}
-      color={root === cwd.at(-1) ? 'object' : 'selectedObject'}
-    />
-  );
-};
+import { Stack } from '@mui/material';
 
 const View = () => {
   const { root, cwd } = useContext(Interation);
@@ -24,9 +9,9 @@ const View = () => {
     <Stack
       direction='column'
       alignItems='center'
-      width='70vw'
+      width='61vw'
+      padding={4}
     >
-      <Root root={root} cwd={cwd} />
       <Vertex tree={root} cwd={cwd} />
     </Stack>
   );
