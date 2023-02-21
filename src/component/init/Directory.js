@@ -4,6 +4,11 @@ import { MESSAGE } from '../../constants/Message';
 import { TextField } from '@mui/material';
 import { Box } from '@mui/material';
 import { useTheme } from 'styled-components';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { CardActionArea, Stack } from '@mui/material';
 
 const Directory = ({ onDirec }) => {
   const theme = useTheme();
@@ -26,24 +31,51 @@ const Directory = ({ onDirec }) => {
   };
 
   return (
-    <Container>
-      <Help>{MESSAGE.INFORMATION}</Help>
-      <Wrapper>
-        <StartDirectory
-          ref={focusInput}
-          autoFocus={true}
-          placeholder='시작할 디렉토리 입력란'
-          onKeyDown={handleOnKeyPress}
-          onChange={onChangeInput}
-          value={directory}
-          color='StartDirectory'
-          variant='standard'
-          autoComplete='off'
+    <Stack alignItems='center'>
+      <Stack direction='row' alignItems='center' spacing={2} padding={20}>
+        <CardMedia
+          component='img'
+          image='img/Cat.jpg'
+          alt='Cat on Laptop'
+          sx={{ Height: 300, maxWidth: 300, objectFit: 'contain' }}
         />
-      </Wrapper>
-    </Container>
+        <CardMedia
+          component='img'
+          image='img/mal.png'
+          sx={{ Height: 300, maxWidth: 300, objectFit: 'contain' }}
+        />
+        <Box
+          component='div'
+          sx={{
+            width: 300,
+            position: 'absolute',
+            left: '0',
+            top: '0',
+            color: 'black',
+          }}
+        >
+          {MESSAGE.INFORMATION}
+        </Box>
+      </Stack>
+      <StartDirectory
+        ref={focusInput}
+        autoFocus={true}
+        placeholder='시작할 디렉토리 입력란'
+        onKeyDown={handleOnKeyPress}
+        onChange={onChangeInput}
+        value={directory}
+        color='StartDirectory'
+        variant='standard'
+        autoComplete='off'
+      />
+    </Stack>
   );
 };
+// <Container>
+//   <Help>{MESSAGE.INFORMATION}</Help>
+//   <Wrapper>
+//   </Wrapper>
+// </Container>
 
 export default Directory;
 
