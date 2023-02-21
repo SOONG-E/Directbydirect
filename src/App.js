@@ -11,13 +11,12 @@ import { ThemeProvider } from '@mui/material/styles';
 import Colors from './constants/Colors';
 import { Box, Stack } from '@mui/material';
 
-export const Interation = createContext();
+export const Interaction = createContext();
 
 function App() {
-  const [record, setRecord] = useState({ cmd: [], error: [] }); //command, erro 기록
-  const [cmd, setCmd] = useState([]); //history...............진행 중!
-  const [cwd, setCwd] = useState([]); // 현재 경로(스택)
-  const [root, setRoot] = useState(); // Root
+  const [record, setRecord] = useState({ cmd: [], error: [] });
+  const [cwd, setCwd] = useState([]);
+  const [root, setRoot] = useState();
 
   const onDirec = (direc) => {
     const root = new Tree(direc, TYPE.DIR);
@@ -31,14 +30,14 @@ function App() {
         <Header />
         <MiddleWrapper>
           {cwd.length > 0 ? (
-            <Interation.Provider
-              value={{ record, setRecord, cwd, setCwd, root, cmd, setCmd }}
+            <Interaction.Provider
+              value={{ record, setRecord, cwd, setCwd, root }}
             >
               <Stack direction='row' justifyContent='space-between'>
                 <Command />
                 <View />
               </Stack>
-            </Interation.Provider>
+            </Interaction.Provider>
           ) : (
             <Directory onDirec={onDirec} />
           )}

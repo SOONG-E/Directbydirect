@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { Interation } from '../../App';
+import { Interaction } from '../../App';
 import History from './History';
 import Prompt from './Prompt';
 import Builtin from '../../model/Builitin';
@@ -14,6 +14,7 @@ table.set('mkdir', Builtin.mkdir);
 table.set('mv', Builtin.mv);
 table.set('rm', Builtin.rm);
 table.set('touch', Builtin.touch);
+table.set('clear', Builtin.clear);
 
 const execute = (splittedCommand, props) => {
   const cmd = splittedCommand[0];
@@ -27,7 +28,7 @@ const execute = (splittedCommand, props) => {
 };
 
 const Command = () => {
-  const props = useContext(Interation);
+  const props = useContext(Interaction);
   const [lastCommand, setLastCommand] = useState('');
 
   useEffect(() => {
@@ -40,20 +41,13 @@ const Command = () => {
         error: [...prev.error, error],
       };
     });
-    props.setCmd((prev) => {
-      return [...prev, splittedCommand];
-    });
     setLastCommand('');
   }, [lastCommand]);
 
   return (
     <CommandBox>
       <History />
-      <Prompt
-        cmd={props.record.cmd}
-        history={props.cmd}
-        addCommand={setLastCommand}
-      />
+      <Prompt cmd={props.record.cmd} addCommand={setLastCommand} />
     </CommandBox>
   );
 };

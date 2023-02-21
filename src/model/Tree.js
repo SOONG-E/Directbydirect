@@ -3,14 +3,13 @@ import { TYPE } from '../constants/Type';
 class Tree {
   #name;
   #type;
-  #depth;
+  #depth = 0;
   #child = null;
   #parent = null;
 
-  constructor(name, type, depth = 0) {
+  constructor(name, type) {
     this.#name = name;
     this.#type = type;
-    this.#depth = depth;
     if (type === TYPE.DIR) {
       this.#child = new Map();
     }
@@ -61,6 +60,7 @@ class Tree {
       return false;
     }
     tree.setDepth(this.#depth + 1);
+    tree.setParent(this);
     this.#child.set(key, tree);
     return true;
   }
