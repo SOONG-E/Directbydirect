@@ -32,28 +32,30 @@ const Builtin = {
   },
 
   cd(arg, { cwd, setCwd }) {
+    const new_cwd = [...cwd];
     if (arg.length === 0) {
       return [];
     }
     const path = arg[0].split('/');
     for (const element of path) {
       if (element === '..') {
-        if (cwd.length != 1) {
-          cwd.pop();
+        if (new_cwd.length != 1) {
+          new_cwd.pop();
         }
         continue;
       }
       if (element === '.') continue;
 
-      const subTree = cwd.at(-1).getChild().get(element);
+      const subTree = new_cwd.at(-1).getChild().get(element);
       if (subTree === undefined) {
         return [`cd: ${arg[0]}: ${ERROR.ENOENT}`];
       }
       if (subTree.getType() !== TYPE.DIR) {
         return [`cd: ${arg[0]}: ${ERROR.ENOTDIR}`];
       }
-      setCwd([...cwd, subTree]);
+      new_cwd.push(subTree);
     }
+    setCwd(new_cwd);
     return [];
   },
 
@@ -188,6 +190,9 @@ const Builtin = {
       path.lastDir.addChild(file);
     }
     return [];
+  },
+  clear(arg, { cmd }) {
+    cmd = [];
   },
 };
 
