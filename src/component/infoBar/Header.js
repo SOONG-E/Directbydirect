@@ -2,6 +2,7 @@ import { styled } from '@mui/material/styles';
 import ModeButton from './ModeButton';
 import Theme from './Theme';
 import { Box, AppBar, Stack } from '@mui/material';
+import CardMedia from '@mui/material/CardMedia';
 import { useTheme } from '@mui/material/styles';
 
 const Header = () => {
@@ -15,12 +16,29 @@ const Header = () => {
       >
         <Stack
           direction='row'
-          justifyContent='flex-end'
-          spacing={2}
+          justifyContent='space-between'
           sx={{ m: '0.1em' }}
         >
-          <ModeButton />
-          <Theme />
+          <CardMedia
+            component='img'
+            sx={{
+              ml: 3,
+              width: 190,
+              height: 50,
+              objectFit: 'contain',
+              cursor: 'pointer',
+              float: 'left',
+            }}
+            image='img/logo.png'
+            alt='go home'
+            onClick={() => {
+              window.location.reload();
+            }}
+          />
+          <Stack direction='row' justifyContent='flex-end' spacing={2}>
+            <ModeButton />
+            <Theme />
+          </Stack>
         </Stack>
       </AppBar>
     </Wrapper>
