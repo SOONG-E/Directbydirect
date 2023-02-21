@@ -25,6 +25,9 @@ const Colors = createTheme({
     ErrorLine: {
       main: '#d32f2f',
     },
+    CmdLine: {
+      main: '#2e7d32',
+    },
   },
 });
 
