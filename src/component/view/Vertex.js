@@ -5,26 +5,51 @@ import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutl
 import { TYPE } from '../../constants/Type';
 import { useTheme } from '@mui/material/styles';
 import FolderSpecialOutlinedIcon from '@mui/icons-material/FolderSpecialOutlined';
-import Builtin from '../../model/Builitin';
+import { useContext } from 'react';
+import { Interaction } from '../../App';
 
-const Root = ({ root, cwd }) => {
-  const theme = useTheme();
+const Root = ({ root }) => {
+  const props = useContext(Interaction);
   return (
     <Chip
       icon={<FolderSpecialOutlinedIcon />}
       label={root.getName()}
-      color={root === cwd.at(-1) ? 'object' : 'selectedObject'}
+      color={root === props.cwd.at(-1) ? 'object' : 'selectedObject'}
+      onClick={(e) => onChangeDirectory([root, props], e)}
     />
   );
 };
 
-const onChangeDirectory = (tree) => {
-  const queue = [];
-  const visited = [];
-  queue.push(tree);
+const onChangeDirectory = ([dest, {cwd, setCwd, record, setRecord}]) => {
+  const queue = [cwd.at(-1)];
+  const visited = new Set(queue);
+  while (queue.length > 0) {
+    const current = queue.shift();
+    if (current == dest) {
+      const root = cwd[0];
+      const new_cwd = [dest];
+      while (dest != root) {
+        dest = dest.getParent();
+        new_cwd.unshift(dest);
+      }
+      let i = 0;
+      while (cwd[i] === new_cwd[i]) ++i;
+      let add_command = 'cd ';
+      setCwd(new_cwd);
+      return;
+    }
+    const next = [...current.getChild().values(), current.getParent()];
+    next.forEach((vertex) => {
+      if (!visited.has(vertex)) {
+        queue.push(vertex);
+        visited.add(vertex);
+      }
+    });
+  }
 };
 
-const ChipChild = ({ child, cwd }) => {
+const ChipChild = ({ child }) => {
+  const props = useContext(Interaction);
   return (
     <Chip
       icon={
@@ -35,8 +60,8 @@ const ChipChild = ({ child, cwd }) => {
         )
       }
       label={child.getName()}
-      color={child === cwd.at(-1) ? 'object' : 'selectedObject'}
-      onClick={(e) => onChangeDirectory(child, e)}
+      color={child === props.cwd.at(-1) ? 'object' : 'selectedObject'}
+      onClick={(e) => onChangeDirectory([child, props], e)}
     />
   );
 };
@@ -56,12 +81,12 @@ const Vertex = ({ tree, cwd }) => {
   const theme = useTheme();
   return (
     <Stack spacing={2}>
-      {tree === cwd.at(0) ? <Root root={tree} cwd={cwd} /> : null}
+      {tree === cwd.at(0) ? <Root root={tree} /> : null}
       {[...tree.getChild().values()].map((child, idx) => (
         <VertexWrapper key={idx}>
           <CircleWrapper>
             {Prefix(child.getDepth())}
-            <ChipChild child={child} cwd={cwd} />
+            <ChipChild child={child} />
           </CircleWrapper>
           {child.getChild()?.size ? <Vertex tree={child} cwd={cwd} /> : null}
         </VertexWrapper>
