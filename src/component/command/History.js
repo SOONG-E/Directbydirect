@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { Interation } from '../../App';
+import { Interaction } from '../../App';
 import { styled } from '@mui/material/styles';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box, Stack } from '@mui/material';
@@ -18,7 +18,7 @@ const CommandLine = ({ cmd, error }) => {
         {cmd.join(' ')}
       </CommandBox>
       {error.length === 0 ? (
-        <CheckCircleOutlineOutlinedIcon />
+        <CheckCircleOutlineOutlinedIcon color='CmdLine' />
       ) : (
         <ErrorOutlineOutlinedIcon color='ErrorLine' />
       )}
@@ -36,6 +36,7 @@ const ErrorLine = ({ error }) => {
             borderRadius: 1,
             minWidth: '90%',
             padding: 1,
+            bgcolor: '#ffffff20',
           }}
         >
           {x}
@@ -46,7 +47,7 @@ const ErrorLine = ({ error }) => {
 };
 
 const History = () => {
-  const { record } = useContext(Interation);
+  const { record } = useContext(Interaction);
   const messagesEndRef = useRef(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'auto' });
@@ -77,9 +78,8 @@ const History = () => {
 
 export default History;
 
-const ErrorAlert = styled(Box)`
-  border: 2px dotted white;
-`;
+const ErrorAlert = styled(Box)``;
+// border: 2px dotted white;
 
 const PromptIcon = styled(Box)`
   padding-top: 1px;
