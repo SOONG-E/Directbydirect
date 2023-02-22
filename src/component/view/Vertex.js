@@ -20,25 +20,40 @@ const Root = ({ root }) => {
   );
 };
 
-const onChangeDirectory = ([dest, {cwd, setCwd, record, setRecord}]) => {
+const onChangeDirectory = ([dest, { root, cwd, setCwd, setRecord }]) => {
+  if (dest === cwd.at(-1)) return;
   const queue = [cwd.at(-1)];
   const visited = new Set(queue);
   while (queue.length > 0) {
     const current = queue.shift();
-    if (current == dest) {
-      const root = cwd[0];
+    if (current === dest) {
       const new_cwd = [dest];
       while (dest != root) {
         dest = dest.getParent();
         new_cwd.unshift(dest);
       }
-      let i = 0;
-      while (cwd[i] === new_cwd[i]) ++i;
+      let common_idx = 1;
+      while (common_idx < cwd.length && common_idx < new_cwd.length && cwd[common_idx] === new_cwd[common_idx]) ++common_idx;
       let add_command = 'cd ';
+      for (let i = common_idx; i < cwd.length; ++i) {
+        add_command += '../';
+      }
+      for (let i = common_idx; i < new_cwd.length; ++i) {
+        add_command += `${new_cwd[i].getName()}/`;
+      }
+      setRecord((prev) => {
+        return {
+          cmd: [...prev.cmd, add_command.split(' ')],
+          error: [...prev.error, []],
+        };
+      });
       setCwd(new_cwd);
       return;
     }
-    const next = [...current.getChild().values(), current.getParent()];
+    const next = [...current.getChild().values()];
+    if (current !== root) {
+      next.push(current.getParent());
+    }
     next.forEach((vertex) => {
       if (!visited.has(vertex)) {
         queue.push(vertex);
