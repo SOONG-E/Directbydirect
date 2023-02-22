@@ -191,9 +191,6 @@ const Builtin = {
     }
     return [];
   },
-  clear(arg, { cmd }) {
-    cmd = [];
-  },
 };
 
 export default Builtin;
