@@ -4,19 +4,19 @@ import { lime } from '@mui/material/colors';
 const Colors = createTheme({
   palette: {
     primary: {
-      main: '#5E8790',
+      main: '#838383',
       contrastText: '#000',
     },
     button: {
-      main: '#ffea08',
-      contrastText: '#000',
+      main: '#838383',
+      contrastText: '#9cbdd4',
     },
     object: {
-      main: '#5E8790',
+      main: '#A5D9F3',
       contrastText: '#000',
     },
     selectedObject: {
-      main: '#ffea08',
+      main: '#5E8790',
       contrastText: '#000',
     },
     StartDirectory: {
