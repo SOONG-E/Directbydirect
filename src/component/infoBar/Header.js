@@ -1,5 +1,4 @@
 import { styled } from '@mui/material/styles';
-import ModeButton from './ModeButton';
 import Theme from './Theme';
 import { Box, AppBar, Stack } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
@@ -9,11 +8,7 @@ const Header = () => {
   const theme = useTheme();
   return (
     <Wrapper>
-      <AppBar
-        position='static'
-        style={{ backgroundColor: 'primary.border' }}
-        elevation={0}
-      >
+      <AppBar position='static' elevation={0} color='primary'>
         <Stack
           direction='row'
           justifyContent='space-between'
@@ -36,7 +31,6 @@ const Header = () => {
             }}
           />
           <Stack direction='row' justifyContent='flex-end' spacing={2}>
-            <ModeButton />
             <Theme />
           </Stack>
         </Stack>
