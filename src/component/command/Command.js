@@ -14,7 +14,6 @@ table.set('mkdir', Builtin.mkdir);
 table.set('mv', Builtin.mv);
 table.set('rm', Builtin.rm);
 table.set('touch', Builtin.touch);
-table.set('clear', Builtin.clear);
 
 const execute = (splittedCommand, props) => {
   const cmd = splittedCommand[0];
@@ -33,7 +32,10 @@ const Command = () => {
 
   useEffect(() => {
     if (lastCommand.length === 0) return;
-    const splittedCommand = lastCommand.trim().split(' ');
+    const splittedCommand = lastCommand
+      .trim()
+      .split(' ')
+      .filter((word) => word.length > 0);
     const error = execute(splittedCommand, props);
     props.setRecord((prev) => {
       return {
