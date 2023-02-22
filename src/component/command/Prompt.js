@@ -78,10 +78,10 @@ const Prompt = ({ cmd, addCommand }) => {
         autoFocus={true}
         type='text'
         ref={focusInput}
-        onKeyDown={handleOnKeyPress}
+        onKeyPress={handleOnKeyPress}
         value={input}
         onChange={onChangeInput}
-        InputProps={{
+        inputProps={{
           style: { color: '#0a1929' },
         }}
       />
