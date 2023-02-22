@@ -1,14 +1,20 @@
 import { styled } from '@mui/material/styles';
 import { useState, useRef } from 'react';
 import { MESSAGE } from '../../constants/Message';
-import { TextField } from '@mui/material';
-import { Box } from '@mui/material';
 import { useTheme } from 'styled-components';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea, Stack } from '@mui/material';
+// import Card from '@mui/material/Card';
+// import CardContent from '@mui/material/CardContent';
+// import CardMedia from '@mui/material/CardMedia';
+// import Typography from '@mui/material/Typography';
+import {
+  CardActionArea,
+  Stack,
+  TextField,
+  Box,
+  Grid,
+  Paper,
+} from '@mui/material';
+// import { Margin } from '@mui/icons-material';
 
 const Directory = ({ onDirec }) => {
   const theme = useTheme();
@@ -31,83 +37,79 @@ const Directory = ({ onDirec }) => {
   };
 
   return (
-    <Stack alignItems='center'>
-      <Stack direction='row' alignItems='center' spacing={2} padding={20}>
-        <CardMedia
-          component='img'
-          image='img/Cat.jpg'
-          alt='Cat on Laptop'
-          sx={{ Height: 300, maxWidth: 300, objectFit: 'contain' }}
+    <>
+      {/* 
+    // <Stack alignItems='center'>
+    //   <Card sx={{ maxWidth: 500, marginTop: '20%' }}>
+    //     <CardMedia
+    //       component='img'
+    //       image='img/Cat.jpg'
+    //       alt='Cat on Laptop'
+    //       sx={{
+    //         Height: 500,
+    //         maxWidth: 500,
+    //         objectFit: 'contain',
+    //       }}
+    //     />
+    //     <CardContent>
+    //       <Typography align='left' variant='body1'>
+    //         {MESSAGE.INFORMATION}
+    //       </Typography>
+    //       </CardContent>
+    //     </Card>
+    // </Stack> */}
+
+      <Box
+        sx={{
+          flexGrow: 1,
+          width: 90,
+          height: '90%',
+        }}
+      >
+        <Grid container my={4} spacing={2}>
+          <Grid item xs={6}>
+            <Item>xs=8</Item>
+          </Grid>
+          <Grid item xs={6}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={6}>
+            <Item>xs=4</Item>
+          </Grid>
+          <Grid item xs={6}>
+            <Item>xs=8</Item>
+          </Grid>
+        </Grid>
+        <StartDirectory
+          ref={focusInput}
+          autoFocus={true}
+          placeholder='시작할 디렉토리를 적어주세요!'
+          onKeyPress={handleOnKeyPress}
+          onChange={onChangeInput}
+          value={directory}
+          color='StartDirectory'
+          variant='standard'
+          autoComplete='off'
+          style={{ textAlign: 'center' }}
+          inputProps={{ maxLength: 24, style: { textAlign: 'center' } }}
         />
-        <CardMedia
-          component='img'
-          image='img/mal.png'
-          sx={{ Height: 300, maxWidth: 300, objectFit: 'contain' }}
-        />
-        <Box
-          component='div'
-          sx={{
-            width: 300,
-            position: 'absolute',
-            left: '0',
-            top: '0',
-            color: 'black',
-          }}
-        >
-          {MESSAGE.INFORMATION}
-        </Box>
-      </Stack>
-      <StartDirectory
-        ref={focusInput}
-        autoFocus={true}
-        placeholder='시작할 디렉토리 입력란'
-        onKeyDown={handleOnKeyPress}
-        onChange={onChangeInput}
-        value={directory}
-        color='StartDirectory'
-        variant='standard'
-        autoComplete='off'
-      />
-    </Stack>
+      </Box>
+    </>
   );
 };
-// <Container>
-//   <Help>{MESSAGE.INFORMATION}</Help>
-//   <Wrapper>
-//   </Wrapper>
-// </Container>
 
 export default Directory;
 
-const Container = styled(Box)`
-  margin: auto;
-  width: 80%;
-  height: 70%;
-  border: 1px solid white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 30px;
-`;
-const Help = styled(Box)`
-  text-align: center;
-  padding: 0% 20%;
-`;
 const StartDirectory = styled(TextField)`
   type: text;
   font-size: 15px;
   text-align: center;
-  border-radius: 10px;
-  margin-top: 30px;
-  width: 50%;
+  width: 100%;
   height: 100%;
   z-index: 3;
 `;
-const Wrapper = styled(Box)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 60%;
-  height: 30px;
-`;
+
+const Item = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(15),
+  textAlign: 'center',
+}));
