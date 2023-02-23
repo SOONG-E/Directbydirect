@@ -18,15 +18,16 @@ const CommandLine = ({ cmd, error }) => {
         {cmd.join(' ')}
       </CommandBox>
       {error.length === 0 ? (
-        <CheckCircleOutlineOutlinedIcon color='CmdLine' />
+        <CheckCircleOutlineOutlinedIcon color='success' />
       ) : (
-        <ErrorOutlineOutlinedIcon color='ErrorLine' />
+        <ErrorOutlineOutlinedIcon color='error' />
       )}
     </Stack>
   );
 };
 
 const ErrorLine = ({ error }) => {
+  const theme = useTheme();
   return (
     <>
       {error.map((x, idx) => (
@@ -36,7 +37,7 @@ const ErrorLine = ({ error }) => {
             borderRadius: 1,
             minWidth: '90%',
             padding: 1,
-            bgcolor: '#ffffff20',
+            bgcolor: 'History.errorBg',
           }}
         >
           {x}
@@ -79,7 +80,6 @@ const History = () => {
 export default History;
 
 const ErrorAlert = styled(Box)``;
-// border: 2px dotted white;
 
 const PromptIcon = styled(Box)`
   padding-top: 1px;
@@ -89,7 +89,6 @@ const PromptIcon = styled(Box)`
 const HistoryBox = styled(Box)`
   height: 90%;
   font-size: large;
-  color: white;
   font-family: monospace;
   line-height: 20px;
   padding: 0.25em 1em;

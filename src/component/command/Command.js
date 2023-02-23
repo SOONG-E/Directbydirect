@@ -5,6 +5,7 @@ import Prompt from './Prompt';
 import Builtin from '../../model/Builitin';
 import { styled } from '@mui/material/styles';
 import { Box } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 
 const table = new Map();
 table.set('cd', Builtin.cd);
@@ -27,6 +28,7 @@ const execute = (splittedCommand, props) => {
 };
 
 const Command = () => {
+  const theme = useTheme();
   const props = useContext(Interaction);
   const [lastCommand, setLastCommand] = useState('');
 
@@ -47,7 +49,13 @@ const Command = () => {
   }, [lastCommand]);
 
   return (
-    <CommandBox>
+    <CommandBox
+      sx={{
+        backgroundColor: 'History.main',
+        color: 'History.contrastText',
+        border: '#ff0000',
+      }}
+    >
       <History />
       <Prompt cmd={props.record.cmd} addCommand={setLastCommand} />
     </CommandBox>
@@ -62,5 +70,4 @@ const CommandBox = styled(Box)`
   margin-bottom: 18px;
   width: 33vw;
   border-radius: 5px;
-  background-color: #0a1929;
 `;
