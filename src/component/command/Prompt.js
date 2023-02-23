@@ -3,19 +3,17 @@ import { styled } from '@mui/material/styles';
 import CMD from '../../constants/Cmd';
 import { Box, Paper, TextField } from '@mui/material';
 import KeyboardDoubleArrowRightRoundedIcon from '@mui/icons-material/KeyboardDoubleArrowRightRounded';
+import { useTheme } from 'styled-components';
 
 const MAX_LENGTH = 50;
 const FONT_WIDTH = 30;
 
 const Prompt = ({ cmd, addCommand }) => {
+  const theme = useTheme();
   const focusInput = useRef(null);
   const historyIndex = useRef(cmd.length + 1);
   const [input, setInput] = useState('');
   const [recoInput, setRecoInput] = useState('');
-
-  // useEffect(() => {
-  //   focusInput.current.focus();
-  // }, []);
 
   useEffect(() => {
     if (input.length === 0) {
@@ -38,10 +36,11 @@ const Prompt = ({ cmd, addCommand }) => {
     }
   };
 
-  const handleOnKeyPress = (e) => {
+  const handleOnKeyDown = (e) => {
     if (e.key === 'ArrowUp') {
       changeIndex(-1);
-      setInput(cmd[historyIndex.current].join(' '));
+      if (historyIndex.current === cmd.length) setInput('');
+      else setInput(cmd[historyIndex.current].join(' '));
       setTimeout(() => {
         e.target.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
         e.target.scrollLeft = MAX_LENGTH * FONT_WIDTH;
@@ -58,7 +57,7 @@ const Prompt = ({ cmd, addCommand }) => {
       setInput('');
     }
     if (e.key === 'Tab') {
-      e.preventDefault(); // 탭에서 다음 항목으로 넘어가는 거 방지!
+      e.preventDefault();
       if (recoInput !== undefined) {
         setInput(recoInput);
       }
@@ -78,15 +77,23 @@ const Prompt = ({ cmd, addCommand }) => {
         autoFocus={true}
         type='text'
         ref={focusInput}
-        onKeyPress={handleOnKeyPress}
+        // onKeyUp={handleOnKeyUp}  // tab 안됨
+        onKeyDown={handleOnKeyDown} // 한글 입력 이슈
+        // onKeyPress={handleOnKeyPress}  // enter만 됨
         value={input}
         onChange={onChangeInput}
         inputProps={{
           style: { color: '#0a1929' },
         }}
       />
-      <Recommend elevation={0}>{recoInput}</Recommend>
-      <CurrentTyping elevation={0} onClick={onClickReco}>
+      <Recommend sx={{ bgcolor: 'History.main' }} elevation={0}>
+        {recoInput}
+      </Recommend>
+      <CurrentTyping
+        elevation={0}
+        onClick={onClickReco}
+        sx={{ color: 'History.contrastText', bgcolor: 'History.main' }}
+      >
         {input}
       </CurrentTyping>
     </Wrapper>
@@ -98,7 +105,6 @@ export default Prompt;
 const Wrapper = styled(Box)`
   position: relative;
   display: flex;
-  background-color: #0a1929;
   align-items: center;
 `;
 
@@ -121,7 +127,6 @@ const Recommend = styled(Paper)`
   position: absolute;
   left: 37px;
   display: inline-block;
-  background: #0a1929;
   color: gray;
   font-size: 18px;
   font-family: Arial;
@@ -132,8 +137,6 @@ const CurrentTyping = styled(Paper)`
   position: absolute;
   left: 37px;
   display: inline-block;
-  background: #0a1929;
-  color: white;
   font-size: 18px;
   font-family: Arial;
   z-index: 3;
