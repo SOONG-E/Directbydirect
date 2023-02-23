@@ -4,10 +4,14 @@ import { Box, AppBar, Stack } from '@mui/material';
 import CardMedia from '@mui/material/CardMedia';
 import { useTheme } from '@mui/material/styles';
 
-const Header = () => {
+const Header = ({ setTheme }) => {
   const theme = useTheme();
   return (
-    <Wrapper>
+    <Wrapper
+      sx={{
+        backgroundColor: 'primary.main',
+      }}
+    >
       <AppBar position='static' elevation={0} color='primary'>
         <Stack
           direction='row'
@@ -30,8 +34,8 @@ const Header = () => {
               window.location.reload();
             }}
           />
-          <Stack direction='row' justifyContent='flex-end' spacing={2}>
-            <Theme />
+          <Stack direction='row' justifyContent='flex-end' paddingRight={2} paddingTop={1}>
+            <Theme setTheme={setTheme} />
           </Stack>
         </Stack>
       </AppBar>
