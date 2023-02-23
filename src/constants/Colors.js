@@ -1,34 +1,61 @@
 import { createTheme } from '@mui/material/styles';
-import { lime } from '@mui/material/colors';
 
-const Colors = createTheme({
+export const DarkColors = createTheme({
   palette: {
     primary: {
-      main: '#838383',
+      main: '#455c79',
       contrastText: '#000',
+      dial: '#112744',
     },
-    button: {
-      main: '#838383',
-      contrastText: '#9cbdd4',
+    History: {
+      main: '#0a1929',
+      contrastText: '#ffffff',
+      border: '#00000000',
+      errorBg: '#ffffff20',
+    },
+    Theme: {
+      bgColor: '#E9E9EA',
     },
     object: {
-      main: '#A5D9F3',
+      main: '#1a4169',
       contrastText: '#000',
     },
     selectedObject: {
-      main: '#5E8790',
+      main: '#94a6ba',
       contrastText: '#000',
     },
     StartDirectory: {
       main: '#5E8790',
     },
-    ErrorLine: {
-      main: '#d32f2f',
-    },
-    CmdLine: {
-      main: '#2e7d32',
-    },
   },
 });
 
-export default Colors;
+export const LightColors = createTheme({
+  palette: {
+    primary: {
+      main: '#FCF9ED',
+      contrastText: '#000',
+      dial: '#112744',
+    },
+    History: {
+      main: '#ffffff90',
+      contrastText: '#000000',
+      border: '#000000',
+      errorBg: '#D6B75A40',
+    },
+    Theme: {
+      bgColor: '#ecbe30',
+    },
+    object: {
+      main: '#e7d02f',
+      contrastText: '#000',
+    },
+    selectedObject: {
+      main: '#fdec74',
+      contrastText: '#000',
+    },
+    StartDirectory: {
+      main: '#5E8790',
+    },
+  },
+});
