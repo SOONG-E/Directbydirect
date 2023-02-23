@@ -8,7 +8,7 @@ import Tree from './model/Tree';
 import { TYPE } from './constants/Type';
 import { styled } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material/styles';
-import Colors from './constants/Colors';
+import { DarkColors, LightColors } from './constants/Colors';
 import { Box, Stack } from '@mui/material';
 
 export const Interaction = createContext();
@@ -17,6 +17,7 @@ function App() {
   const [record, setRecord] = useState({ cmd: [], error: [] });
   const [cwd, setCwd] = useState([]);
   const [root, setRoot] = useState();
+  const [theme, setTheme] = useState(0);
 
   const onDirec = (direc) => {
     const root = new Tree(direc, TYPE.DIR);
@@ -25,13 +26,13 @@ function App() {
   };
 
   return (
-    <ThemeProvider theme={Colors}>
+    <ThemeProvider theme={theme == 0 ? DarkColors : LightColors}>
       <Wrapper>
-        <Header />
-        <MiddleWrapper>
+        <Header setTheme={setTheme} />
+        <MiddleWrapper sx={{ bgcolor: 'primary.main' }}>
           {cwd.length > 0 ? (
             <Interaction.Provider
-              value={{ record, setRecord, cwd, setCwd, root }}
+              value={{ record, setRecord, cwd, setCwd, root, setTheme }}
             >
               <Stack direction='row' justifyContent='space-between'>
                 <Command />
@@ -56,14 +57,12 @@ const Wrapper = styled(Box)`
   color: white;
   height: 100%;
   width: 100%;
-  background-color: #213c4b;
 `;
 
 const MiddleWrapper = styled(Box)`
   display: flex;
-  height: 96%;
+  height: 100%;
   width: 100%;
-  background-color: #213c4b;
   justify-content: center;
   align-content: center;
 `;
