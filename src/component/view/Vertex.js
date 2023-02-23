@@ -1,5 +1,5 @@
 import { styled } from '@mui/material/styles';
-import { Box, Chip, Stack } from '@mui/material';
+import { Box, Chip, Grid, Stack } from '@mui/material';
 import FolderOpenOutlinedIcon from '@mui/icons-material/FolderOpenOutlined';
 import InsertDriveFileOutlinedIcon from '@mui/icons-material/InsertDriveFileOutlined';
 import { TYPE } from '../../constants/Type';
@@ -8,14 +8,14 @@ import FolderSpecialOutlinedIcon from '@mui/icons-material/FolderSpecialOutlined
 import { useContext } from 'react';
 import { Interaction } from '../../App';
 
-const Root = ({ root }) => {
+const Root = ({ tree }) => {
   const props = useContext(Interaction);
   return (
-    <Chip
+    <Icon
       icon={<FolderSpecialOutlinedIcon />}
-      label={root.getName()}
-      color={root === props.cwd.at(-1) ? 'object' : 'selectedObject'}
-      onClick={(e) => onChangeDirectory([root, props], e)}
+      label={tree.getName()}
+      color={tree === props.cwd.at(-1) ? 'selectedObject' : 'object'}
+      onClick={(e) => onChangeDirectory([tree, props], e)}
     />
   );
 };
@@ -33,7 +33,12 @@ const onChangeDirectory = ([dest, { root, cwd, setCwd, setRecord }]) => {
         new_cwd.unshift(dest);
       }
       let common_idx = 1;
-      while (common_idx < cwd.length && common_idx < new_cwd.length && cwd[common_idx] === new_cwd[common_idx]) ++common_idx;
+      while (
+        common_idx < cwd.length &&
+        common_idx < new_cwd.length &&
+        cwd[common_idx] === new_cwd[common_idx]
+      )
+        ++common_idx;
       let add_command = 'cd ';
       for (let i = common_idx; i < cwd.length; ++i) {
         add_command += '../';
@@ -63,20 +68,20 @@ const onChangeDirectory = ([dest, { root, cwd, setCwd, setRecord }]) => {
   }
 };
 
-const ChipChild = ({ child }) => {
+const ChipChild = ({ tree }) => {
   const props = useContext(Interaction);
   return (
-    <Chip
+    <Icon
       icon={
-        child.getType() == TYPE.DIR ? (
+        tree.getType() == TYPE.DIR ? (
           <FolderOpenOutlinedIcon fontSize='small' />
         ) : (
           <InsertDriveFileOutlinedIcon fontSize='small' />
         )
       }
-      label={child.getName()}
-      color={child === props.cwd.at(-1) ? 'object' : 'selectedObject'}
-      onClick={(e) => onChangeDirectory([child, props], e)}
+      label={tree.getName()}
+      color={tree === props.cwd.at(-1) ? 'selectedObject' : 'object'}
+      onClick={(e) => onChangeDirectory([tree, props], e)}
     />
   );
 };
@@ -95,18 +100,22 @@ const Prefix = (depth) => {
 const Vertex = ({ tree, cwd }) => {
   const theme = useTheme();
   return (
-    <Stack spacing={2}>
-      {tree === cwd.at(0) ? <Root root={tree} /> : null}
-      {[...tree.getChild().values()].map((child, idx) => (
-        <VertexWrapper key={idx}>
-          <CircleWrapper>
-            {Prefix(child.getDepth())}
-            <ChipChild child={child} />
-          </CircleWrapper>
-          {child.getChild()?.size ? <Vertex tree={child} cwd={cwd} /> : null}
-        </VertexWrapper>
-      ))}
-    </Stack>
+    <>
+      <Grid container alignItems='flex-start'>
+        {tree === cwd.at(0) ? <Root tree={tree} /> : null}
+      </Grid>
+      <Grid container alignItems='flex-start' style={{ flexDirection: 'column' }}>
+        {[...tree.getChild().values()].map((child, idx) => (
+          <VertexWrapper key={idx}>
+            <CircleWrapper>
+              {Prefix(child.getDepth())}
+              <ChipChild tree={child} />
+            </CircleWrapper>
+            {child.getChild()?.size ? <Vertex tree={child} cwd={cwd} /> : null}
+          </VertexWrapper>
+        ))}
+      </Grid>
+    </>
   );
 };
 
@@ -118,4 +127,8 @@ const VertexWrapper = styled(Box)`
 
 const CircleWrapper = styled(Box)`
   display: flex;
+`;
+
+const Icon = styled(Chip)`
+  margin-bottom: 7px;
 `;
