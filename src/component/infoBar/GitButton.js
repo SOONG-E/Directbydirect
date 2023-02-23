@@ -1,10 +1,16 @@
-import { styled } from '@mui/material/styles';
-import { SpeedDial, SpeedDialIcon, SpeedDialAction } from '@mui/material';
+import {
+  SpeedDial,
+  SpeedDialIcon,
+  SpeedDialAction,
+  Avatar,
+} from '@mui/material';
 import { Us } from '../../constants/Us';
-import GitHubIcon from '@mui/icons-material/GitHub';
 import ShareIcon from '@mui/icons-material/Share';
+import { useTheme } from 'styled-components';
+import { styled } from '@mui/material/styles';
 
 const GitButton = () => {
+  const theme = useTheme();
   const onClick = (url) => {
     window.open(url, '_blank', 'noopener, noreferrer');
   };
@@ -19,16 +25,21 @@ const GitButton = () => {
   };
 
   return (
-    <SpeedDial
+    <GitDial
       ariaLabel='SpeedDial'
-      sx={{ position: 'absolute', bottom: 16, right: 16 }}
+      sx={{
+        color: '#000',
+        position: 'absolute',
+        bottom: 16,
+        right: 16,
+      }}
       icon={<SpeedDialIcon />}
     >
       {Us.map((developer) => (
         <SpeedDialAction
           onClick={() => onClick(developer.url)}
           key={developer.name}
-          icon={<img src='developer.img_src' alt=<GitHubIcon /> />}
+          icon=<Avatar src={developer.img} />
           tooltipTitle={developer.name}
         />
       ))}
@@ -37,8 +48,19 @@ const GitButton = () => {
         icon={<ShareIcon />}
         tooltipTitle='Share'
       />
-    </SpeedDial>
+    </GitDial>
   );
 };
 
 export default GitButton;
+
+const GitDial = styled(SpeedDial)(({ theme }) => ({
+  '& .MuiSpeedDial-fab': {
+    backgroundColor: '#ecbe30',
+  },
+  '& .MuiSpeedDialIcon-iconOpen': {
+    '& .MuiSpeedDial-fab': {
+      backgroundColor: '#ecbe30',
+    },
+  },
+}));
