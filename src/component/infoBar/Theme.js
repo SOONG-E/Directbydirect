@@ -10,7 +10,7 @@ const Theme = ({ setTheme }) => {
 
   const changeTheme = () => {
     setTheme((prev) => {
-      return prev === 1 ? 0 : 1;
+      return !prev;
     });
   };
 
