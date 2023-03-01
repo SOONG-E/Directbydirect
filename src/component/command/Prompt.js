@@ -83,7 +83,7 @@ const Prompt = ({ cmd, addCommand }) => {
         value={input}
         onChange={onChangeInput}
         inputProps={{
-          style: { color: '#0a1929' },
+          style: { color: 'transparent' },
         }}
       />
       <Recommend sx={{ bgcolor: 'History.main' }} elevation={0}>
