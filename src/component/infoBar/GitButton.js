@@ -44,7 +44,7 @@ const GitButton = () => {
         />
       ))}
       <SpeedDialAction
-        onClick={() => handleCopy('http://localhost:3000/')}
+        onClick={() => handleCopy('https://react-project-23036.web.app/')}
         icon={<ShareIcon />}
         tooltipTitle='Share'
       />
