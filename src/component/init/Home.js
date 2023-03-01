@@ -3,8 +3,8 @@ import Typography from './Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 import { useTheme } from '@mui/material/styles';
 
-const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400';
+const backgroundImage = 'img/Cat.jpg';
+// 'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400';
 
 export default function ProductHero() {
   const theme = useTheme();
@@ -37,7 +37,7 @@ export default function ProductHero() {
         variant='h4'
         sx={{ mb: 4, mt: { xs: 4, sm: 10 }, zIndex: 3 }}
       >
-        Learn commands related to directory and file control! 
+        Learn commands related to directory and file control!
       </Typography>
       <Typography
         color='StartDirectory.contrastText'
