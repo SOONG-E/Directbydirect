@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Stack, TextField, Box, Paper } from '@mui/material';
 import Grid from '@mui/material/Unstable_Grid2';
 // import { Margin } from '@mui/icons-material';
+import Home from './Home';
 
 const Directory = ({ onDirec }) => {
   const theme = useTheme();
@@ -32,8 +33,9 @@ const Directory = ({ onDirec }) => {
 
   return (
     <>
-      <Stack alignItems='center'>
-        <Card sx={{ maxWidth: 500, marginTop: '20%' }}>
+      <Stack alignItems='center' paddingTop={4.2}>
+        <Home />
+        {/* <Card sx={{ maxWidth: 500, marginTop: '20%' }}>
           <CardMedia
             component='img'
             image='img/Cat.jpg'
@@ -49,21 +51,21 @@ const Directory = ({ onDirec }) => {
               {MESSAGE.INFORMATION}
             </Typography>
           </CardContent>
-        </Card>
+        </Card> */}
+        <StartDirectory
+          ref={focusInput}
+          autoFocus={true}
+          placeholder='시작할 디렉토리를 적어주세요!'
+          onKeyPress={handleOnKeyPress}
+          onChange={onChangeInput}
+          value={directory}
+          color='StartDirectory'
+          variant='standard'
+          autoComplete='off'
+          style={{ textAlign: 'center' }}
+          inputProps={{ maxLength: 24, style: { textAlign: 'center' } }}
+        />
       </Stack>
-      <StartDirectory
-        ref={focusInput}
-        autoFocus={true}
-        placeholder='시작할 디렉토리를 적어주세요!'
-        onKeyPress={handleOnKeyPress}
-        onChange={onChangeInput}
-        value={directory}
-        color='StartDirectory'
-        variant='standard'
-        autoComplete='off'
-        style={{ textAlign: 'center' }}
-        inputProps={{ maxLength: 24, style: { textAlign: 'center' } }}
-      />
     </>
   );
 };
@@ -76,6 +78,7 @@ const StartDirectory = styled(TextField)`
   text-align: center;
   width: 100%;
   height: 100%;
+  padding-top: 10px;
   z-index: 3;
 `;
 

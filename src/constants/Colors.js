@@ -26,6 +26,7 @@ export const DarkColors = createTheme({
     },
     StartDirectory: {
       main: '#5E8790',
+      contrastText: '#FCF9ED',
     },
   },
 });
@@ -56,6 +57,7 @@ export const LightColors = createTheme({
     },
     StartDirectory: {
       main: '#5E8790',
+      contrastText: '#FCF9ED',
     },
   },
 });
