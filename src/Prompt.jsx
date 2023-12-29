@@ -17,6 +17,7 @@ export default function Prompt({ setHistory }) {
     <div className='mx-2 flex justify-between'>
       <div className='text-xl font-bold text-green-400'>&gt;</div>
       <input
+        autoFocus
         value={input}
         onKeyDown={onEnter}
         onChange={onChange}
