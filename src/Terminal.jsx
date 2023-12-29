@@ -15,7 +15,7 @@ export default function Terminal() {
   return (
     <animated.div
       {...bindTerminalPos()}
-      className={`relative flex h-5/6 w-1/3 flex-col justify-between rounded-md bg-black shadow-lg`}
+      className={`relative flex h-5/6 min-h-96 w-1/3 min-w-60 flex-col justify-between rounded-md bg-black shadow-lg`}
       style={{
         x: terminalPos.x,
         y: terminalPos.y,
