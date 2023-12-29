@@ -25,14 +25,14 @@ export default function Prompt({ setHistory }) {
   };
 
   return (
-    <div className='mx-2 flex justify-between'>
+    <div className='mx-2 mb-1 flex justify-between'>
       <div className='animate-pulse text-xl font-bold text-green-400'>&gt;</div>
       <input
         autoFocus
         value={input}
         onKeyDown={handleOnKeyDown}
         onChange={onChange}
-        className='bg-black text-white'
+        className='ml-2 flex-1 bg-black font-semibold text-white outline-none'
         type='text'
       />
     </div>
