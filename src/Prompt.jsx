@@ -2,10 +2,21 @@ import { useState } from 'react';
 
 export default function Prompt({ setHistory }) {
   const [input, setInput] = useState('');
-  const onEnter = (e) => {
+
+  const handleOnKeyDown = (e) => {
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       setHistory((prev) => [...prev, e.target.value]);
       setInput('');
+    }
+    if (e.key === 'ArrowUp') {
+      console.log('ArrowUp');
+    }
+    if (e.key === 'ArrowDown') {
+      console.log('ArrowDown');
+    }
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      console.log('Tab');
     }
   };
 
@@ -19,7 +30,7 @@ export default function Prompt({ setHistory }) {
       <input
         autoFocus
         value={input}
-        onKeyDown={onEnter}
+        onKeyDown={handleOnKeyDown}
         onChange={onChange}
         className='bg-black text-white'
         type='text'
