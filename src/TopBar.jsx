@@ -1,6 +1,6 @@
 export default function TopBar() {
   return (
-    <div className='flex justify-between rounded-t-md border border-gray-400 bg-gray-300 shadow-inner'>
+    <div className='flex justify-between rounded-t-md border border-gray-400 bg-gray-300 shadow-sm'>
       <div className='ml-2 flex items-center justify-center space-x-1'>
         <div className='aspect-square h-4 w-4 rounded-full bg-[#ff2b2b] shadow-md' />
         <div className='aspect-square h-4 w-4 rounded-full bg-[#ffc700] shadow-md' />
