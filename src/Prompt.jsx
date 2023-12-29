@@ -15,7 +15,7 @@ export default function Prompt({ setHistory }) {
 
   return (
     <div className='mx-2 flex justify-between'>
-      <div className='text-xl font-bold text-green-400'>&gt;</div>
+      <div className='animate-pulse text-xl font-bold text-green-400'>&gt;</div>
       <input
         autoFocus
         value={input}
