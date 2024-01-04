@@ -12,7 +12,7 @@ export default function DirectoryTree() {
   return (
     <animated.div
       {...bindTreeComponentPos()}
-      className='absolute flex h-5/6 w-full min-w-60 flex-col'
+      className='absolute flex h-5/6 w-3/5 min-w-60 flex-col'
       style={{
         x: TreeComponentPos.x,
         y: TreeComponentPos.y,
