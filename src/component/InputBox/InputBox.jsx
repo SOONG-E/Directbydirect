@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useRecoilState } from 'recoil';
 import InputBoxHeader from 'src/component/InputBox/InputBoxHeader';
 import OkButton from 'src/component/InputBox/OkButton';
+import { rootDirNameState } from 'src/state/rootDirName';
 
 const InputBox = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [rootDirName, setRootDirName] = useRecoilState(rootDirNameState);
 
-  const handleChange = (e) => setInputValue(e.target.value);
+  const handleChange = (e) => setRootDirName(e.target.value);
 
   return (
     <div className='flex h-screen items-center justify-center'>
@@ -18,7 +19,7 @@ const InputBox = () => {
             </p>
             <input
               type='text'
-              value={inputValue}
+              value={rootDirName}
               onChange={handleChange}
               className='mt-[6px] h-[23px] w-full rounded-[5px] border bg-white p-2 text-black drop-shadow'
             />

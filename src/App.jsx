@@ -1,3 +1,4 @@
+import { RecoilRoot } from 'recoil';
 import DirectoryTree from 'src/component/DirectoryTree/DirectoryTree';
 import InputBox from 'src/component/InputBox/InputBox';
 import NavBar from 'src/component/NavBar/NavBar';
@@ -6,12 +7,14 @@ import 'src/style/App.css';
 
 function App() {
   return (
-    <div className="flex h-full w-full bg-cover bg-[url('background.png')]">
-      <NavBar />
-      <Terminal />
-      <DirectoryTree />
-      <InputBox />
-    </div>
+    <RecoilRoot>
+      <div className="flex h-full w-full bg-cover bg-[url('background.png')]">
+        <NavBar />
+        <Terminal />
+        <DirectoryTree />
+        <InputBox />
+      </div>
+    </RecoilRoot>
   );
 }
 
