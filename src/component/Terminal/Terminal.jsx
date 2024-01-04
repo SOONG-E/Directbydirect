@@ -21,7 +21,7 @@ export default function Terminal() {
         y: terminalPos.y,
       }}
     >
-      <TopBar Title='Terminal' />
+      <TopBar title='Terminal' />
       <History history={history} />
       <Prompt setHistory={setHistory} />
     </animated.div>
