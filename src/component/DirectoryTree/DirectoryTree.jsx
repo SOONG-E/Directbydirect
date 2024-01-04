@@ -1,7 +1,7 @@
-import TopBar from 'src/component/Terminal/TopBar';
-import Detail from 'src/component/DirectoryTree/Detail';
+import { animated, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { useSpring, animated } from 'react-spring';
+import Detail from 'src/component/DirectoryTree/Detail';
+import TopBar from 'src/component/Terminal/TopBar';
 
 export default function DirectoryTree() {
   const TreeComponentPos = useSpring({ x: 0, y: 0 });
@@ -12,7 +12,7 @@ export default function DirectoryTree() {
   return (
     <animated.div
       {...bindTreeComponentPos()}
-      className='flex h-5/6 w-full min-w-60 flex-col'
+      className='absolute flex h-5/6 w-full min-w-60 flex-col'
       style={{
         x: TreeComponentPos.x,
         y: TreeComponentPos.y,
