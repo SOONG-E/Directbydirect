@@ -1,0 +1,25 @@
+import TopBar from 'src/component/Terminal/TopBar';
+import Detail from 'src/component/DrectoryTree/Detail';
+import { useDrag } from 'react-use-gesture';
+import { useSpring, animated } from 'react-spring';
+
+export default function DrectoryTree() {
+  const TreeComponentPos = useSpring({ x: 0, y: 0 });
+  const bindTreeComponentPos = useDrag((params) => {
+    TreeComponentPos.x.set(params.offset[0]);
+    TreeComponentPos.y.set(params.offset[1]);
+  });
+  return (
+    <animated.div
+      {...bindTreeComponentPos()}
+      className='flex h-5/6 w-full min-w-60 flex-col'
+      style={{
+        x: TreeComponentPos.x,
+        y: TreeComponentPos.y,
+      }}
+    >
+      <TopBar />
+      <Detail />
+    </animated.div>
+  );
+}
