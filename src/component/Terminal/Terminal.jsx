@@ -1,9 +1,9 @@
-import History from 'src/component/Terminal/History';
-import TopBar from 'src/component/Terminal/TopBar';
-import Prompt from 'src/component/Terminal/Prompt';
 import { useState } from 'react';
+import { animated, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { useSpring, animated } from 'react-spring';
+import History from 'src/component/Terminal/History';
+import Prompt from 'src/component/Terminal/Prompt';
+import TopBar from 'src/component/Terminal/TopBar';
 
 export default function Terminal() {
   const [history, setHistory] = useState([]);
@@ -15,13 +15,13 @@ export default function Terminal() {
   return (
     <animated.div
       {...bindTerminalPos()}
-      className={`relative flex h-5/6 min-h-96 w-1/3 min-w-60 flex-col justify-between rounded-md bg-black shadow-lg`}
+      className='absolute flex h-5/6 min-h-96 w-1/3 min-w-60 flex-col justify-between rounded-md bg-black shadow-lg'
       style={{
         x: terminalPos.x,
         y: terminalPos.y,
       }}
     >
-      <TopBar />
+      <TopBar Title='Terminal' />
       <History history={history} />
       <Prompt setHistory={setHistory} />
     </animated.div>
