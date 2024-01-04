@@ -1,3 +1,5 @@
+import InputBox from 'src/InputBox';
+import Terminal from 'src/Terminal';
 import NavBar from 'src/component/NavBar/NavBar';
 import 'src/style/App.css';
 
@@ -7,10 +9,11 @@ function App() {
       style={{
         backgroundImage: `url('background.png')`,
       }}
-			className='h-full'
+      className='h-full bg-cover'
     >
       <NavBar />
-      <div>본문</div>
+      <Terminal />
+      <InputBox />
     </div>
   );
 }
