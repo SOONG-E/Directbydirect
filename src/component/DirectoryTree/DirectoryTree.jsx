@@ -1,9 +1,9 @@
 import TopBar from 'src/component/Terminal/TopBar';
-import Detail from 'src/component/DrectoryTree/Detail';
+import Detail from 'src/component/DirectoryTree/Detail';
 import { useDrag } from 'react-use-gesture';
 import { useSpring, animated } from 'react-spring';
 
-export default function DrectoryTree() {
+export default function DirectoryTree() {
   const TreeComponentPos = useSpring({ x: 0, y: 0 });
   const bindTreeComponentPos = useDrag((params) => {
     TreeComponentPos.x.set(params.offset[0]);
