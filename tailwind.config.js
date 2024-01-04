@@ -4,6 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
+        'bar-gray': '#dddddd',
         midblack: '#353535',
       },
     },

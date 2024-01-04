@@ -9,7 +9,7 @@ const InputBox = () => {
     <div className='flex h-screen items-center justify-center'>
       <div className='fixed left-0 top-0 flex h-full w-full items-center justify-center bg-[#d9d9d9]/[50%]'>
         <div className='h-[140px] w-[465px] rounded-[5px] bg-[#eeeeee] drop-shadow'>
-          <div className='h-[25px] justify-center rounded-t-[5px] bg-[#dddddd] drop-shadow'>
+          <div className='bg-bar-gray h-[25px] justify-center rounded-t-[5px] drop-shadow'>
             <p className='pt-[3.5px] text-[14px] font-semibold text-[#727272]'>
               입력 창
             </p>
