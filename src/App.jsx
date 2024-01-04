@@ -1,6 +1,6 @@
-import InputBox from 'src/InputBox';
-import Terminal from 'src/Terminal';
+import InputBox from 'src/component/InputBox/InputBox';
 import NavBar from 'src/component/NavBar/NavBar';
+import Terminal from 'src/component/Terminal/Terminal';
 import 'src/style/App.css';
 
 function App() {

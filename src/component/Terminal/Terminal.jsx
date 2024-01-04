@@ -1,6 +1,6 @@
-import History from 'src/History';
-import TopBar from 'src/TopBar';
-import Prompt from 'src/Prompt';
+import History from 'src/component/Terminal/History';
+import TopBar from 'src/component/Terminal/TopBar';
+import Prompt from 'src/component/Terminal/Prompt';
 import { useState } from 'react';
 import { useDrag } from 'react-use-gesture';
 import { useSpring, animated } from 'react-spring';
