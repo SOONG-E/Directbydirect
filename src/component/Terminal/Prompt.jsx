@@ -3,7 +3,8 @@ import { useState } from 'react';
 export default function Prompt({ setHistory }) {
   const [input, setInput] = useState('');
 
-  const handleOnKeyDown = (e) => {
+  const handleChange = (e) => setInput(e.target.value);
+  const handleKeyDown = (e) => {
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
       setHistory((prev) => [...prev, e.target.value]);
       setInput('');
@@ -20,18 +21,14 @@ export default function Prompt({ setHistory }) {
     }
   };
 
-  const onChange = (e) => {
-    setInput(e.target.value);
-  };
-
   return (
     <div className='mx-2 mb-1 flex justify-between'>
       <div className='animate-pulse text-xl font-bold text-green-400'>&gt;</div>
       <input
         autoFocus
         value={input}
-        onKeyDown={handleOnKeyDown}
-        onChange={onChange}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
         className='ml-2 flex-1 bg-black font-semibold text-white outline-none'
         type='text'
       />
