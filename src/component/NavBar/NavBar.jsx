@@ -5,7 +5,7 @@ const NavBar = () => {
   return (
     <div className='w-full h-[32px] backdrop-blur-md'>
       <div className='w-full h-[32px] opacity-30 bg-neutral-300 drop-shadow'>
-        <div className='flex h-full justify-between items-center'>
+        <div className='flex h-full justify-between'>
           <TopLeftSide />
           <TopRightSide />
         </div>
