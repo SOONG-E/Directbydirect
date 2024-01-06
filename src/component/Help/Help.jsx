@@ -6,7 +6,7 @@ import { HELP } from 'src/constant/Help';
 import { helpIsOpenState } from 'src/state/helpIsOpen';
 
 const Help = () => {
-  const helpPos = useSpring({ x: 0, y: 0 });
+  const helpPos = useSpring({ x: 100, y: 100 });
   const [targetCmd, setTargetCmd] = useState('');
   const [isOpened, setIsOpened] = useRecoilState(helpIsOpenState);
   const bindHelpPos = useDrag((params) => {
@@ -31,7 +31,7 @@ const Help = () => {
     isOpened && (
       <animated.div
         {...bindHelpPos()}
-        className='w-2/3 h-2/3'
+        className='absolute w-2/3 h-2/3'
         style={{
           x: helpPos.x,
           y: helpPos.y,
