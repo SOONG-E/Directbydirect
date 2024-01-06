@@ -48,8 +48,12 @@ const Help = () => {
         <div className='bg-[#efefef] w-full h-full bg-opacity-90 rounded-b-md drop-shadow'>
           {HELP.map((item, index) => {
             return (
-              <div key={index} onClick={() => onClick(index)}>
-                <h3>&gt; {item.CMD}</h3>
+              <div
+                className='flex flex-col items-start p-2 group'
+                key={index}
+                onClick={() => onClick(index)}
+              >
+                <h3 className=' group-hover:font-bold'>&gt; {item.CMD}</h3>
                 {targetCmd === item.CMD && <p className=''>{item.TEXT}</p>}
               </div>
             );
