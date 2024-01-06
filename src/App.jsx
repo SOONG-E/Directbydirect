@@ -11,14 +11,12 @@ function App() {
   const showInputBox = useRecoilValue(showInputboxState);
 
   return (
-    <RecoilRoot>
-      <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
-        <NavBar />
-        <Terminal />
-        {showInputBox ? <InputBox /> : <DirectoryTree />}
-        <Help />
-      </div>
-    </RecoilRoot>
+    <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
+      <NavBar />
+      <Terminal />
+      {showInputBox ? <InputBox /> : <DirectoryTree />}
+      <Help />
+    </div>
   );
 }
 
