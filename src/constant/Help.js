@@ -36,14 +36,6 @@ export const HELP = [
     TEXT: 'Remove file',
   },
   {
-    CMD: 'rmdir',
-    TEXT: 'Remove directory',
-  },
-  {
-    CMD: 'rm',
-    TEXT: 'Remove file',
-  },
-  {
     CMD: 'touch',
     TEXT: 'Create file',
   },
