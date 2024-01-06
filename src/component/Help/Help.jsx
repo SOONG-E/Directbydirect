@@ -1,17 +1,24 @@
+import { useState } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { HELPTEXT } from 'src/constant/Help';
+import { HELP } from 'src/constant/Help';
 
 const Help = () => {
   const helpPos = useSpring({ x: 0, y: 0 });
+  const [targetCmd, setTargetCmd] = useState('');
   const bindHelpPos = useDrag((params) => {
     helpPos.x.set(params.offset[0]);
     helpPos.y.set(params.offset[1]);
   });
+
+  const onClick = (index) => {
+    setTargetCmd(HELP[index].CMD);
+    console.log(targetCmd);
+  };
   return (
     <animated.div
       {...bindHelpPos()}
-      className='w-1/2 h-1/2'
+      className='w-2/3 h-2/3'
       style={{
         x: helpPos.x,
         y: helpPos.y,
@@ -23,8 +30,13 @@ const Help = () => {
         <div className='aspect-square h-3 w-3 rounded-full bg-[#04b300] shadow-md' />
       </div>
       <div className='bg-[#efefef] w-full h-full bg-opacity-90 rounded-b-md drop-shadow'>
-        {HELPTEXT.map((item, index) => {
-          <div key={index}>{item.cd}</div>;
+        {HELP.map((item, index) => {
+          return (
+            <div key={index} onClick={() => onClick(index)}>
+              <h3>&gt; {item.CMD}</h3>
+              {targetCmd === item.CMD && <p className=''>{item.TEXT}</p>}
+            </div>
+          );
         })}
       </div>
     </animated.div>
