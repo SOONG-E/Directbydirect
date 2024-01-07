@@ -10,3 +10,17 @@
   margin: 0 auto;
   text-align: center;
 }
+
+@layer components {
+  .top-bar-item {
+    @apply rounded border-transparent bg-transparent px-2 py-0 hover:border-transparent hover:bg-gray-200 hover:bg-opacity-60 hover:ring-transparent;
+  }
+
+  .all-unset {
+    all: unset;
+  }
+
+  .nav-bar-box {
+    @apply absolute top-8 rounded bg-gray-200 bg-opacity-80 p-2 drop-shadow-lg backdrop-blur-lg;
+  }
+}
