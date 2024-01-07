@@ -7,7 +7,7 @@ import TopBar from 'src/component/Terminal/TopBar';
 
 export default function Terminal() {
   const [history, setHistory] = useState([]);
-  const terminalPos = useSpring({ x: 0, y: 0 });
+  const terminalPos = useSpring({ x: 10, y: 50 });
   const bindTerminalPos = useDrag((params) => {
     terminalPos.x.set(params.offset[0]);
     terminalPos.y.set(params.offset[1]);
@@ -21,7 +21,7 @@ export default function Terminal() {
         y: terminalPos.y,
       }}
     >
-      <TopBar Title='Terminal' />
+      <TopBar title='Terminal' />
       <History history={history} />
       <Prompt setHistory={setHistory} />
     </animated.div>

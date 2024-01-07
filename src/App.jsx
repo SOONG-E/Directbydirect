@@ -1,5 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import DirectoryTree from 'src/component/DirectoryTree/DirectoryTree';
+import Help from 'src/component/Help/help';
 import InputBox from 'src/component/InputBox/InputBox';
 import NavBar from 'src/component/NavBar/NavBar';
 import Terminal from 'src/component/Terminal/Terminal';
@@ -14,6 +15,7 @@ function App() {
       <NavBar />
       <Terminal />
       {showInputBox ? <InputBox /> : <DirectoryTree />}
+      <Help />
     </div>
   );
 }
