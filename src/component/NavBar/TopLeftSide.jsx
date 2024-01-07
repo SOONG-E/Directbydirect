@@ -1,8 +1,14 @@
 import { useState } from 'react';
+import GitButtons from 'src/component/NavBar/GitButtons';
 import Introduction from 'src/component/NavBar/Introduction';
 
 const TopLeftSide = () => {
+  const [gitsClicked, setGitsClicked] = useState(false);
   const [titleClicked, setTitleClicked] = useState(false);
+
+  const onClickedGits = () => {
+    setGitsClicked(true);
+  };
 
   const onClickedTitle = () => {
     setTitleClicked(true);
@@ -27,6 +33,7 @@ const TopLeftSide = () => {
       <button className='top-bar-item ml-4' onClick={onClickedGits}>
         Gits
       </button>
+      {gitsClicked && <GitButtons />}
     </div>
   );
 };
