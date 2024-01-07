@@ -24,13 +24,13 @@ const GitButton = () => {
           <a
             target='_blank'
             href={developer.url}
-            className='all-unset flex cursor-pointer'
+            className='all-unset flex cursor-pointer py-0.5'
             key={id}
           >
             <div className='mr-2 h-6 w-6 overflow-hidden rounded-full'>
               <img className='bg-cover' src={developer.imageUrl}></img>
             </div>
-            <div>{developer.nickname}</div>
+            <div className='text-nowrap text-left'>{developer.nickname}</div>
           </a>
         );
       })}
