@@ -35,7 +35,7 @@ function App() {
     <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
       <Terminal />
       {showInputBox ? <InputBox /> : <DirectoryTree />}
-      <Help />
+      <Help navBarRef={navBarRef}/>
       <NavBar navBarRef={navBarRef} />
     </div>
   );

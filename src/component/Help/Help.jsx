@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 import { HELP } from 'src/constant/Help';
 import { helpOpenState } from 'src/state/NavBar.state';
 
-const Help = () => {
+const Help = ({ navBarRef }) => {
   const [targetCmd, setTargetCmd] = useState('');
   const [isOpened, setIsOpened] = useRecoilState(helpOpenState);
 
@@ -23,7 +23,11 @@ const Help = () => {
 
   return (
     isOpened && (
-      <Draggable defaultPosition={{ x: 100, y: 100 }} bounds='body'>
+      <Draggable
+        defaultPosition={{ x: 100, y: 100 }}
+        bounds='body'
+        ref={navBarRef}
+      >
         <div className='absolute h-2/3 w-2/3'>
           <div className='flex h-5 items-center space-x-1 rounded-t-md border border-gray-400 bg-bar-gray pl-2 shadow-sm'>
             <div
