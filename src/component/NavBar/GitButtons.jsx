@@ -18,7 +18,7 @@ const GitButton = () => {
   ];
 
   return (
-    <div className='nav-bar-box left-44'>
+    <div className='nav-bar-box left-60'>
       {developers.map((developer, id) => {
         return (
           <a
