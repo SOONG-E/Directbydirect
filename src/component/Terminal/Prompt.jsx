@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
-import { helpIsOpenState } from 'src/state/helpIsOpen';
+import { helpOpenState } from 'src/state/NavBar.state';
 
 export default function Prompt({ setHistory }) {
   const [input, setInput] = useState('');
-  const setHelpIsOpen = useSetRecoilState(helpIsOpenState);
+  const setHelpIsOpen = useSetRecoilState(helpOpenState);
   const handleChange = (e) => setInput(e.target.value);
   const handleKeyDown = (e) => {
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {

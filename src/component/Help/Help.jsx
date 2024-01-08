@@ -3,12 +3,12 @@ import { animated, useSpring } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import { useRecoilState } from 'recoil';
 import { HELP } from 'src/constant/Help';
-import { helpIsOpenState } from 'src/state/helpIsOpen';
+import { helpOpenState } from 'src/state/NavBar.state';
 
 const Help = () => {
   const helpPos = useSpring({ x: 100, y: 100 });
   const [targetCmd, setTargetCmd] = useState('');
-  const [isOpened, setIsOpened] = useRecoilState(helpIsOpenState);
+  const [isOpened, setIsOpened] = useRecoilState(helpOpenState);
   const bindHelpPos = useDrag((params) => {
     helpPos.x.set(params.offset[0]);
     helpPos.y.set(params.offset[1]);
@@ -31,25 +31,25 @@ const Help = () => {
     isOpened && (
       <animated.div
         {...bindHelpPos()}
-        className='absolute w-2/3 h-2/3'
+        className='absolute h-2/3 w-2/3'
         style={{
           x: helpPos.x,
           y: helpPos.y,
         }}
       >
-        <div className='flex pl-2 space-x-1 h-5 items-center rounded-t-md border border-gray-400 bg-bar-gray shadow-sm'>
+        <div className='flex h-5 items-center space-x-1 rounded-t-md border border-gray-400 bg-bar-gray pl-2 shadow-sm'>
           <div
             onClick={onClose}
-            className='aspect-square h-3 w-3 hover:ring-2 rounded-full bg-[#ff2b2b] shadow-md'
+            className='aspect-square h-3 w-3 rounded-full bg-[#ff2b2b] shadow-md hover:ring-2'
           />
           <div className='aspect-square h-3 w-3 rounded-full bg-[#ffc700] shadow-md' />
           <div className='aspect-square h-3 w-3 rounded-full bg-[#04b300] shadow-md' />
         </div>
-        <div className='bg-[#efefef] w-full h-full bg-opacity-90 rounded-b-md drop-shadow'>
+        <div className='h-full w-full rounded-b-md bg-[#efefef] bg-opacity-90 drop-shadow'>
           {HELP.map((item, index) => {
             return (
               <div
-                className='flex flex-col items-start p-2 group'
+                className='group flex flex-col items-start p-2'
                 key={index}
                 onClick={() => onClick(index)}
               >
