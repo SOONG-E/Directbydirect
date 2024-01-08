@@ -26,6 +26,7 @@ const GitButton = () => {
             href={developer.url}
             className='all-unset flex cursor-pointer py-0.5'
             key={id}
+            rel='noreferrer'
           >
             <div className='mr-2 h-6 w-6 overflow-hidden rounded-full'>
               <img className='bg-cover' src={developer.imageUrl}></img>
