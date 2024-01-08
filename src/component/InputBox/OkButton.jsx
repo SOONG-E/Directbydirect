@@ -7,10 +7,11 @@ const OkButton = ({ text }) => {
   const isValidRoot = useRecoilValue(isValidRootState);
   const setShowInputBox = useSetRecoilState(showInputboxState);
 
-  const bgColor = isValidRoot ? '#1c6df5' : '#848484';
   const buttonClass = classNames(
-    `h-[21px] w-[73px] rounded-[5px] drop-shadow bg-gradient-to-b from-[${bgColor}]/[42%] via-[${bgColor}]/[84%] to-[${bgColor}]`,
-    isValidRoot ? 'cursor-pointer' : 'pointer-events-none'
+    'h-[21px] w-[73px] rounded-[5px] drop-shadow bg-gradient-to-b',
+    isValidRoot
+      ? 'cursor-pointer from-[#1c6df5]/[42%] via-[#1c6df5]/[84%] to-[#1c6df5]'
+      : 'pointer-events-none from-[#848484]/[42%] via-[#848484]/[84%] to-[#848484]'
   );
 
   const handleClick = () => setShowInputBox(false);
