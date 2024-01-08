@@ -29,7 +29,7 @@ function App() {
     return () => {
       document.removeEventListener('mouseup', handleFocus);
     };
-  }, [navBarRef]);
+  }, [navBarRef, setComponentClicked]);
 
   return (
     <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
