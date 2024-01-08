@@ -1,4 +1,4 @@
-import { TYPE } from '../constants/Type';
+import { TYPE } from 'src/constant/Type';
 
 class Tree {
   #name;
