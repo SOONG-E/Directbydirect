@@ -7,7 +7,7 @@ const TopLeftSide = ({ navBarRef }) => {
   const onClickedItem = (key) => {
     setComponentClicked((pre) =>
       pre.map((item) => {
-        if (item.key === key) return { ...item, value: true };
+        if (item.key === key) return { ...item, value: !item.value };
         return { ...item, value: false };
       })
     );
