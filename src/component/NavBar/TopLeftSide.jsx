@@ -1,18 +1,8 @@
-import { useState } from 'react';
-import GitButtons from 'src/component/NavBar/GitButtons';
-import Introduction from 'src/component/NavBar/Introduction';
+import { useRecoilState } from 'recoil';
+import { navBarState } from 'src/state/NavBar.state';
 
 const TopLeftSide = () => {
-  const [componentClicked, setComponentClicked] = useState([
-    { key: 'gits', value: false, title: 'Gits', child: <Introduction /> },
-    { key: 'help', value: false, title: 'help', child: null },
-    {
-      key: 'title',
-      value: false,
-      title: 'DirectByDirect',
-      child: <GitButtons />,
-    },
-  ]);
+  const [componentClicked, setComponentClicked] = useRecoilState(navBarState);
 
   const onClickedItem = (key) => {
     setComponentClicked((pre) =>
@@ -28,7 +18,9 @@ const TopLeftSide = () => {
   };
 
   return (
-    <div className='relative flex items-center text-sm font-bold text-midblack'>
+    <div
+      className='relative flex items-center text-sm font-bold text-midblack'
+    >
       <img
         src='MiniLogo.png'
         className='mr-4 w-6 cursor-pointer'
