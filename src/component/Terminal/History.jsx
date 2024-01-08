@@ -1,4 +1,9 @@
-export default function History({ history }) {
+import { useRecoilValue } from 'recoil';
+import { historyState } from 'src/state/history';
+
+export default function History() {
+  const history = useRecoilValue(historyState);
+
   return (
     <div className='h-full overflow-y-auto'>
       {history.map((x, idx) => (
