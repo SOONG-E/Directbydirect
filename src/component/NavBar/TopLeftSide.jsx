@@ -1,7 +1,7 @@
 import { useRecoilState } from 'recoil';
 import { navBarState } from 'src/state/NavBar.state';
 
-const TopLeftSide = () => {
+const TopLeftSide = ({ navBarRef }) => {
   const [componentClicked, setComponentClicked] = useRecoilState(navBarState);
 
   const onClickedItem = (key) => {
@@ -20,6 +20,7 @@ const TopLeftSide = () => {
   return (
     <div
       className='relative flex items-center text-sm font-bold text-midblack'
+      ref={navBarRef}
     >
       <img
         src='MiniLogo.png'
