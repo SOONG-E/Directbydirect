@@ -24,9 +24,7 @@ export const helpOpenState = selector({
     return navBar.find((item) => item.key === 'help').value;
   },
   set: ({ set }, newValue) => {
-    const setNavBar = set(navBarState);
-
-    setNavBar((pre) =>
+    set(navBarState, (pre) =>
       pre.map((item) => {
         if (item.key === 'help') return { ...item, value: newValue };
         return { ...item, value: false };
