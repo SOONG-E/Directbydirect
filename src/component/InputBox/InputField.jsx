@@ -18,7 +18,7 @@ const InputField = () => {
   const inputClass = classNames(
     'mt-[6px] h-[23px] w-full rounded-[5px] border bg-white p-2 text-black drop-shadow focus:outline-none',
     {
-      'animate-shake animate-duration-[175ms]': shake,
+      'animate-short-shake animate-duration-[175ms]': shake,
       'border-2 border-rose-500': !isValid,
     }
   );
