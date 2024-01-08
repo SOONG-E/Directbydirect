@@ -13,7 +13,8 @@
 
 @layer components {
   .top-bar-item {
-    @apply rounded border-transparent bg-transparent px-2 py-0 hover:border-transparent hover:bg-gray-200 hover:bg-opacity-60 hover:ring-transparent;
+    all: unset;
+    @apply rounded px-2 py-0 hover:bg-gray-200 hover:bg-opacity-60 focus:outline-none;
   }
 
   .all-unset {
