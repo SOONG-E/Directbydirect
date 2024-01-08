@@ -18,7 +18,6 @@ const Help = ({ navBarRef }) => {
 
   const onClose = () => {
     setIsOpened(!isOpened);
-    console.log(isOpened);
   };
 
   return (
