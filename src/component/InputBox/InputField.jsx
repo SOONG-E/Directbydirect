@@ -11,7 +11,7 @@ const InputField = () => {
   const handleChange = (e) => {
     const value = e.target.value;
     setRootDirName(value);
-    const regex = /^.{1,20}$/;
+    const regex = /^.{1,}$/;
     setIsValid(regex.test(value));
   };
 
@@ -37,6 +37,7 @@ const InputField = () => {
       value={rootDirName}
       onChange={handleChange}
       className={inputClass}
+      maxLength={20}
     />
   );
 };
