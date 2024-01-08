@@ -42,6 +42,7 @@ const InputField = () => {
       onChange={handleChange}
       className={inputClass}
       maxLength={20}
+      autoFocus
     />
   );
 };
