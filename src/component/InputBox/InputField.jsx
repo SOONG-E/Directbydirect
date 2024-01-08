@@ -1,12 +1,14 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isValidRootState } from 'src/state/isValidRoot';
 import { rootDirNameState } from 'src/state/rootDirName';
+import { showInputboxState } from 'src/state/showInputBox';
 
 const InputField = () => {
   const [isValidRoot, setIsValidRoot] = useRecoilState(isValidRootState);
   const [rootDirName, setRootDirName] = useRecoilState(rootDirNameState);
+  const setShowInputBox = useSetRecoilState(showInputboxState);
   const [init, setInit] = useState(true);
   const [shake, setShake] = useState(false);
 
@@ -26,6 +28,13 @@ const InputField = () => {
     setIsValidRoot(regex.test(value));
   };
 
+  const handleKeyDown = (e) => {
+    if (e.code == 'Enter') {
+      if (!isValidRoot) return;
+      setShowInputBox(false);
+    }
+  };
+
   useEffect(() => {
     if (init) return;
     if (isValidRoot) return;
@@ -40,6 +49,7 @@ const InputField = () => {
       type='text'
       value={rootDirName}
       onChange={handleChange}
+      onKeyDown={handleKeyDown}
       className={inputClass}
       maxLength={20}
       autoFocus
