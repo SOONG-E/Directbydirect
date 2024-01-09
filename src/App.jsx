@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import DirectoryTree from 'src/component/DirectoryTree/DirectoryTree';
 import Help from 'src/component/Help/Help';
@@ -11,6 +11,11 @@ import 'src/style/App.css';
 
 function App() {
   const navBarRef = useRef(null);
+  const [screen, setScreen] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+  const [visiblity, setVisiblity] = useState(true);
   const initialPhase = useRecoilValue(showInputboxState);
   const setComponentClicked = useSetRecoilState(navBarState);
 
@@ -31,11 +36,33 @@ function App() {
     };
   }, [navBarRef, setComponentClicked]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (screen.width > 540 && screen.height > 600) {
+      setVisiblity(true);
+    } else {
+      setVisiblity(false);
+    }
+  }, [screen]);
+
   return (
     <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
-      <Terminal />
-      {initialPhase ? <InitialModal /> : <DirectoryTree />}
-      <Help navBarRef={navBarRef} />
+      {visiblity && <Terminal />}
+      {visiblity && (initialPhase ? <InitialModal /> : <DirectoryTree />)}
+      {visiblity && <Help navBarRef={navBarRef} />}
       <NavBar navBarRef={navBarRef} />
     </div>
   );
