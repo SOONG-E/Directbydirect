@@ -15,7 +15,7 @@ function App() {
     width: window.innerWidth,
     height: window.innerHeight,
   });
-  const [visiblity, setVisiblity] = useState(true);
+  const [visibility, setVisibility] = useState(true);
   const initialPhase = useRecoilValue(showInputboxState);
   const setComponentClicked = useSetRecoilState(navBarState);
 
@@ -52,17 +52,17 @@ function App() {
 
   useEffect(() => {
     if (screen.width > 540 && screen.height > 600) {
-      setVisiblity(true);
+      setVisibility(true);
     } else {
-      setVisiblity(false);
+      setVisibility(false);
     }
   }, [screen]);
 
   return (
     <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
-      {visiblity && <Terminal />}
-      {visiblity && (initialPhase ? <InitialModal /> : <DirectoryTree />)}
-      {visiblity && <Help navBarRef={navBarRef} />}
+      {visibility && <Terminal />}
+      {visibility && (initialPhase ? <InitialModal /> : <DirectoryTree />)}
+      {visibility && <Help navBarRef={navBarRef} />}
       <NavBar navBarRef={navBarRef} />
     </div>
   );
