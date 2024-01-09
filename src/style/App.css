@@ -19,6 +19,7 @@
 
   .all-unset {
     all: unset;
+    @apply focus:outline-none;
   }
 
   .nav-bar-box {
