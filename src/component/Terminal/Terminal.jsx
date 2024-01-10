@@ -12,7 +12,7 @@ export default function Terminal() {
       <div className='absolute flex h-5/6 min-h-96 w-1/3 min-w-60 flex-col justify-between rounded-md bg-black shadow-lg'>
         <TopBar title='Terminal' />
         <History history={history} />
-        <Prompt setHistory={setHistory} />
+        <Prompt history={history} setHistory={setHistory} />
       </div>
     </Draggable>
   );
