@@ -48,11 +48,12 @@ export default function Prompt() {
       historyIndex.current = history.cmd.length;
       setCmdLine('');
       const splittedCmd = splitCmd(input);
-      const error = execute(splittedCmd, { cwd, setCwd });
+      const result = execute(splittedCmd, { cwd, setCwd });
       setHistory((prev) => {
         return {
           cmd: [...prev.cmd, splittedCmd],
-          error: [...prev.error, error],
+          output: [...prev.output, result.output],
+          error: [...prev.error, result.error],
         };
       });
     }

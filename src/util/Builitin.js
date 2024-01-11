@@ -2,6 +2,8 @@ import { ERROR } from 'src/constant/Error';
 import { TYPE } from 'src/constant/Type';
 import Tree from 'src/util/Tree';
 
+const DFL_RET = { output: [], error: [] };
+
 const Builtin = {
   getNode(cwd, splittedPath) {
     const tempWd = [...cwd];
@@ -34,7 +36,7 @@ const Builtin = {
   cd(arg, { cwd, setCwd }) {
     const new_cwd = [...cwd];
     if (arg.length === 0) {
-      return [];
+      return DFL_RET;
     }
     const path = arg[0].split('/');
     for (const element of path) {
@@ -48,34 +50,34 @@ const Builtin = {
 
       const subTree = new_cwd.at(-1).getChild().get(element);
       if (subTree === undefined) {
-        return [`cd: ${arg[0]}: ${ERROR.ENOENT}`];
+        return { output: [], error: [`cd: ${arg[0]}: ${ERROR.ENOENT}`] };
       }
       if (subTree.getType() !== TYPE.DIR) {
-        return [`cd: ${arg[0]}: ${ERROR.ENOTDIR}`];
+        return { output: [], error: [`cd: ${arg[0]}: ${ERROR.ENOTDIR}`] };
       }
       new_cwd.push(subTree);
     }
     setCwd(new_cwd);
-    return [];
+    return DFL_RET;
   },
 
   cp(arg, { cwd }) {
     if (arg.length !== 2) {
-      return [ERROR.USAGE_CP];
+      return { output: [], error: [ERROR.USAGE_CP] };
     }
     const splittedSrc = arg[0].split('/');
     const src = Builtin.getNode(cwd, splittedSrc);
     if (src === undefined || src.leafNode === undefined) {
-      return [`cp: ${arg[0]}: ${ERROR.ENOENT}`];
+      return { output: [], error: [`cp: ${arg[0]}: ${ERROR.ENOENT}`] };
     }
     if (src.leafNode.getType() === TYPE.DIR) {
-      return [`cp: ${arg[0]}: ${ERROR.EISDIR}`];
+      return { output: [], error: [`cp: ${arg[0]}: ${ERROR.EISDIR}`] };
     }
 
     const splittedDest = arg[1].split('/');
     const dest = Builtin.getNode(cwd, splittedDest);
     if (dest === undefined) {
-      return [`cp: ${arg[1]}: ${ERROR.ENOENT}`];
+      return { output: [], error: [`cp: ${arg[1]}: ${ERROR.ENOENT}`] };
     }
     if (dest.leafNode === undefined) {
       dest.lastDir.addChild(
@@ -85,11 +87,14 @@ const Builtin = {
       dest.leafNode.addChild(src.leafNode);
     } else if (dest.leafNode.getType() === TYPE.FILE) {
       if (src.leafNode.getName() === dest.leafNode.getName()) {
-        return [`cp: ${arg[0]} and ${arg[1]} ${ERROR.EIDENTICAL}`];
+        return {
+          output: [],
+          error: [`cp: ${arg[0]} and ${arg[1]} ${ERROR.EIDENTICAL}`],
+        };
       }
       dest.lastDir.addChild(src.leafNode, true);
     }
-    return [];
+    return DFL_RET;
   },
 
   mkdir(arg, { cwd }) {
@@ -106,26 +111,26 @@ const Builtin = {
         error.push(`mkdir: ${element}: ${ERROR.EEXIST}`);
       }
     }
-    return error;
+    return { output: [], error };
   },
 
   mv(arg, { cwd }) {
     if (arg.length === 0) {
-      return [];
+      return DFL_RET;
     }
     if (arg.length === 1) {
-      return [`mv: ${ERROR.EINVAL}`];
+      return { output: [], error: [`mv: ${ERROR.EINVAL}`] };
     }
     const splittedLastArg = arg.at(-1).split('/');
     const lastArg = Builtin.getNode(cwd, splittedLastArg);
     if (arg.length > 2) {
       if (lastArg === undefined) {
-        return [`mv: ${arg.at(-1)}: ${ERROR.ENOTDIR}`];
+        return { output: [], error: [`mv: ${arg.at(-1)}: ${ERROR.ENOTDIR}`] };
       } else if (
         lastArg.leafNode === undefined ||
         lastArg.leafNode.getType() !== TYPE.DIR
       ) {
-        return [`mv: ${arg.at(-1)}: ${ERROR.ENOTDIR}`];
+        return { output: [], error: [`mv: ${arg.at(-1)}: ${ERROR.ENOTDIR}`] };
       }
     }
     const dummy = [];
@@ -159,7 +164,7 @@ const Builtin = {
         lastArg.leafNode.addChild(tempTree);
       });
     }
-    return errorDummy;
+    return { output: [], error: errorDummy };
   },
 
   rm(arg, { cwd }) {
@@ -168,15 +173,15 @@ const Builtin = {
       const splittedArg = arg[i].split('/');
       const node = Builtin.getNode(cwd, splittedArg);
       if (node === undefined || node.leafNode === undefined) {
-        return [`rm: ${arg[i]}: ${ERROR.ENOENT}`];
+        return { output: [], error: [`rm: ${arg[i]}: ${ERROR.ENOENT}`] };
       }
       const type = node.leafNode.getType();
       if (i === 0 && type === TYPE.DIR) {
-        return [`rm: ${arg[i]}: ${ERROR.EISDIR}`];
+        return { output: [], error: [`rm: ${arg[i]}: ${ERROR.EISDIR}`] };
       }
       node.lastDir.getChild().delete(splittedArg.at(-1));
     }
-    return [];
+    return DFL_RET;
   },
 
   touch(arg, { cwd }) {
@@ -184,12 +189,12 @@ const Builtin = {
       const splittedPath = element.split('/');
       const path = Builtin.getNode(cwd, splittedPath);
       if (path === undefined || path.leafNode !== undefined) {
-        return [];
+        return DFL_RET;
       }
       const file = new Tree(splittedPath.at(-1), TYPE.FILE);
       path.lastDir.addChild(file);
     }
-    return [];
+    return DFL_RET;
   },
 };
 
