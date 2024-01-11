@@ -46,7 +46,7 @@ export default function Prompt() {
       if (input === 'help') {
         setHelpIsOpen(true);
       }
-      historyIndex.current = history.cmd.length;
+      historyIndex.current = history.cmd.length + 1;
       setCmdLine('');
       const splittedCmd = splitCmd(input);
       const result = execute(splittedCmd, { cwd, setCwd });
