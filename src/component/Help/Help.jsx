@@ -19,6 +19,7 @@ const Help = ({ navBarRef }) => {
 
   const onClose = () => {
     setIsOpened(!isOpened);
+    setShowClear(false);
   };
 
   const handleHoveEvent = (isIn) => {
@@ -27,12 +28,8 @@ const Help = ({ navBarRef }) => {
 
   return (
     isOpened && (
-      <Draggable
-        defaultPosition={{ x: 100, y: 100 }}
-        bounds='body'
-        ref={navBarRef}
-      >
-        <div className='absolute h-2/3 w-2/3'>
+      <Draggable defaultPosition={{ x: 100, y: 100 }} bounds='body'>
+        <div className='absolute h-2/3 w-2/3' ref={navBarRef}>
           <div className='flex h-5 items-center space-x-1 rounded-t-md border border-gray-400 bg-bar-gray pl-2 shadow-sm'>
             <div
               onClick={onClose}
