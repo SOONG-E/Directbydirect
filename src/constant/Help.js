@@ -4,7 +4,7 @@ export const HELP = [
     TEXT: 'Change directory',
     CONTENT: '현재 작업 디렉터리의 위치를 바꾸는 명령어입니다.',
     EXAMPLE: 'cd ../home',
-    ICON: '👉',
+    ICON: '🚪',
   },
   {
     CMD: 'clear',
