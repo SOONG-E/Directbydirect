@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { CMD } from 'src/constant/Cmd';
 import { helpOpenState } from 'src/state/NavBar.state';
@@ -15,6 +15,7 @@ export default function Prompt() {
   const [history, setHistory] = useRecoilState(historyState);
   const setHelpIsOpen = useSetRecoilState(helpOpenState);
   const [cmdLine, setCmdLine] = useState('');
+  const [recommendLine, setRecommendLine] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
   const changeIndex = (delta) => {
     const newIndex = historyIndex.current + delta;
@@ -58,8 +59,7 @@ export default function Prompt() {
     }
     if (e.key === 'Tab') {
       e.preventDefault();
-      autoComplete();
-      console.log('Tab');
+      setCmdLine(recommendLine);
     }
   };
 
@@ -70,22 +70,30 @@ export default function Prompt() {
     const target = splittedCmd.at(-1);
     const cmd = CMD.find((cmd) => cmd.startsWith(target));
     if (cmd === undefined) return;
-		
+
     const addedText = cmd.substring(target.length);
-    setCmdLine((pre) => pre + addedText);
+    setRecommendLine((pre) => pre + addedText);
   };
 
+  useEffect(() => {
+    setRecommendLine(cmdLine);
+    autoComplete();
+  }, [cmdLine]);
+
   return (
-    <div className='mx-2 mb-1 flex justify-between'>
+    <div className='relative mx-2 mb-1 flex justify-between'>
       <div className='animate-pulse text-xl font-bold text-green-400'>&gt;</div>
       <input
         autoFocus
         value={cmdLine}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        className='ml-2 flex-1 bg-black font-semibold text-white outline-none'
+        className=' absolute left-3 top-0.5 z-10 ml-2 flex-1 bg-black bg-transparent font-semibold text-white outline-none'
         type='text'
       />
+      <div className='font-sm absolute left-5 top-0.5 whitespace-break-spaces font-semibold text-gray-400'>
+        {recommendLine}
+      </div>
     </div>
   );
 }
