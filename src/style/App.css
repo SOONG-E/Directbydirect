@@ -25,4 +25,12 @@
   .nav-bar-box {
     @apply absolute top-8 rounded bg-gray-200 bg-opacity-80 p-2 drop-shadow-lg backdrop-blur-lg;
   }
+
+  .window-height {
+    height: calc(100vh - 30px - 20px - 20px);
+  }
+
+  .tree-width {
+    width: calc(100vw - 360px - 20px - 20px - 20px);
+  }
 }
