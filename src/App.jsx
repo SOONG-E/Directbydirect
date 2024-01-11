@@ -6,8 +6,6 @@ import InitialModal from 'src/component/InitialModal/InitialModal';
 import NavBar from 'src/component/NavBar/NavBar';
 import Terminal from 'src/component/Terminal/Terminal';
 import { navBarState } from 'src/state/NavBar.state';
-import { rootState } from 'src/state/root';
-import { rootDirNameState } from 'src/state/rootDirName';
 import { showInputboxState } from 'src/state/showInputBox';
 import 'src/style/App.css';
 
@@ -19,8 +17,6 @@ function App() {
   });
   const [visibility, setVisibility] = useState(true);
   const initialPhase = useRecoilValue(showInputboxState);
-  const root = useRecoilValue(rootState);
-  const rootDirName = useRecoilValue(rootDirNameState);
   const setComponentClicked = useSetRecoilState(navBarState);
 
   useEffect(() => {
@@ -36,11 +32,6 @@ function App() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
-  useEffect(() => {
-    if (initialPhase) return;
-    root.setName(rootDirName);
-  }, [initialPhase, root, rootDirName]);
 
   useEffect(() => {
     function handleFocus(e) {
