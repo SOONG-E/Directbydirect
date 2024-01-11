@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
+import { CMD } from 'src/constant/Cmd';
 import { helpOpenState } from 'src/state/NavBar.state';
 import { cwdState } from 'src/state/cwd';
 import { historyState } from 'src/state/history';
@@ -57,8 +58,21 @@ export default function Prompt() {
     }
     if (e.key === 'Tab') {
       e.preventDefault();
+      autoComplete();
       console.log('Tab');
     }
+  };
+
+  const autoComplete = () => {
+    const splittedCmd = splitCmd(cmdLine);
+    if (splittedCmd.length === 0) return;
+
+    const target = splittedCmd.at(-1);
+    const cmd = CMD.find((cmd) => cmd.startsWith(target));
+    if (cmd === undefined) return;
+		
+    const addedText = cmd.substring(target.length);
+    setCmdLine((pre) => pre + addedText);
   };
 
   return (
