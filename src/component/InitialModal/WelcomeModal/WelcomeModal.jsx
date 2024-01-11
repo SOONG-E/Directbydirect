@@ -9,7 +9,7 @@ const WelcomeModal = ({ setIsIntroduction }) => {
 
   return (
     <Draggable defaultPosition={{ x: 10, y: 10 }} bounds='body'>
-      <div className='absolute flex h-1/3 w-1/2 flex-col justify-between rounded-md bg-white bg-opacity-80 shadow-lg backdrop-blur-lg'>
+      <div className='absolute flex h-[320px] w-[560px] flex-col justify-between rounded-md bg-white bg-opacity-80 shadow-lg backdrop-blur-lg'>
         <TopBar title='DirectByDirect' />
         <div className='whitespace-pre-wrap'>
           <span className='font-semibold'>{title}</span>
