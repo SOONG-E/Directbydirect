@@ -12,26 +12,27 @@ const IconPick = ({ tree }) => {
   );
 };
 
-const Detail = ({ child }) => {
+const Detail = ({ tree }) => {
+  const child = tree.getChild();
   const rootDirName = useRecoilValue(rootDirNameState);
 
   return (
     <div className='flex-1 rounded-b-md bg-[#EFEFEF] bg-opacity-90'>
       {/* root 보여주기 */}
-      {tree.parent === null && (
+      {tree.getParent() === null && (
         <div className='flex items-center gap-1'>
-          {tree.child.size !== 0 && '🔻'}
+          {child.size !== 0 && '🔻'}
           <img src='Directory.png' alt='Directory' />
           <p>{rootDirName}</p>
         </div>
       )}
       {/* child 보여주기 */}
-      {[...tree.child.values()].map((child, idx) => (
-        <div key={idx}>
-          <IconPick tree={child} />
-          {/* {child.child.size !== 0 && <Detail tree={child} />} */}
+      {/* {tree.forEach((child) => (
+        <div>
+          <IconPick tree={tree} />
+          {child.child.size !== 0 && <Detail tree={child} />}
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };
