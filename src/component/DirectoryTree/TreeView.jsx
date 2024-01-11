@@ -8,7 +8,7 @@ const IconPick = ({ tree }) => {
   return (
     <div className={`flex gap-2 pl-${tree.getDepth() * 10}`}>
       {type === TYPE.DIR && '🔻'}
-      <img src={`ic_file_type_${type}.png`} alt={type} />
+      <img src={`ic_file_${type}.png`} alt={type} />
       <p>{tree.getName()}</p>
     </div>
   );
@@ -19,12 +19,11 @@ const TreeView = ({ tree }) => {
   const rootDirName = useRecoilValue(rootDirNameState);
 
   return (
-    <div className='flex-1 rounded-b-md bg-[#EFEFEF] bg-opacity-90'>
-      {/* root 보여주기 */}
+    <div className='flex-1 rounded-b-md bg-[#efefef] bg-opacity-90'>
       {tree.getParent() === null && (
         <div className='flex items-center gap-1'>
-          {child.size !== 0 && '🔻'}
-          <img src='ic_file_type_0.png' alt='0' />
+          🔻
+          <img src='ic_file_0.png' alt='0' />
           <p>{rootDirName}</p>
         </div>
       )}
