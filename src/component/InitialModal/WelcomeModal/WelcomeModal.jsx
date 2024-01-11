@@ -1,6 +1,6 @@
 import Draggable from 'react-draggable';
 import NextButton from 'src/component/InitialModal/WelcomeModal/NextButton';
-import TopBar from 'src/component/Terminal/TopBar';
+import TopBar from 'src/component/common/TopBar';
 
 const WelcomeModal = ({ setIsIntroduction }) => {
   return (
