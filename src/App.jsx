@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     function handleFocus(e) {
-      if (navBarRef.current && !navBarRef.current.contains(e.target)) {
+      if (!navBarRef.current?.contains(e.target)) {
         setComponentClicked((pre) =>
           pre.map((item) => {
             return { ...item, value: false };
