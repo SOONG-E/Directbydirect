@@ -12,7 +12,7 @@ export default function DirectoryTree() {
   root.setName(rootDirName);
 
   return (
-    <Draggable defaultPosition={{ x: 350, y: 50 }} bounds='body'>
+    <Draggable defaultPosition={{ x: 400, y: 50 }} bounds='body'>
       <div className='absolute flex h-5/6 w-3/5 min-w-60 flex-col'>
         <TopBar />
         <TreeView tree={root} />
