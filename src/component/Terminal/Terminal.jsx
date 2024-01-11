@@ -8,8 +8,8 @@ export default function Terminal() {
     <Draggable defaultPosition={{ x: 10, y: 50 }} bounds='body'>
       <div className='absolute flex h-5/6 min-h-96 w-1/3 min-w-60 flex-col justify-between rounded-md bg-black shadow-lg'>
         <TopBar title='Terminal' />
-        <History history={history} />
-        <Prompt history={history} setHistory={setHistory} />
+        <History />
+        <Prompt />
       </div>
     </Draggable>
   );

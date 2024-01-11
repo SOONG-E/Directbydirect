@@ -14,7 +14,6 @@ export default function Prompt() {
   const [history, setHistory] = useRecoilState(historyState);
   const setHelpIsOpen = useSetRecoilState(helpOpenState);
   const [cmdLine, setCmdLine] = useState('');
-
   const historyIndex = useRef(history.cmd.length + 1);
   const changeIndex = (delta) => {
     const newIndex = historyIndex.current + delta;
