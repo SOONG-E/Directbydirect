@@ -1,33 +1,15 @@
-import { useRecoilValue } from 'recoil';
-import { TYPE } from 'src/constant/Type';
-import { rootDirNameState } from 'src/state/rootDirName';
-
-const IconPick = ({ tree }) => {
-  const type = tree.getType();
-
-  return (
-    <div className={`flex gap-2 pl-${tree.getDepth() * 10}`}>
-      {type === TYPE.DIR && '🔻'}
-      <img src={`ic_file_${type}.png`} alt={type} />
-      <p>{tree.getName()}</p>
-    </div>
-  );
-};
+import File from 'src/component/DirectoryTree/File';
 
 const TreeView = ({ tree }) => {
   const child = tree.getChild();
-  const rootDirName = useRecoilValue(rootDirNameState);
 
   return (
     <div className='flex-1 rounded-b-md bg-[#efefef] bg-opacity-90'>
       {tree.getParent() === null && (
         <div className='flex items-center gap-1'>
-          🔻
-          <img src='ic_file_0.png' alt='0' />
-          <p>{rootDirName}</p>
+          <File tree={tree} />
         </div>
       )}
-      {/* child 보여주기 */}
       {/* {tree.forEach((child) => (
         <div>
           <IconPick tree={tree} />
