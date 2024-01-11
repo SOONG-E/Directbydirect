@@ -1,6 +1,6 @@
-import { TYPE } from '../constants/Type';
-import { ERROR } from '../constants/Message';
-import Tree from './Tree';
+import { ERROR } from 'src/constant/Error';
+import { TYPE } from 'src/constant/Type';
+import Tree from 'src/util/Tree';
 
 const Builtin = {
   getNode(cwd, splittedPath) {
