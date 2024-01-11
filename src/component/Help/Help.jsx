@@ -13,7 +13,6 @@ const Help = ({ navBarRef }) => {
   const [manualIsOpened, setManualIsOpened] = useState(false);
 
   const handleManualOpen = (index) => {
-    console.log(index);
     setTargetIndex(index);
     setManualIsOpened(true);
   };
@@ -27,10 +26,7 @@ const Help = ({ navBarRef }) => {
   };
   return (
     isOpened && (
-      <Draggable
-        defaultPosition={{ x: 100, y: 100 }}
-        bounds='body'
-      >
+      <Draggable defaultPosition={{ x: 100, y: 100 }} bounds='body'>
         {!manualIsOpened ? (
           <div className='absolute h-2/3 w-2/3' ref={navBarRef}>
             <div className='flex h-5 items-center space-x-1 rounded-t-md border border-gray-400 bg-bar-gray pl-2 shadow-sm'>
@@ -72,6 +68,7 @@ const Help = ({ navBarRef }) => {
           <HelpManual
             targetIndex={targetIndex}
             setManualIsOpened={setManualIsOpened}
+            navBarRef={navBarRef}
           />
         )}
       </Draggable>
