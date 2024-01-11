@@ -51,7 +51,7 @@ function App() {
   }, [navBarRef, setComponentClicked]);
 
   useEffect(() => {
-    if (screen.width > 540 && screen.height > 600) {
+    if (screen.width > 700 && screen.height > 600) {
       setVisibility(true);
     } else {
       setVisibility(false);
@@ -60,9 +60,9 @@ function App() {
 
   return (
     <div className="flex h-full w-full bg-[url('bg_main.png')] bg-cover">
+      <Terminal />
       {visibility && (
         <div>
-          <Terminal />
           {initialPhase ? <InitialModal /> : <DirectoryTree />}
           <Help navBarRef={navBarRef} />
         </div>
