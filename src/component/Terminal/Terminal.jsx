@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Draggable from 'react-draggable';
 import History from 'src/component/Terminal/History';
 import Prompt from 'src/component/Terminal/Prompt';
