@@ -1,11 +1,19 @@
+import { useEffect, useRef } from 'react';
 import { useRecoilValue } from 'recoil';
 import { historyState } from 'src/state/history';
 
 export default function History() {
   const history = useRecoilValue(historyState);
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [history]);
 
   return (
-    <div className='h-full overflow-y-auto'>
+    <div className='h-full overflow-y-auto' ref={scrollRef}>
       {history.cmd.map((x, idx) => (
         <div className='ml-2 items-center' key={idx}>
           <div className='flex space-x-2'>
