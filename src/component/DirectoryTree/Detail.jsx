@@ -12,36 +12,9 @@ const IconPick = ({ tree }) => {
   );
 };
 
-const Detail = () => {
+const Detail = ({ child }) => {
   const rootDirName = useRecoilValue(rootDirNameState);
-  const tree = {
-    name: 'hi',
-    child: new Map(),
-    parent: null,
-    type: 0,
-    depth: 0,
-  };
 
-  const a = {
-    name: 'a',
-    child: new Map(),
-    parent: tree,
-    type: 0,
-    depth: 1,
-  };
-
-  const b = {
-    name: 'b',
-    child: new Map(),
-    parent: tree,
-    type: 1,
-    depth: 2,
-  };
-
-  tree.child.set(a.name, a);
-  a.child.set(b.name, b);
-  console.log(tree);
-  console.log(tree.child.forEach((value, key) => console.log(key, value)));
   return (
     <div className='flex-1 rounded-b-md bg-[#EFEFEF] bg-opacity-90'>
       {/* root 보여주기 */}
