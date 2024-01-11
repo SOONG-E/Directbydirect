@@ -1,6 +1,6 @@
 import Draggable from 'react-draggable';
 import Detail from 'src/component/DirectoryTree/Detail';
-import TopBar from 'src/component/Terminal/TopBar';
+import TopBar from 'src/component/common/TopBar';
 
 export default function DirectoryTree() {
   return (

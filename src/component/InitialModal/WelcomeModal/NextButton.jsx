@@ -1,4 +1,4 @@
-import OkButton from 'src/component/OkButton';
+import OkButton from 'src/component/common/OkButton';
 
 const NextButton = ({ setIsIntroduction }) => {
   const onClickButton = () => {

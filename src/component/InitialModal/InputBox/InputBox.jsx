@@ -1,6 +1,6 @@
 import InputBoxHeader from 'src/component/InitialModal/InputBox/InputBoxHeader';
 import InputField from 'src/component/InitialModal/InputBox/InputField';
-import OkButton from 'src/component/OkButton';
+import OkButton from 'src/component/common/OkButton';
 
 const InputBox = () => {
   return (

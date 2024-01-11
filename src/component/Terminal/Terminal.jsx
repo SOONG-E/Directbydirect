@@ -1,7 +1,7 @@
 import Draggable from 'react-draggable';
 import History from 'src/component/Terminal/History';
 import Prompt from 'src/component/Terminal/Prompt';
-import TopBar from 'src/component/Terminal/TopBar';
+import TopBar from 'src/component/common/TopBar';
 
 export default function Terminal() {
   return (
