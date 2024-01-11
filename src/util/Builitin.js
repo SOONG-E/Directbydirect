@@ -61,6 +61,14 @@ const Builtin = {
     return DFL_RET;
   },
 
+  clear(arg, { historyIndex, setHistoryStart }) {
+    if (arg.length > 0) {
+      return { output: [], error: [`pwd: ${ERROR.EMARG}`] };
+    }
+    setHistoryStart(historyIndex.current);
+    return DFL_RET;
+  },
+
   cp(arg, { cwd }) {
     if (arg.length !== 2) {
       return { output: [], error: [ERROR.USAGE_CP] };

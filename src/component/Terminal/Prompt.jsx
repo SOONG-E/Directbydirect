@@ -4,6 +4,7 @@ import { CMD } from 'src/constant/Cmd';
 import { helpOpenState } from 'src/state/NavBar.state';
 import { cwdState } from 'src/state/cwd';
 import { historyState } from 'src/state/history';
+import { historyStartState } from 'src/state/historyStart';
 import execute from 'src/util/execute';
 import splitCmd from 'src/util/splitCmd';
 
@@ -14,6 +15,7 @@ export default function Prompt() {
   const [cwd, setCwd] = useRecoilState(cwdState);
   const [history, setHistory] = useRecoilState(historyState);
   const setHelpIsOpen = useSetRecoilState(helpOpenState);
+  const setHistoryStart = useSetRecoilState(historyStartState);
   const [cmdLine, setCmdLine] = useState('');
   const [recommendLine, setRecommendLine] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
@@ -51,7 +53,12 @@ export default function Prompt() {
       historyIndex.current = history.cmd.length + 1;
       setCmdLine('');
       const splittedCmd = splitCmd(input);
-      const result = execute(splittedCmd, { cwd, setCwd });
+      const result = execute(splittedCmd, {
+        cwd,
+        setCwd,
+        historyIndex,
+        setHistoryStart,
+      });
       setHistory((prev) => {
         return {
           cmd: [...prev.cmd, splittedCmd],
