@@ -37,7 +37,7 @@ const Help = ({ navBarRef }) => {
               onMouseLeave={() => handleHoveEvent(false)}
               className='flex aspect-square h-3  w-3 items-center justify-center rounded-full bg-[#ff2b2b] shadow-md hover:ring-2'
             >
-              {showClear && <img src='ic_clear.png' className='h-1.5 w-1.5'></img>}
+              {showClear && <img src='ic_clear.png' className='h-1.5 w-1.5' />}
             </div>
             <div className='aspect-square h-3 w-3 rounded-full bg-[#ffc700] shadow-md' />
             <div className='aspect-square h-3 w-3 rounded-full bg-[#04b300] shadow-md' />
