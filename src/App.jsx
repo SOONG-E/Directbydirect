@@ -68,7 +68,7 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
+    <div className="flex h-full w-full bg-[url('bg_main.png')] bg-cover">
       {visibility && (
         <div>
           <Terminal />

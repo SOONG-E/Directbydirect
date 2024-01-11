@@ -1,11 +1,11 @@
 const TopRightSide = () => {
   return (
     <div className='grid grid-cols-5 place-items-center gap-7'>
-      <img src='Battery.png' className='w-5' />
-      <img src='Find.png' className='w-5' />
-      <img src='Switch.png' className='w-5' />
-      <img src='Wifi.png' className='w-5' />
-      <img src='Siri.png' className='w-5' />
+      <img src='ic_battery.png' className='w-5' />
+      <img src='ic_find.png' className='w-5' />
+      <img src='ic_switch.png' className='w-5' />
+      <img src='ic_wifi.png' className='w-5' />
+      <img src='ic_siri.png' className='w-5' />
     </div>
   );
 };

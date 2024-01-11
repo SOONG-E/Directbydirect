@@ -23,7 +23,7 @@ const TopLeftSide = ({ navBarRef }) => {
       ref={navBarRef}
     >
       <img
-        src='MiniLogo.png'
+        src='ic_logo.png'
         className='mr-4 w-6 cursor-pointer'
         onClick={onClickImg}
       />
