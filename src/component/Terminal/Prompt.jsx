@@ -92,7 +92,7 @@ export default function Prompt() {
         className=' absolute left-3 top-0.5 z-10 ml-2 flex-1 bg-black bg-transparent font-semibold text-white outline-none'
         type='text'
       />
-      <div className='font-sm absolute left-5 top-0.5 whitespace-break-spaces font-semibold text-gray-400'>
+      <div className='absolute left-5 top-0.5 whitespace-break-spaces font-semibold text-gray-400'>
         {recommendLine}
       </div>
     </div>
