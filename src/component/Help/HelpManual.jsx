@@ -1,3 +1,5 @@
+import { HELP } from 'src/constant/Help';
+
 const HelpManual = ({ targetIndex, setManualIsOpened }) => {
   return (
     <div className='absolute left-[12.5%] top-[12.5%] flex h-3/4 w-3/4 items-center justify-center rounded-3xl bg-white shadow-lg'>
@@ -7,7 +9,9 @@ const HelpManual = ({ targetIndex, setManualIsOpened }) => {
       >
         &lt;
       </div>
-      {targetIndex}
+      <div>
+        
+      </div>
     </div>
   );
 };
