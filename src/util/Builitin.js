@@ -167,6 +167,13 @@ const Builtin = {
     return { output: [], error: errorDummy };
   },
 
+  pwd(arg, { cwd }) {
+    if (arg.length > 0) {
+      return { output: [], error: [`pwd: ${ERROR.EMARG}`] };
+    }
+    return { output: cwd.join('/'), error: [] };
+  },
+
   rm(arg, { cwd }) {
     for (let i = 0; i < arg.length; i++) {
       if (arg[i] === '-rf') continue;
