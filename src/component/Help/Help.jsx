@@ -6,6 +6,7 @@ import { helpOpenState } from 'src/state/NavBar.state';
 
 const Help = ({ navBarRef }) => {
   const [targetCmd, setTargetCmd] = useState('');
+  const [showClear, setShowClear] = useState(false);
   const [isOpened, setIsOpened] = useRecoilState(helpOpenState);
 
   const onClick = (index) => {
@@ -20,6 +21,10 @@ const Help = ({ navBarRef }) => {
     setIsOpened(!isOpened);
   };
 
+  const handleHoveEvent = (isIn) => {
+    setShowClear(isIn ? true : false);
+  };
+
   return (
     isOpened && (
       <Draggable
@@ -31,8 +36,12 @@ const Help = ({ navBarRef }) => {
           <div className='flex h-5 items-center space-x-1 rounded-t-md border border-gray-400 bg-bar-gray pl-2 shadow-sm'>
             <div
               onClick={onClose}
-              className='aspect-square h-3 w-3 rounded-full bg-[#ff2b2b] shadow-md hover:ring-2'
-            />
+              onMouseEnter={() => handleHoveEvent(true)}
+              onMouseLeave={() => handleHoveEvent(false)}
+              className='flex aspect-square h-3  w-3 items-center justify-center rounded-full bg-[#ff2b2b] shadow-md hover:ring-2'
+            >
+              {showClear && <img src='clear.png' className='h-1.5 w-1.5'></img>}
+            </div>
             <div className='aspect-square h-3 w-3 rounded-full bg-[#ffc700] shadow-md' />
             <div className='aspect-square h-3 w-3 rounded-full bg-[#04b300] shadow-md' />
           </div>
