@@ -60,9 +60,13 @@ function App() {
 
   return (
     <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
-      {visibility && <Terminal />}
-      {visibility && (initialPhase ? <InitialModal /> : <DirectoryTree />)}
-      {visibility && <Help navBarRef={navBarRef} />}
+      {visibility && (
+        <div>
+          <Terminal />
+          {initialPhase ? <InitialModal /> : <DirectoryTree />}
+          <Help navBarRef={navBarRef} />
+        </div>
+      )}
       <NavBar navBarRef={navBarRef} />
     </div>
   );
