@@ -1,18 +1,20 @@
 import { useRecoilValue } from 'recoil';
+import { TYPE } from 'src/constant/Type';
 import { rootDirNameState } from 'src/state/rootDirName';
 
 const IconPick = ({ tree }) => {
-  const typeText = tree.type === 0 ? 'Directory' : 'File';
+  const type = tree.getType();
+
   return (
-    <div className={`flex gap-2 pl-${tree.depth * 10}`}>
-      {typeText === 'Directory' && tree.child.size !== 0 && '🔻'}
-      <img src={`${typeText}.png`} alt={`${typeText}`} />
-      <p>{tree.name}</p>
+    <div className={`flex gap-2 pl-${tree.getDepth() * 10}`}>
+      {type === TYPE.DIR && '🔻'}
+      <img src={`ic_file_type_${type}.png`} alt={type} />
+      <p>{tree.getName()}</p>
     </div>
   );
 };
 
-const Detail = ({ tree }) => {
+const TreeView = ({ tree }) => {
   const child = tree.getChild();
   const rootDirName = useRecoilValue(rootDirNameState);
 
@@ -22,7 +24,7 @@ const Detail = ({ tree }) => {
       {tree.getParent() === null && (
         <div className='flex items-center gap-1'>
           {child.size !== 0 && '🔻'}
-          <img src='Directory.png' alt='Directory' />
+          <img src='ic_file_type_0.png' alt='0' />
           <p>{rootDirName}</p>
         </div>
       )}
@@ -37,4 +39,4 @@ const Detail = ({ tree }) => {
   );
 };
 
-export default Detail;
+export default TreeView;
