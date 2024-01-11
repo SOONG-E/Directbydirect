@@ -6,7 +6,7 @@ const NextButton = ({ setIsIntroduction }) => {
   };
 
   return (
-    <div className='all-unset m-4 flex h-8'>
+    <div className='all-unset m-4 flex'>
       <OkButton onClick={onClickButton} text='next' />
     </div>
   );

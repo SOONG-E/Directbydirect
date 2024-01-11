@@ -30,10 +30,9 @@ const Help = ({ navBarRef }) => {
       <Draggable
         defaultPosition={{ x: 100, y: 100 }}
         bounds='body'
-        ref={navBarRef}
       >
         {!manualIsOpened ? (
-          <div className='absolute h-2/3 w-2/3'>
+          <div className='absolute h-2/3 w-2/3' ref={navBarRef}>
             <div className='flex h-5 items-center space-x-1 rounded-t-md border border-gray-400 bg-bar-gray pl-2 shadow-sm'>
               <div
                 onClick={onClose}
@@ -41,9 +40,7 @@ const Help = ({ navBarRef }) => {
                 onMouseLeave={() => handleHoveEvent(false)}
                 className='flex aspect-square h-3  w-3 items-center justify-center rounded-full bg-[#ff2b2b] shadow-md hover:ring-2'
               >
-                {showClear && (
-                  <img src='clear.png' className='h-1.5 w-1.5'></img>
-                )}
+                {showClear && <img src='clear.png' className='h-1.5 w-1.5' />}
               </div>
               <div className='aspect-square h-3 w-3 rounded-full bg-[#ffc700] shadow-md' />
               <div className='aspect-square h-3 w-3 rounded-full bg-[#04b300] shadow-md' />

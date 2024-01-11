@@ -6,8 +6,8 @@ import InitialModal from 'src/component/InitialModal/InitialModal';
 import NavBar from 'src/component/NavBar/NavBar';
 import Terminal from 'src/component/Terminal/Terminal';
 import { navBarState } from 'src/state/NavBar.state';
+import { cwdState } from 'src/state/cwd';
 import { rootState } from 'src/state/root';
-import { rootDirNameState } from 'src/state/rootDirName';
 import { showInputboxState } from 'src/state/showInputBox';
 import 'src/style/App.css';
 
@@ -20,8 +20,8 @@ function App() {
   const [visibility, setVisibility] = useState(true);
   const initialPhase = useRecoilValue(showInputboxState);
   const root = useRecoilValue(rootState);
-  const rootDirName = useRecoilValue(rootDirNameState);
   const setComponentClicked = useSetRecoilState(navBarState);
+  const setCwd = useSetRecoilState(cwdState);
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,12 +39,12 @@ function App() {
 
   useEffect(() => {
     if (initialPhase) return;
-    root.setName(rootDirName);
-  }, [initialPhase, root, rootDirName]);
+    setCwd([root]);
+  }, [initialPhase, root, setCwd]);
 
   useEffect(() => {
     function handleFocus(e) {
-      if (navBarRef.current && !navBarRef.current.contains(e.target)) {
+      if (!navBarRef.current?.contains(e.target)) {
         setComponentClicked((pre) =>
           pre.map((item) => {
             return { ...item, value: false };
@@ -60,7 +60,7 @@ function App() {
   }, [navBarRef, setComponentClicked]);
 
   useEffect(() => {
-    if (screen.width > 540 && screen.height > 600) {
+    if (screen.width > 700 && screen.height > 600) {
       setVisibility(true);
     } else {
       setVisibility(false);
@@ -68,10 +68,10 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="flex h-full w-full bg-[url('background.png')] bg-cover">
+    <div className="flex h-full w-full bg-[url('bg_main.png')] bg-cover">
+      <Terminal />
       {visibility && (
         <div>
-          <Terminal />
           {initialPhase ? <InitialModal /> : <DirectoryTree />}
           <Help navBarRef={navBarRef} />
         </div>

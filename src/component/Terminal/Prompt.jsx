@@ -17,6 +17,7 @@ export default function Prompt() {
   const [cmdLine, setCmdLine] = useState('');
   const [recommendLine, setRecommendLine] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
+
   const changeIndex = (delta) => {
     const newIndex = historyIndex.current + delta;
     if (0 <= newIndex && newIndex <= history.cmd.length) {
@@ -25,6 +26,7 @@ export default function Prompt() {
   };
 
   const handleChange = (e) => setCmdLine(e.target.value);
+
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
       changeIndex(1);
@@ -46,7 +48,7 @@ export default function Prompt() {
       if (input === 'help') {
         setHelpIsOpen(true);
       }
-      historyIndex.current = history.cmd.length;
+      historyIndex.current = history.cmd.length + 1;
       setCmdLine('');
       const splittedCmd = splitCmd(input);
       const result = execute(splittedCmd, { cwd, setCwd });
@@ -64,19 +66,18 @@ export default function Prompt() {
     }
   };
 
-  const autoComplete = () => {
-    const splittedCmd = splitCmd(cmdLine);
-    if (splittedCmd.length === 0) return;
-
-    const target = splittedCmd.at(-1);
-    const cmd = CMD.find((cmd) => cmd.startsWith(target));
-    if (cmd === undefined) return;
-
-    const addedText = cmd.substring(target.length);
-    setRecommendLine((pre) => pre + addedText);
-  };
-
   useEffect(() => {
+    const autoComplete = () => {
+      const splittedCmd = splitCmd(cmdLine);
+      if (splittedCmd.length === 0) return;
+
+      const target = splittedCmd.at(-1);
+      const cmd = CMD.find((cmd) => cmd.startsWith(target));
+      if (cmd === undefined) return;
+
+      const addedText = cmd.substring(target.length);
+      setRecommendLine((pre) => pre + addedText);
+    };
     setRecommendLine(cmdLine);
     autoComplete();
   }, [cmdLine]);
@@ -92,7 +93,7 @@ export default function Prompt() {
         className=' absolute left-3 top-0.5 z-10 ml-2 flex-1 bg-black bg-transparent font-semibold text-white outline-none'
         type='text'
       />
-      <div className='font-sm absolute left-5 top-0.5 whitespace-break-spaces font-semibold text-gray-400'>
+      <div className='absolute left-5 top-0.5 whitespace-break-spaces font-semibold text-gray-400'>
         {recommendLine}
       </div>
     </div>
