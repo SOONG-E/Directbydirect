@@ -6,12 +6,9 @@ const NextButton = ({ setIsIntroduction }) => {
   };
 
   return (
-    <button
-      className='all-unset m-4 flex h-8 cursor-pointer'
-      onClick={onClickButton}
-    >
-      <OkButton text='next' />
-    </button>
+    <div className='all-unset m-4 flex h-8'>
+      <OkButton onClick={onClickButton} text='next' />
+    </div>
   );
 };
 
