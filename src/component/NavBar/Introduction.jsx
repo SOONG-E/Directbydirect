@@ -6,7 +6,12 @@ const Introduction = () => {
   return (
     <div className='nav-bar-box left-12 text-left'>
       <div>{instruction}</div>
-      <a href={githubLink}>깃허브 바로가기</a>
+      <div>
+        <a href={githubLink} className='flex items-center'>
+          <img src='github.png' className='h-6 w-6' />
+          깃허브 바로가기
+        </a>
+      </div>
       <div className='my-2 h-[0px] w-full border-t border-gray-400 px-2'></div>
       <div className='text-xs'>{'버전 정보: v1.0'}</div>
     </div>
