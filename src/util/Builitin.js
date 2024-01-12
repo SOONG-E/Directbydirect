@@ -179,7 +179,7 @@ const Builtin = {
     if (arg.length > 0) {
       return { output: [], error: [`pwd: ${ERROR.EMARG}`] };
     }
-    return { output: cwd.join('/'), error: [] };
+    return { output: [cwd.map((tree) => tree.getName()).join('/')], error: [] };
   },
 
   rm(arg, { cwd }) {

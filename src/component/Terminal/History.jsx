@@ -16,17 +16,27 @@ export default function History() {
 
   return (
     <div className='h-full overflow-y-auto' ref={scrollRef}>
-      {history.cmd.slice(historyStart).map((x, idx) => (
-        <div className='ml-2 items-center' key={idx}>
-          <div className='flex space-x-2'>
-            <p className='text-xl font-bold text-green-400'>&gt;</p>
-            <p className='pt-0.5 font-semibold text-white'>{x.join(' ')}</p>
+      {history.cmd.slice(historyStart).map((value, index) => {
+        const i = historyStart + index;
+        const output = history.output[i];
+        const error = history.error[i];
+        const messages = error.length === 0 ? output : error;
+        return (
+          <div key={index} className='ml-2 items-center'>
+            <div className='flex space-x-2'>
+              <p className='text-xl font-bold text-green-400'>&gt;</p>
+              <p className='pt-0.5 font-semibold text-white'>
+                {value.join(' ')}
+              </p>
+            </div>
+            {messages.map((msg, idx) => (
+              <div key={idx} className='flex'>
+                <p className='font-semibold text-white'>{msg}</p>
+              </div>
+            ))}
           </div>
-          <div className='flex'>
-            <p className='font-semibold text-white'>{history.error[idx]}</p>
-          </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
