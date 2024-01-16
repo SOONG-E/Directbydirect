@@ -29,7 +29,7 @@ const InputField = () => {
   };
 
   const handleKeyDown = (e) => {
-    if (e.code == 'Enter') {
+    if (e.code == 'Enter' && e.nativeEvent.isComposing === false) {
       if (!isValidRoot) return;
       setShowInputBox(false);
     }

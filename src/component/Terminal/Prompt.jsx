@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import { CMD } from 'src/constant/Cmd';
 import { helpOpenState } from 'src/state/NavBar.state';
 import { cwdState } from 'src/state/cwd';
 import { historyState } from 'src/state/history';
 import { historyStartState } from 'src/state/historyStart';
+import { showInputBoxState } from 'src/state/showInputBox';
 import execute from 'src/util/execute';
 import splitCmd from 'src/util/splitCmd';
 
@@ -14,6 +15,7 @@ const MAX_LENGTH = 50;
 export default function Prompt() {
   const [cwd, setCwd] = useRecoilState(cwdState);
   const [history, setHistory] = useRecoilState(historyState);
+  const showInputBox = useRecoilValue(showInputBoxState);
   const setHelpIsOpen = useSetRecoilState(helpOpenState);
   const setHistoryStart = useSetRecoilState(historyStartState);
   const [cmdLine, setCmdLine] = useState('');
@@ -89,10 +91,16 @@ export default function Prompt() {
     autoComplete();
   }, [cmdLine]);
 
+  useEffect(() => {
+    if (showInputBox) return;
+    document.getElementById('prompt-input').focus();
+  }, [showInputBox]);
+
   return (
     <div className='relative mx-2 mb-1 flex justify-between'>
       <div className='animate-pulse text-xl font-bold text-green-400'>&gt;</div>
       <input
+        id='prompt-input'
         autoFocus
         value={cmdLine}
         onChange={handleChange}
