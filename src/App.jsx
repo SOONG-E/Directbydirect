@@ -8,7 +8,7 @@ import Terminal from 'src/component/Terminal/Terminal';
 import { navBarState } from 'src/state/NavBar.state';
 import { cwdState } from 'src/state/cwd';
 import { rootState } from 'src/state/root';
-import { showInputboxState } from 'src/state/showInputBox';
+import { showInputBoxState } from 'src/state/showInputBox';
 import 'src/style/App.css';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
     height: window.innerHeight,
   });
   const [visibility, setVisibility] = useState(true);
-  const initialPhase = useRecoilValue(showInputboxState);
+  const initialPhase = useRecoilValue(showInputBoxState);
   const root = useRecoilValue(rootState);
   const setComponentClicked = useSetRecoilState(navBarState);
   const setCwd = useSetRecoilState(cwdState);

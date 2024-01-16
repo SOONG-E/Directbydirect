@@ -3,12 +3,12 @@ import { useEffect, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import { isValidRootState } from 'src/state/isValidRoot';
 import { rootDirNameState } from 'src/state/rootDirName';
-import { showInputboxState } from 'src/state/showInputBox';
+import { showInputBoxState } from 'src/state/showInputBox';
 
 const InputField = () => {
   const [isValidRoot, setIsValidRoot] = useRecoilState(isValidRootState);
   const [rootDirName, setRootDirName] = useRecoilState(rootDirNameState);
-  const setShowInputBox = useSetRecoilState(showInputboxState);
+  const setShowInputBox = useSetRecoilState(showInputBoxState);
   const [init, setInit] = useState(true);
   const [shake, setShake] = useState(false);
 

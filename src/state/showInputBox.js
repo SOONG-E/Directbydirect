@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const showInputboxState = atom({
-  key: 'showInputboxState',
+export const showInputBoxState = atom({
+  key: 'showInputBoxState',
   default: true,
 });

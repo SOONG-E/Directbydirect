@@ -3,11 +3,11 @@ import InputBoxHeader from 'src/component/InitialModal/InputBox/InputBoxHeader';
 import InputField from 'src/component/InitialModal/InputBox/InputField';
 import OkButton from 'src/component/common/OkButton';
 import { isValidRootState } from 'src/state/isValidRoot';
-import { showInputboxState } from 'src/state/showInputBox';
+import { showInputBoxState } from 'src/state/showInputBox';
 
 const InputBox = () => {
   const isValidRoot = useRecoilValue(isValidRootState);
-  const setShowInputBox = useSetRecoilState(showInputboxState);
+  const setShowInputBox = useSetRecoilState(showInputBoxState);
 
   const handleClick = () => setShowInputBox(false);
 
