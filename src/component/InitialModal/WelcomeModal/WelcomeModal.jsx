@@ -24,7 +24,7 @@ const WelcomeModal = ({ setIsIntroduction }) => {
       <div
         id='welcome-modal'
         tabIndex='0'
-        className='absolute flex h-[320px] w-[560px] flex-col justify-between rounded-md bg-white bg-opacity-80 shadow-lg backdrop-blur-lg'
+        className='absolute flex h-[320px] w-[560px] flex-col justify-between rounded-md bg-white bg-opacity-80 shadow-lg backdrop-blur-lg focus:outline-none'
         onKeyDown={handleKeyDown}
       >
         <TopBar title='DirectByDirect' />
