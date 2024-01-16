@@ -97,7 +97,7 @@ export default function Prompt() {
         value={cmdLine}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        className=' absolute left-3 top-0.5 z-10 ml-2 flex-1 bg-black bg-transparent font-semibold text-white outline-none'
+        className='absolute left-5 top-0.5 z-10 w-full flex-1 bg-black bg-transparent pr-4 font-semibold text-white outline-none'
         type='text'
       />
       <div className='absolute left-5 top-0.5 whitespace-break-spaces font-semibold text-gray-400'>
