@@ -78,9 +78,9 @@ export default function Prompt() {
   useEffect(() => {
     const autoComplete = () => {
       const splittedCmd = splitCmd(cmdLine);
-      if (splittedCmd.length === 0) return;
+      if (splittedCmd.length !== 1) return;
 
-      const target = splittedCmd.at(-1);
+      const target = splittedCmd.at(0);
       const cmd = CMD.find((cmd) => cmd.startsWith(target));
       if (cmd === undefined) return;
 
