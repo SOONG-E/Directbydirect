@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Draggable from 'react-draggable';
 import NextButton from 'src/component/InitialModal/WelcomeModal/NextButton';
 import TopBar from 'src/component/common/TopBar';
@@ -14,9 +15,14 @@ const WelcomeModal = ({ setIsIntroduction }) => {
     }
   };
 
+  useEffect(() => {
+    document.getElementById('welcome-modal').focus();
+  }, []);
+
   return (
     <Draggable defaultPosition={{ x: 10, y: 10 }} bounds='body'>
       <div
+        id='welcome-modal'
         tabIndex='0'
         className='absolute flex h-[320px] w-[560px] flex-col justify-between rounded-md bg-white bg-opacity-80 shadow-lg backdrop-blur-lg'
         onKeyDown={handleKeyDown}
