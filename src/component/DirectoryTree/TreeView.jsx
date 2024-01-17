@@ -4,7 +4,7 @@ const TreeView = ({ tree }) => {
   const child = tree.getChild();
 
   return (
-    <div className='space-y-1'>
+    <div className='space-y-1.5'>
       <File tree={tree} />
       {child &&
         [...child.values()].map((subtree, index) => (
