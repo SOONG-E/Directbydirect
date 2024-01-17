@@ -20,7 +20,9 @@ export default function DirectoryTree() {
     <Draggable defaultPosition={{ x: 400, y: 50 }} bounds='body'>
       <div className='window-height tree-width absolute flex flex-col'>
         <TopBar />
-        <TreeView tree={root} />
+        <div className='flex-1 rounded-b-md bg-[#efefef] bg-opacity-90 p-2'>
+          <TreeView tree={root} />
+        </div>
       </div>
     </Draggable>
   );
