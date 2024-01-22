@@ -116,10 +116,10 @@ export default function Prompt() {
         value={cmdLine}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        className='absolute left-5 top-0.5 z-10 w-full flex-1 bg-black bg-transparent pr-4 font-semibold text-white outline-none'
+        className='absolute left-5 top-0.5 z-10 w-full flex-1 bg-black bg-transparent pr-4 font-mono font-semibold text-white outline-none'
         type='text'
       />
-      <div className='absolute left-5 top-0.5 whitespace-break-spaces font-semibold text-gray-400'>
+      <div className='absolute left-5 top-0.5 whitespace-break-spaces font-mono font-semibold text-gray-400'>
         {recommendLine}
       </div>
     </div>
