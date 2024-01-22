@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { HELP } from 'src/constant/Help';
 
-const HelpManual = ({ targetIndex, setManualIsOpened, navBarRef }) => {
+const HelpManual = ({ targetIndex, setManualIsOpened }) => {
   useEffect(() => {
     return () => {
       setManualIsOpened(false);

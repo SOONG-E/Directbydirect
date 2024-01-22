@@ -9,7 +9,6 @@ const WelcomeModal = ({ setIsIntroduction }) => {
     '에서 디렉토리 구조를 편집하는 명령어들을 연습해볼 수 있어요!\n 명령어 사용법들을 연습해보고 변경되는 구조를 그림과 함께 확인해봐요!\n\n 다음으로 넘어가 루트 디렉토리 명을 지정후 시작할 수 있어요!';
 
   const handleKeyDown = (event) => {
-    console.log('QW');
     if (event.key === 'Enter') {
       setIsIntroduction(false);
     }
