@@ -73,7 +73,10 @@ function App() {
   }, [screen]);
 
   return (
-    <div className="flex h-full w-full bg-[url('bg_main.png')] bg-cover">
+    <div
+      className='flex h-full w-full bg-cover'
+      style={{ backgroundImage: 'url(bg_main.png)' }}
+    >
       {visibility ? (
         <div>
           <Terminal />
