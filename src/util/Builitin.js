@@ -69,6 +69,10 @@ const Builtin = {
     return DFL_RET;
   },
 
+  help() {
+    return { output: [], error: [] };
+  },
+
   cp(arg, { cwd }) {
     if (arg.length !== 2) {
       return { output: [], error: [ERROR.USAGE_CP] };
