@@ -25,6 +25,11 @@ const HelpManual = ({ targetIndex, setManualIsOpened }) => {
         <span>Ex: </span>
         {HELP[targetIndex].EXAMPLE}
       </div>
+      {HELP[targetIndex].EXPLAINMENT && (
+        <div className='flex h-1/5 w-[70%] items-center justify-center whitespace-pre-wrap rounded-md bg-gray-50 font-mono shadow-md'>
+          {HELP[targetIndex].EXPLAINMENT}
+        </div>
+      )}
     </div>
   );
 };
