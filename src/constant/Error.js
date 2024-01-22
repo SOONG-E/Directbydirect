@@ -1,10 +1,10 @@
 export const ERROR = Object.freeze({
-  EEXIST: 'File exists',
+  EEXIST: 'file exists',
   EIDENTICAL: 'are identical (not copied).',
-  EISDIR: 'Is a directory',
-  EMARG: 'Too many arguments',
+  EISDIR: 'is a directory',
+  EMARG: 'too many arguments',
   ENOCMD: 'command not found',
-  ENOENT: 'No such file or directory',
-  ENOTDIR: 'Not a directory',
-  EUSAGE: "Wrong usage\nTry 'help' for more information.",
+  ENOENT: 'no such file or directory',
+  ENOTDIR: 'not a directory',
+  EUSAGE: "wrong usage\nTry 'help' for more information.",
 });
