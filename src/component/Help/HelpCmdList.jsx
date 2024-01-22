@@ -1,9 +1,12 @@
 import { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
 import { HELP } from 'src/constant/Help';
+import { helpOpenState } from 'src/state/NavBar.state';
 
 const HelpCmdList = ({ setTargetIndex, setIsOpened, setManualIsOpened }) => {
   const [targetCmd, setTargetCmd] = useState('');
   const [showClear, setShowClear] = useState(false);
+  const helpState = useSetRecoilState(helpOpenState);
 
   const handleHoverEvent = (isIn) => {
     setShowClear(isIn ? true : false);
@@ -16,6 +19,7 @@ const HelpCmdList = ({ setTargetIndex, setIsOpened, setManualIsOpened }) => {
 
   const onClose = () => {
     setIsOpened((pre) => !pre);
+    helpState(false);
   };
 
   return (
