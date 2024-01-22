@@ -30,7 +30,7 @@ const TopLeftSide = ({ navBarRef }) => {
       {componentClicked.map((item, id) => (
         <div key={id}>
           <button
-            className='top-bar-item m-2'
+            className='top-bar-item m-1'
             onClick={() => onClickedItem(item.key)}
           >
             {item.title}
