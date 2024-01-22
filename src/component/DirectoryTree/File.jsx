@@ -11,10 +11,14 @@ const File = ({ tree }) => {
 
   return (
     <div
-      className='flex items-center gap-x-2'
+      className='flex items-center gap-x-1'
       style={{ paddingLeft: `${tree.getDepth() * 15}px` }}
     >
-      <img src={`ic_file_${tree.getType()}.png`} alt='file icon' />
+      <img
+        src={`ic_file_${tree.getType()}.png`}
+        alt='file icon'
+        className='h-6 w-6'
+      />
       <p className={filenameClass}>{tree.getName()}</p>
     </div>
   );
