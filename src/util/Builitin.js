@@ -111,7 +111,7 @@ const Builtin = {
 
   mkdir(arg, { cwd }) {
     if (arg.length === 0) {
-      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
+      return { output: [], error: [`mkdir: ${ERROR.EUSAGE}`] };
     }
     const error = [];
     for (const element of arg) {
@@ -181,7 +181,7 @@ const Builtin = {
 
   pwd(arg, { cwd }) {
     if (arg.length > 0) {
-      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
+      return { output: [], error: [`pwd: ${ERROR.EUSAGE}`] };
     }
     return { output: [cwd.map((tree) => tree.getName()).join('/')], error: [] };
   },
@@ -208,7 +208,7 @@ const Builtin = {
 
   touch(arg, { cwd }) {
     if (arg.length === 0) {
-      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
+      return { output: [], error: [`touch: ${ERROR.EUSAGE}`] };
     }
     for (const element of arg) {
       const splittedPath = element.split('/');
