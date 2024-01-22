@@ -1,3 +1,4 @@
+import { ERROR } from 'src/constant/Error';
 import Builtin from 'src/util/Builitin';
 
 const table = new Map();
@@ -16,7 +17,7 @@ const execute = (splittedCmd, obj) => {
   const arg = splittedCmd.slice(1);
   const func = table.get(cmd);
   if (func === undefined) {
-    return { output: [], error: [`${cmd}: command not found`] };
+    return { output: [], error: [`${cmd}: ${ERROR.ENOCMD}`] };
   }
   return func(arg, obj);
 };
