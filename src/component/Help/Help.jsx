@@ -9,14 +9,10 @@ const Help = ({ helpRef }) => {
   const [targetIndex, setTargetIndex] = useState(null);
   const [isOpened, setIsOpened] = useRecoilState(helpOpenState);
   const [manualIsOpened, setManualIsOpened] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    setPosition({
-      x: window.innerWidth / 2 - 300,
-      y: window.innerHeight / 2 - 300,
-    });
-  }, []);
+  const position = {
+    x: window.innerWidth / 2 - 300,
+    y: window.innerHeight / 2 - 300,
+  };
 
   return (
     isOpened && (
