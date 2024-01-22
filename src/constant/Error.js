@@ -5,5 +5,5 @@ export const ERROR = Object.freeze({
   EMARG: 'Too many arguments',
   ENOENT: 'No such file or directory',
   ENOTDIR: 'Not a directory',
-  EUSAGE: "Wrong usage. Try 'help' for more information.",
+  EUSAGE: "Wrong usage\nTry 'help' for more information.",
 });

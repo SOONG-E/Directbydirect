@@ -31,7 +31,7 @@ export default function History() {
             </div>
             {messages.map((msg, idx) => (
               <div key={idx} className='flex'>
-                <p className='break-all text-left font-semibold text-white'>
+                <p className='whitespace-pre-wrap break-all text-left font-semibold text-white'>
                   {msg}
                 </p>
               </div>
