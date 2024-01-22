@@ -25,13 +25,15 @@ export default function History() {
           <div key={index} className='ml-2 items-center'>
             <div className='flex space-x-2'>
               <p className='text-xl font-bold text-green-400'>&gt;</p>
-              <p className='pt-0.5 font-semibold text-white'>
+              <p className='break-all pt-0.5 text-left font-semibold text-white'>
                 {value.join(' ')}
               </p>
             </div>
             {messages.map((msg, idx) => (
               <div key={idx} className='flex'>
-                <p className='font-semibold text-white'>{msg}</p>
+                <p className='break-all text-left font-semibold text-white'>
+                  {msg}
+                </p>
               </div>
             ))}
           </div>
