@@ -210,16 +210,20 @@ const Builtin = {
     if (arg.length === 0) {
       return { output: [], error: [`touch: ${ERROR.EUSAGE}`] };
     }
+    const error = [];
     for (const element of arg) {
       const splittedPath = element.split('/');
       const path = Builtin.getNode(cwd, splittedPath);
-      if (path === undefined || path.leafNode !== undefined) {
-        return DFL_RET;
+      console.log(path);
+      if (path === undefined) {
+        error.push(`touch: '${element}': ${ERROR.ENOENT}`);
+        continue;
       }
+      if (path.leafNode !== undefined) continue;
       const file = new Tree(splittedPath.at(-1), TYPE.FILE);
       path.lastDir.addChild(file);
     }
-    return DFL_RET;
+    return { output: [], error };
   },
 };
 
