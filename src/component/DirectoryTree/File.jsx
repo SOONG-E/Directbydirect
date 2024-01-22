@@ -5,7 +5,9 @@ const File = ({ tree }) => {
   const cwd = useRecoilValue(cwdState);
 
   const isCwd = tree === cwd.at(-1);
-  const filenameClass = isCwd ? 'rounded-[3px] bg-[#0064e1] px-1' : '';
+  const filenameClass = isCwd
+    ? 'rounded-[3px] bg-[#0064e1] px-1 text-white'
+    : '';
 
   return (
     <div
