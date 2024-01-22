@@ -8,6 +8,14 @@ name: Deploy to Firebase Hosting on merge
       - main
 jobs:
   build_and_deploy:
+    env:
+      VITE_APP_FIREBASE_API_KEY: '${{ secrets.VITE_APP_FIREBASE_API_KEY }}'
+      VITE_APP_FIREBASE_AUTH_DOMAIN: '${{ secrets.VITE_APP_FIREBASE_AUTH_DOMAIN }}'
+      VITE_APP_FIREBASE_PROJECT_ID: '${{ secrets.VITE_APP_FIREBASE_PROJECT_ID }}'
+      VITE_APP_FIREBASE_STORAGE_BUCKET: '${{ secrets.VITE_APP_FIREBASE_STORAGE_BUCKET }}'
+      VITE_APP_FIREBASE_MESSAGING_SENDER_ID: '${{ secrets.VITE_APP_FIREBASE_MESSAGING_SENDER_ID }}'
+      VITE_APP_FIREBASE_APP_ID: '${{ secrets.VITE_APP_FIREBASE_APP_ID }}'
+      VITE_APP_FIREBASE_MEASUREMENT_ID: '${{ secrets.VITE_APP_FIREBASVITE_APP_FIREBASE_MEASUREMENT_IDE_MESSAGING_SENDER_ID }}'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
