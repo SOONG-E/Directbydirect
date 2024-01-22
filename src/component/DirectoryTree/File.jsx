@@ -4,8 +4,11 @@ const File = ({ tree }) => {
   const type = tree.getType();
 
   return (
-    <div className={`flex gap-2 pl-${tree.getDepth() * 10}`}>
-      {type === TYPE.DIR && '🔻'}
+    <div
+      className='flex items-center gap-x-2'
+      style={{ paddingLeft: `${tree.getDepth() * 15}px` }}
+    >
+      {/* {type === TYPE.DIR && '🔻'} */}
       <img src={`ic_file_${type}.png`} alt='file icon' />
       <p>{tree.getName()}</p>
     </div>

@@ -4,10 +4,8 @@ const TreeView = ({ tree }) => {
   const child = tree.getChild();
 
   return (
-    <div className='flex-1 rounded-b-md bg-[#efefef] bg-opacity-90'>
-      <div className='flex items-center gap-1'>
-        <File tree={tree} />
-      </div>
+    <div className='space-y-1.5'>
+      <File tree={tree} />
       {child &&
         [...child.values()].map((subtree, index) => (
           <TreeView key={index} tree={subtree} />
