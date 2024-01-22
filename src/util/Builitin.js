@@ -181,7 +181,7 @@ const Builtin = {
 
   pwd(arg, { cwd }) {
     if (arg.length > 0) {
-      return { output: [], error: [`pwd: ${ERROR.EMARG}`] };
+      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
     }
     return { output: [cwd.map((tree) => tree.getName()).join('/')], error: [] };
   },
