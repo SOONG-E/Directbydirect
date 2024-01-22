@@ -5,12 +5,12 @@ table.set('cd', Builtin.cd);
 table.set('chmod', Builtin.chmod);
 table.set('clear', Builtin.clear);
 table.set('cp', Builtin.cp);
+table.set('help', Builtin.help);
 table.set('mkdir', Builtin.mkdir);
 table.set('mv', Builtin.mv);
 table.set('pwd', Builtin.pwd);
 table.set('rm', Builtin.rm);
 table.set('touch', Builtin.touch);
-table.set('help', Builtin.help);
 
 const execute = (splittedCmd, obj) => {
   const cmd = splittedCmd[0];

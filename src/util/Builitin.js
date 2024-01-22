@@ -69,10 +69,6 @@ const Builtin = {
     return DFL_RET;
   },
 
-  help() {
-    return DFL_RET;
-  },
-
   cp(arg, { cwd }) {
     if (arg.length !== 2) {
       return { output: [], error: [ERROR.USAGE_CP] };
@@ -106,6 +102,10 @@ const Builtin = {
       }
       dest.lastDir.addChild(src.leafNode, true);
     }
+    return DFL_RET;
+  },
+
+  help() {
     return DFL_RET;
   },
 
