@@ -24,7 +24,13 @@ export default function History() {
         return (
           <div key={index} className='mx-2 items-center'>
             <div className='flex space-x-2'>
-              <p className='text-xl font-bold text-green-400'>&gt;</p>
+              <p
+                className={`text-xl font-bold ${
+                  error.length === 0 ? 'text-green-400' : 'text-red-500'
+                }`}
+              >
+                &gt;
+              </p>
               <p className='break-all pt-0.5 text-left font-semibold text-white'>
                 {value.join(' ')}
               </p>
