@@ -5,7 +5,7 @@ import HelpCmdList from 'src/component/Help/HelpCmdList';
 import HelpManual from 'src/component/Help/HelpManual';
 import { helpOpenState } from 'src/state/NavBar.state';
 
-const Help = ({ navBarRef }) => {
+const Help = ({ helpRef }) => {
   const [targetIndex, setTargetIndex] = useState(null);
   const [isOpened, setIsOpened] = useRecoilState(helpOpenState);
   const [manualIsOpened, setManualIsOpened] = useState(false);
@@ -21,7 +21,7 @@ const Help = ({ navBarRef }) => {
   return (
     isOpened && (
       <Draggable defaultPosition={position} bounds='body'>
-        <div className='absolute' ref={navBarRef}>
+        <div className='absolute' ref={helpRef}>
           {!manualIsOpened ? (
             <HelpCmdList
               setTargetIndex={setTargetIndex}
@@ -32,7 +32,6 @@ const Help = ({ navBarRef }) => {
             <HelpManual
               targetIndex={targetIndex}
               setManualIsOpened={setManualIsOpened}
-              navBarRef={navBarRef}
             />
           )}
         </div>

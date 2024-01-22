@@ -14,6 +14,7 @@ import 'src/style/App.css';
 
 function App() {
   const navBarRef = useRef(null);
+  const helpRef = useRef(null);
   const [screen, setScreen] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -45,7 +46,10 @@ function App() {
 
   useEffect(() => {
     function handleFocus(e) {
-      if (!navBarRef.current?.contains(e.target)) {
+      if (
+        !navBarRef.current?.contains(e.target) &&
+        !helpRef.current?.contains(e.target)
+      ) {
         setComponentClicked((pre) =>
           pre.map((item) => {
             return { ...item, value: false };
@@ -74,7 +78,7 @@ function App() {
         <div>
           <Terminal />
           {initialPhase ? <InitialModal /> : <DirectoryTree />}
-          <Help navBarRef={navBarRef} />
+          <Help helpRef={helpRef} />
         </div>
       ) : (
         <Alert text={'창이 너무 작아요!'} />
