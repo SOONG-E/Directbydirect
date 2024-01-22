@@ -110,6 +110,9 @@ const Builtin = {
   },
 
   mkdir(arg, { cwd }) {
+    if (arg.length === 0) {
+      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
+    }
     const error = [];
     for (const element of arg) {
       const splittedPath = element.split('/');
@@ -127,10 +130,7 @@ const Builtin = {
   },
 
   mv(arg, { cwd }) {
-    if (arg.length === 0) {
-      return DFL_RET;
-    }
-    if (arg.length === 1) {
+    if (arg.length < 2) {
       return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
     }
     const splittedLastArg = arg.at(-1).split('/');
@@ -187,6 +187,9 @@ const Builtin = {
   },
 
   rm(arg, { cwd }) {
+    if (arg.length === 0) {
+      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
+    }
     for (let i = 0; i < arg.length; i++) {
       if (arg[i] === '-rf') continue;
       const splittedArg = arg[i].split('/');
@@ -204,6 +207,9 @@ const Builtin = {
   },
 
   touch(arg, { cwd }) {
+    if (arg.length === 0) {
+      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
+    }
     for (const element of arg) {
       const splittedPath = element.split('/');
       const path = Builtin.getNode(cwd, splittedPath);
