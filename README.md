@@ -12,7 +12,7 @@ DBD에 명령어를 입력하세요. 명령어가 처리되면 오른쪽 Directo
 
 ![ScreenRecording2024-01-22at17 05 11-ezgif com-video-to-gif-converter](https://github.com/SOONG-E/Directbydirect/assets/52056062/6fe563cd-a0a6-4c92-b810-7f4e958d51b2)
 
-**[🔗 DBD 바로가기](direct-by-direct.web.app/)**
+**[🔗 DBD 바로가기](https://direct-by-direct.web.app/)**
 
 ## Developer
 
