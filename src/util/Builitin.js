@@ -63,19 +63,15 @@ const Builtin = {
 
   clear(arg, { historyIndex, setHistoryStart }) {
     if (arg.length > 0) {
-      return { output: [], error: [`pwd: ${ERROR.EMARG}`] };
+      return { output: [], error: [`clear: ${ERROR.EUSAGE}`] };
     }
     setHistoryStart(historyIndex.current);
     return DFL_RET;
   },
 
-  help() {
-    return { output: [], error: [] };
-  },
-
   cp(arg, { cwd }) {
     if (arg.length !== 2) {
-      return { output: [], error: [ERROR.USAGE_CP] };
+      return { output: [], error: [`cp: ${ERROR.EUSAGE}`] };
     }
     const splittedSrc = arg[0].split('/');
     const src = Builtin.getNode(cwd, splittedSrc);
@@ -109,6 +105,10 @@ const Builtin = {
     return DFL_RET;
   },
 
+  help() {
+    return DFL_RET;
+  },
+
   mkdir(arg, { cwd }) {
     const error = [];
     for (const element of arg) {
@@ -131,7 +131,7 @@ const Builtin = {
       return DFL_RET;
     }
     if (arg.length === 1) {
-      return { output: [], error: [`mv: ${ERROR.EINVAL}`] };
+      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
     }
     const splittedLastArg = arg.at(-1).split('/');
     const lastArg = Builtin.getNode(cwd, splittedLastArg);
