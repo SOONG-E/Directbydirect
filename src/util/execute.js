@@ -2,7 +2,6 @@ import Builtin from 'src/util/Builitin';
 
 const table = new Map();
 table.set('cd', Builtin.cd);
-table.set('chmod', Builtin.chmod);
 table.set('clear', Builtin.clear);
 table.set('cp', Builtin.cp);
 table.set('help', Builtin.help);
