@@ -6,8 +6,8 @@ const File = ({ tree }) => {
 
   const isCwd = tree === cwd.at(-1);
   const filenameClass = isCwd
-    ? 'rounded-[3px] bg-[#0064e1] px-1 text-white'
-    : '';
+    ? 'rounded-[3px] bg-[#0064e1] px-1 text-white font-mono'
+    : 'font-mono';
 
   return (
     <div

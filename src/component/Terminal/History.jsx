@@ -31,13 +31,13 @@ export default function History() {
               >
                 &gt;
               </p>
-              <p className='break-all pt-0.5 text-left font-semibold text-white'>
+              <p className='break-all pt-0.5 text-left font-mono font-semibold text-white'>
                 {value.join(' ')}
               </p>
             </div>
             {messages.map((msg, idx) => (
               <div key={idx} className='flex'>
-                <p className='whitespace-pre-wrap break-all text-left font-semibold text-white'>
+                <p className='whitespace-pre-wrap break-all text-left font-mono font-semibold text-white'>
                   {msg}
                 </p>
               </div>
