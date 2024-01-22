@@ -15,7 +15,7 @@ const HelpCmdList = ({ setTargetIndex, setIsOpened, setManualIsOpened }) => {
   };
 
   const onClose = () => {
-    setIsOpened(!isOpened);
+    setIsOpened((pre) => !pre);
   };
 
   return (
