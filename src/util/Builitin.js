@@ -70,7 +70,7 @@ const Builtin = {
   },
 
   help() {
-    return { output: [], error: [] };
+    return DFL_RET;
   },
 
   cp(arg, { cwd }) {
