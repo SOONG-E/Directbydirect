@@ -8,10 +8,10 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACT_PROJECT_23036 }}'
-          projectId: react-project-23036
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DIRECT_BY_DIRECT }}'
+          projectId: direct-by-direct
