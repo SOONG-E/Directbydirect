@@ -214,7 +214,6 @@ const Builtin = {
     for (const element of arg) {
       const splittedPath = element.split('/');
       const path = Builtin.getNode(cwd, splittedPath);
-      console.log(path);
       if (path === undefined) {
         error.push(`touch: '${element}': ${ERROR.ENOENT}`);
         continue;
