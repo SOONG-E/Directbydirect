@@ -54,11 +54,9 @@ const Help = ({ navBarRef }) => {
                     <h3 className='text-3xl font-semibold group-hover:font-bold'>
                       {item.CMD}
                     </h3>
-                    {
-                      <p className={`${targetCmd !== item.CMD && 'invisible'}`}>
-                        {item.TEXT}
-                      </p>
-                    }
+                    <p className={`${targetCmd !== item.CMD && 'invisible'}`}>
+                      {item.TEXT}
+                    </p>
                   </div>
                 );
               })}
