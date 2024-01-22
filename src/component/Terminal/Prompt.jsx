@@ -31,6 +31,11 @@ export default function Prompt() {
 
   const handleChange = (e) => setCmdLine(e.target.value);
 
+  const replaceCmdLine = () => {
+    if (recommendLine === '') return;
+    setCmdLine(recommendLine);
+  };
+
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
       changeIndex(1);
@@ -71,7 +76,7 @@ export default function Prompt() {
     }
     if (e.key === 'Tab') {
       e.preventDefault();
-      setCmdLine(recommendLine);
+      replaceCmdLine();
     }
   };
 
