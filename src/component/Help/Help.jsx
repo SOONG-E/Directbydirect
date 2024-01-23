@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Draggable from 'react-draggable';
 import { useRecoilState } from 'recoil';
 import HelpCmdList from 'src/component/Help/HelpCmdList';

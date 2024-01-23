@@ -6,6 +6,7 @@ import { cwdState } from 'src/state/cwd';
 import { historyState } from 'src/state/history';
 import { historyStartState } from 'src/state/historyStart';
 import { showInputBoxState } from 'src/state/showInputBox';
+import Builtin from 'src/util/Builitin';
 import execute from 'src/util/execute';
 import splitCmd from 'src/util/splitCmd';
 
@@ -19,7 +20,9 @@ export default function Prompt() {
   const setHelpIsOpen = useSetRecoilState(helpOpenState);
   const setHistoryStart = useSetRecoilState(historyStartState);
   const [cmdLine, setCmdLine] = useState('');
+  const [inputWd, setInputWd] = useState([]);
   const [recommendLine, setRecommendLine] = useState('');
+  const [searchString, setSearchString] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
 
   const changeIndex = (delta) => {
@@ -32,8 +35,19 @@ export default function Prompt() {
   const handleChange = (e) => setCmdLine(e.target.value);
 
   const replaceCmdLine = () => {
-    if (recommendLine === '') return;
-    setCmdLine(recommendLine);
+    if (recommendLine !== '') {
+      setCmdLine(recommendLine);
+      return;
+    }
+    if (cmdLine === '') return;
+    if (cmdLine.at(-1) === '/') return;
+    const { selectionStart } = document.getElementById('prompt-input');
+    if (selectionStart !== cmdLine.length) return;
+    const path = cmdLine.split(' ').at(-1);
+    const splittedPath = path.split('/');
+    setSearchString(splittedPath.pop());
+    const parentPath = splittedPath.length > 0 ? splittedPath.join('/') : '.';
+    Builtin.cd([parentPath], { cwd, setCwd: setInputWd });
   };
 
   const handleKeyDown = (e) => {
@@ -96,11 +110,26 @@ export default function Prompt() {
       }
 
       const addedText = cmd.substring(target.length);
-      setRecommendLine((pre) => pre + addedText);
+      setRecommendLine((prev) => prev + addedText);
     };
     setRecommendLine(cmdLine);
     autoComplete();
   }, [cmdLine]);
+
+  useEffect(() => {
+    if (searchString === '') return;
+    if (inputWd.length === 0) return;
+    const child = inputWd.at(-1).getChild();
+    if (!child) return;
+    const names = [...child.values()].map((value) => value.getName());
+    const filteredNames = names.filter((value) =>
+      value.startsWith(searchString)
+    );
+    const target = filteredNames[0];
+    if (!target) return;
+    const addedText = target.substring(searchString.length);
+    setCmdLine((prev) => prev + addedText);
+  }, [inputWd, searchString]);
 
   useEffect(() => {
     if (showInputBox) return;
