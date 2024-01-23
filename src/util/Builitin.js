@@ -40,13 +40,14 @@ const Builtin = {
     }
     const path = arg[0].split('/');
     for (const element of path) {
+      if (element === '') continue;
+      if (element === '.') continue;
       if (element === '..') {
         if (new_cwd.length != 1) {
           new_cwd.pop();
         }
         continue;
       }
-      if (element === '.') continue;
 
       const subTree = new_cwd.at(-1).getChild().get(element);
       if (subTree === undefined) {
