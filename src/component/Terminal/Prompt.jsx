@@ -22,6 +22,7 @@ export default function Prompt() {
   const [cmdLine, setCmdLine] = useState('');
   const [inputWd, setInputWd] = useState([]);
   const [recommendLine, setRecommendLine] = useState('');
+  const [searchString, setSearchString] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
 
   const changeIndex = (delta) => {
@@ -44,20 +45,9 @@ export default function Prompt() {
     if (selectionStart !== cmdLine.length) return;
     const path = cmdLine.split(' ').at(-1);
     const splittedPath = path.split('/');
-    const searchString = splittedPath.pop();
-    const arg = splittedPath.length > 0 ? splittedPath.join('/') : '.';
-    const { error } = Builtin.cd(arg, { cwd, setCwd: setInputWd });
-    if (error.length > 0) return;
-    const child = inputWd.at(-1).getChild();
-    if (!child) return;
-    const names = [...child.values()].map((value) => value.getName());
-    const filteredNames = names.filter((value) =>
-      value.startsWith(searchString)
-    );
-    const target = filteredNames[0];
-    if (!target) return;
-    const addedText = target.substring(searchString.length);
-    setCmdLine((prev) => prev + addedText);
+    setSearchString(splittedPath.pop());
+    const parentPath = splittedPath.length > 0 ? splittedPath.join('/') : '.';
+    Builtin.cd([parentPath], { cwd, setCwd: setInputWd });
   };
 
   const handleKeyDown = (e) => {
@@ -125,6 +115,21 @@ export default function Prompt() {
     setRecommendLine(cmdLine);
     autoComplete();
   }, [cmdLine]);
+
+  useEffect(() => {
+    if (searchString === '') return;
+    if (inputWd.length === 0) return;
+    const child = inputWd.at(-1).getChild();
+    if (!child) return;
+    const names = [...child.values()].map((value) => value.getName());
+    const filteredNames = names.filter((value) =>
+      value.startsWith(searchString)
+    );
+    const target = filteredNames[0];
+    if (!target) return;
+    const addedText = target.substring(searchString.length);
+    setCmdLine((prev) => prev + addedText);
+  }, [inputWd, searchString]);
 
   useEffect(() => {
     if (showInputBox) return;
