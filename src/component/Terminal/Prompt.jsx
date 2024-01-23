@@ -20,7 +20,7 @@ export default function Prompt() {
   const setHelpIsOpen = useSetRecoilState(helpOpenState);
   const setHistoryStart = useSetRecoilState(historyStartState);
   const [cmdLine, setCmdLine] = useState('');
-  const [inputWd, setInputWd] = useState(cwd);
+  const [inputWd, setInputWd] = useState([]);
   const [recommendLine, setRecommendLine] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
 
@@ -45,7 +45,7 @@ export default function Prompt() {
     const path = cmdLine.split(' ').at(-1);
     const splittedPath = path.split('/');
     const searchString = splittedPath.pop();
-    const arg = splittedPath.join('/');
+    const arg = splittedPath.length > 0 ? splittedPath.join('/') : '.';
     const { error } = Builtin.cd(arg, { cwd, setCwd: setInputWd });
     if (error.length > 0) return;
     const child = inputWd.at(-1).getChild();
