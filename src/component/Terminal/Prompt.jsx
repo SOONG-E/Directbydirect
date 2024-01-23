@@ -6,7 +6,7 @@ import { cwdState } from 'src/state/cwd';
 import { historyState } from 'src/state/history';
 import { historyStartState } from 'src/state/historyStart';
 import { showInputBoxState } from 'src/state/showInputBox';
-import { cd } from 'src/util/Builitin';
+import Builtin from 'src/util/Builitin';
 import execute from 'src/util/execute';
 import splitCmd from 'src/util/splitCmd';
 
@@ -46,7 +46,7 @@ export default function Prompt() {
     const splittedPath = path.split('/');
     const searchString = splittedPath.pop();
     const arg = splittedPath.join('/');
-    const { error } = cd(arg, { cwd, setCwd: setInputWd });
+    const { error } = Builtin.cd(arg, { cwd, setCwd: setInputWd });
     if (error.length > 0) return;
     const child = inputWd.at(-1).getChild();
     if (!child) return;
