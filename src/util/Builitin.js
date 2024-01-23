@@ -188,7 +188,7 @@ const Builtin = {
 
   rm(arg, { cwd }) {
     if (arg.length === 0) {
-      return { output: [], error: [`mv: ${ERROR.EUSAGE}`] };
+      return { output: [], error: [`rm: ${ERROR.EUSAGE}`] };
     }
     for (let i = 0; i < arg.length; i++) {
       if (arg[i] === '-rf') continue;
