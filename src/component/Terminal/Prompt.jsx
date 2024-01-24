@@ -32,7 +32,46 @@ export default function Prompt() {
     }
   };
 
+  const handleEnter = (input) => {
+    if (input === '') return;
+    if (input === 'help') {
+      setHelpIsOpen(true);
+    }
+    historyIndex.current = history.cmd.length + 1;
+    setCmdLine('');
+    const splittedCmd = splitCmd(input);
+    const result = execute(splittedCmd, {
+      cwd,
+      setCwd,
+      historyIndex,
+      setHistoryStart,
+    });
+    setHistory((prev) => {
+      return {
+        cmd: [...prev.cmd, splittedCmd],
+        output: [...prev.output, result.output],
+        error: [...prev.error, result.error],
+      };
+    });
+  };
+
   const handleChange = (e) => setCmdLine(e.target.value);
+
+  const handleArrowDown = () => {
+    changeIndex(1);
+    if (historyIndex.current === history.cmd.length) setCmdLine('');
+    else setCmdLine(history.cmd[historyIndex.current].join(' '));
+  };
+
+  const handleArrowUp = (e) => {
+    changeIndex(-1);
+    if (historyIndex.current === history.cmd.length) setCmdLine('');
+    else setCmdLine(history.cmd[historyIndex.current].join(' '));
+    setTimeout(() => {
+      e.target.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
+      e.target.scrollLeft = MAX_LENGTH * FONT_WIDTH;
+    }, 0);
+  };
 
   const replaceCmdLine = () => {
     if (recommendLine !== '') {
@@ -52,41 +91,13 @@ export default function Prompt() {
 
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
-      changeIndex(1);
-      if (historyIndex.current === history.cmd.length) setCmdLine('');
-      else setCmdLine(history.cmd[historyIndex.current].join(' '));
+      handleArrowDown();
     }
     if (e.key === 'ArrowUp') {
-      changeIndex(-1);
-      if (historyIndex.current === history.cmd.length) setCmdLine('');
-      else setCmdLine(history.cmd[historyIndex.current].join(' '));
-      setTimeout(() => {
-        e.target.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
-        e.target.scrollLeft = MAX_LENGTH * FONT_WIDTH;
-      }, 0);
+      handleArrowUp(e);
     }
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
-      const input = e.target.value;
-      if (input === '') return;
-      if (input === 'help') {
-        setHelpIsOpen(true);
-      }
-      historyIndex.current = history.cmd.length + 1;
-      setCmdLine('');
-      const splittedCmd = splitCmd(input);
-      const result = execute(splittedCmd, {
-        cwd,
-        setCwd,
-        historyIndex,
-        setHistoryStart,
-      });
-      setHistory((prev) => {
-        return {
-          cmd: [...prev.cmd, splittedCmd],
-          output: [...prev.output, result.output],
-          error: [...prev.error, result.error],
-        };
-      });
+      handleEnter(e.target.value);
     }
     if (e.key === 'Tab') {
       e.preventDefault();
@@ -99,7 +110,6 @@ export default function Prompt() {
       const splittedCmd = cmdLine.split(' ');
       if (splittedCmd.length !== 1 || splittedCmd.at(-1) === '') {
         setRecommendLine('');
-        console.log(1);
         return;
       }
 
