@@ -24,6 +24,7 @@ export default function Prompt() {
   const [recommendLine, setRecommendLine] = useState('');
   const [searchString, setSearchString] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
+  const inputRef = useRef(null);
 
   const changeIndex = (delta) => {
     const newIndex = historyIndex.current + delta;
@@ -125,6 +126,8 @@ export default function Prompt() {
     };
     setRecommendLine(cmdLine);
     autoComplete();
+    // input 커서 제일 뒤로 이동
+    inputRef.current.setSelectionRange(cmdLine.length, cmdLine.length);
   }, [cmdLine]);
 
   useEffect(() => {
@@ -151,6 +154,7 @@ export default function Prompt() {
     <div className='relative mx-2 mb-1 flex justify-between'>
       <div className='animate-pulse text-xl font-bold text-green-400'>&gt;</div>
       <input
+        ref={inputRef}
         id='prompt-input'
         autoFocus
         value={cmdLine}
