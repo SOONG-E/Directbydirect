@@ -96,9 +96,10 @@ export default function Prompt() {
 
   useEffect(() => {
     const autoComplete = () => {
-      const splittedCmd = splitCmd(cmdLine);
-      if (splittedCmd.length !== 1) {
+      const splittedCmd = cmdLine.split(' ');
+      if (splittedCmd.length !== 1 || splittedCmd.at(-1) === '') {
         setRecommendLine('');
+        console.log(1);
         return;
       }
 
