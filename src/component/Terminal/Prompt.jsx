@@ -24,6 +24,7 @@ export default function Prompt() {
   const [recommendLine, setRecommendLine] = useState('');
   const [searchString, setSearchString] = useState('');
   const historyIndex = useRef(history.cmd.length + 1);
+  const inputRef = useRef(null);
 
   const changeIndex = (delta) => {
     const newIndex = historyIndex.current + delta;
@@ -32,7 +33,46 @@ export default function Prompt() {
     }
   };
 
+  const handleEnter = (input) => {
+    if (input === '') return;
+    if (input === 'help') {
+      setHelpIsOpen(true);
+    }
+    historyIndex.current = history.cmd.length + 1;
+    setCmdLine('');
+    const splittedCmd = splitCmd(input);
+    const result = execute(splittedCmd, {
+      cwd,
+      setCwd,
+      historyIndex,
+      setHistoryStart,
+    });
+    setHistory((prev) => {
+      return {
+        cmd: [...prev.cmd, splittedCmd],
+        output: [...prev.output, result.output],
+        error: [...prev.error, result.error],
+      };
+    });
+  };
+
   const handleChange = (e) => setCmdLine(e.target.value);
+
+  const handleArrowDown = () => {
+    changeIndex(1);
+    if (historyIndex.current === history.cmd.length) setCmdLine('');
+    else setCmdLine(history.cmd[historyIndex.current].join(' '));
+  };
+
+  const handleArrowUp = (e) => {
+    changeIndex(-1);
+    if (historyIndex.current === history.cmd.length) setCmdLine('');
+    else setCmdLine(history.cmd[historyIndex.current].join(' '));
+    setTimeout(() => {
+      e.target.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
+      e.target.scrollLeft = MAX_LENGTH * FONT_WIDTH;
+    }, 0);
+  };
 
   const replaceCmdLine = () => {
     if (recommendLine !== '') {
@@ -52,41 +92,13 @@ export default function Prompt() {
 
   const handleKeyDown = (e) => {
     if (e.key === 'ArrowDown') {
-      changeIndex(1);
-      if (historyIndex.current === history.cmd.length) setCmdLine('');
-      else setCmdLine(history.cmd[historyIndex.current].join(' '));
+      handleArrowDown();
     }
     if (e.key === 'ArrowUp') {
-      changeIndex(-1);
-      if (historyIndex.current === history.cmd.length) setCmdLine('');
-      else setCmdLine(history.cmd[historyIndex.current].join(' '));
-      setTimeout(() => {
-        e.target.setSelectionRange(MAX_LENGTH, MAX_LENGTH);
-        e.target.scrollLeft = MAX_LENGTH * FONT_WIDTH;
-      }, 0);
+      handleArrowUp(e);
     }
     if (e.key === 'Enter' && e.nativeEvent.isComposing === false) {
-      const input = e.target.value;
-      if (input === '') return;
-      if (input === 'help') {
-        setHelpIsOpen(true);
-      }
-      historyIndex.current = history.cmd.length + 1;
-      setCmdLine('');
-      const splittedCmd = splitCmd(input);
-      const result = execute(splittedCmd, {
-        cwd,
-        setCwd,
-        historyIndex,
-        setHistoryStart,
-      });
-      setHistory((prev) => {
-        return {
-          cmd: [...prev.cmd, splittedCmd],
-          output: [...prev.output, result.output],
-          error: [...prev.error, result.error],
-        };
-      });
+      handleEnter(e.target.value);
     }
     if (e.key === 'Tab') {
       e.preventDefault();
@@ -96,8 +108,8 @@ export default function Prompt() {
 
   useEffect(() => {
     const autoComplete = () => {
-      const splittedCmd = splitCmd(cmdLine);
-      if (splittedCmd.length !== 1) {
+      const splittedCmd = cmdLine.split(' ');
+      if (splittedCmd.length !== 1 || splittedCmd.at(-1) === '') {
         setRecommendLine('');
         return;
       }
@@ -114,6 +126,8 @@ export default function Prompt() {
     };
     setRecommendLine(cmdLine);
     autoComplete();
+    // input 커서 제일 뒤로 이동
+    inputRef.current.setSelectionRange(cmdLine.length, cmdLine.length);
   }, [cmdLine]);
 
   useEffect(() => {
@@ -140,6 +154,7 @@ export default function Prompt() {
     <div className='relative mx-2 mb-1 flex justify-between'>
       <div className='animate-pulse text-xl font-bold text-green-400'>&gt;</div>
       <input
+        ref={inputRef}
         id='prompt-input'
         autoFocus
         value={cmdLine}
